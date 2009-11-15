@@ -1,0 +1,188 @@
+
+.background
+{
+	background-color:#000000; 
+	color:#FFB618;
+}
+
+.cellfont
+{
+	font-size: 11px;
+}
+
+.voidcellfull
+{
+	color:#FFB618;
+	background-color: #101010;
+	width: 146px;
+	height: 35px;
+	text-align:center;
+	font-size: 11px;	
+}
+
+.playercell
+{
+	color:#FFB618;
+	text-align: center;
+	background: url(/img/tablo/cs8/player.jpg);
+	width: 146px;
+	height: 35px;
+	font-size: 11px;
+}
+
+.winnercell
+{
+	color:#FFB618;
+	text-align: center;
+	background: url(/img/tablo/cs8/winner.jpg);
+	width: 146px;
+	height: 35px;
+	font-size: 11px;
+}
+
+.losercell
+{
+	color:#FFB618;
+	text-align: center;
+	background: url(/img/tablo/cs8/loser.jpg);
+	width: 146px;
+	height: 35px;
+	font-size: 11px;
+}
+
+.winnercell:hover{font-weight:bold}
+.losercell:hover{font-weight:bold}
+
+.lcentercell
+{
+	color:#FFB618;
+	background: url(/img/tablo/cs8/lcenter.jpg);
+	width: 25px;
+	height: 35px
+}
+
+.trcornercell
+{
+	color:#FFB618;
+	background: url(/img/tablo/cs8/trcorner.jpg);
+	width: 25px;
+	height: 35px
+}
+
+.brcornercell
+{
+	color:#FFB618;
+	background: url(/img/tablo/cs8/brcorner.jpg);
+	width: 25;
+	height: 35
+}
+
+.lvlinecell
+{
+	color:#FFB618;
+	background: url(/img/tablo/cs8/vline.jpg);
+	width: 25px;
+	height: 35px
+}
+
+.rvlinecell
+{
+	color:#FFB618;
+	background: url(/img/tablo/cs8/vline.jpg);
+	width: 25px;
+	height: 35px
+}
+
+.voidcell
+{
+	color:#FFB618;
+	background-color: #101010;
+	width: 25px;
+	height: 35px;
+	text-align:center;
+}
+
+.narrowvoidcell
+{
+	color:#FFB618;
+	background-color: #000000;
+	width: 25px;
+	height: 35px
+	
+}
+
+
+.tableheader
+{
+	color:#FFB618;
+	border-style: solid;
+	border-color: #666666;
+	border-width: 0;
+	background: url(/img/tablo/cs8/bg-top.jpg);
+	background-color: #000000;
+	text-align: center;
+	font-family: Arial;
+	font-size: 8pt;
+	font-weight:bold;
+	height: 35px	
+}
+
+.infownd
+{
+	border-style: solid;
+	border-color: #666666;
+	border-width: 1;
+	background-color: #101010;
+	text-align: center;
+	font-family: Arial;
+	font-size: 8pt;
+	width: 260px;
+	height: -1;
+	visibility: hidden;
+	position: absolute
+}
+
+
+.hlinecell
+{
+	color:#FFB618;
+	background: url(/img/tablo/cs8/hline.jpg);
+	width: 25px;
+	height: 35px
+}
+
+.bigvlinecell
+{
+	color:#FFB618;
+	background: url(/img/tablo/cs8/1.gif) 50% 50%;
+	width: 146px;
+	height: 35px;
+	background-color: #101010 
+}
+
+.tlcornercell
+{
+	color:#FFB618;
+	background: url(/img/tablo/cs8/tlcorner.jpg);
+	width: 25px;
+	height: 35px
+}
+
+.blcornercell
+{
+	color:#FFB618;
+	background: url(/img/tablo/cs8/blcorner.jpg);
+	width: 25px;
+	height: 35px
+}
+
+.rcentercell
+{
+	color:#FFB618;
+	background: url(/img/tablo/cs8/rcenter.jpg);
+	width: 25px;
+	height: 35px
+}
+
+
+

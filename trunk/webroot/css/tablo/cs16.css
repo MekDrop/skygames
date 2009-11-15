@@ -1,0 +1,198 @@
+
+.background
+{
+	background-color:#000000; 
+	color:#FFB618;
+}
+
+.cellfont
+{
+	font-size: 9px;
+}
+
+.voidcellfull
+{
+	color:#FFB618;
+	background-color: #101010;
+	width: 85px;
+	height: 22px;
+	text-align:center;
+	font-size: 9px;	
+}
+
+.voidcellfullbackground
+{
+	color:#FFB618;
+	background-color: #000000;
+	width: 85px;
+	height: 22px;
+	text-align:center;
+	font-size: 9px;	
+}
+
+.playercell
+{
+	color:#FFB618;
+	text-align: center;
+	background: url(/img/tablo/cs16/player.jpg);
+	width: 85px;
+	height: 22px;
+	font-size: 9px;
+}
+
+.winnercell
+{
+	color:#FFB618;
+	text-align: center;
+	background: url(/img/tablo/cs16/winner.jpg);
+	width: 85px;
+	height: 22px;
+	font-size: 9px;
+}
+
+.losercell
+{
+	color:#FFB618;
+	text-align: center;
+	background: url(/img/tablo/cs16/loser.jpg);
+	width: 85px;
+	height: 22px;
+	font-size: 9px;
+}
+
+.winnercell:hover{font-weight:bold}
+.losercell:hover{font-weight:bold}
+
+.lcentercell
+{
+	color:#FFB618;
+	background: url(/img/tablo/cs16/lcenter.jpg);
+	width: 25px;
+	height: 22px
+}
+
+.trcornercell
+{
+	color:#FFB618;
+	background: url(/img/tablo/cs16/trcorner.jpg);
+	width: 25px;
+	height: 22px
+}
+
+.brcornercell
+{
+	color:#FFB618;
+	background: url(/img/tablo/cs16/brcorner.jpg);
+	width: 25;
+	height: 35
+}
+
+.lvlinecell
+{
+	color:#FFB618;
+	background: url(/img/tablo/cs16/vline.jpg);
+	width: 25px;
+	height: 22px
+}
+
+.rvlinecell
+{
+	color:#FFB618;
+	background: url(/img/tablo/cs16/vline.jpg);
+	width: 25px;
+	height: 22px
+}
+
+.voidcell
+{
+	color:#FFB618;
+	background-color: #101010;
+	width: 25px;
+	height: 22px;
+	text-align:center;
+}
+
+.narrowvoidcell
+{
+	color:#FFB618;
+	background-color: #000000;
+	width: 25px;
+	height: 22px
+	
+}
+
+
+.tableheader
+{
+	color:#FFB618;
+	border-style: solid;
+	border-color: #666666;
+	border-width: 0;
+	background: url(/img/tablo/cs16/bg-top.jpg);
+	background-color: #000000;
+	text-align: center;
+	font-family: Arial;
+	font-size: 8pt;
+	font-weight:bold;
+	height: 22px	
+}
+
+.infownd
+{
+	border-style: solid;
+	border-color: #666666;
+	border-width: 1;
+	background-color: #101010;
+	text-align: center;
+	font-family: Arial;
+	font-size: 8pt;
+	width: 260px;
+	height: -1;
+	visibility: hidden;
+	position: absolute
+}
+
+
+.hlinecell
+{
+	color:#FFB618;
+	background: url(/img/tablo/cs16/hline.jpg);
+	width: 25px;
+	height: 22px
+}
+
+.bigvlinecell
+{
+	color:#FFB618;
+	background: url(/img/tablo/cs16/1.gif) 50% 50%;
+	width: 85px;
+	height: 22px;
+	background-color: #101010 
+}
+
+.tlcornercell
+{
+	color:#FFB618;
+	background: url(/img/tablo/cs16/tlcorner.jpg);
+	width: 25px;
+	height: 22px
+}
+
+.blcornercell
+{
+	color:#FFB618;
+	background: url(/img/tablo/cs16/blcorner.jpg);
+	width: 25px;
+	height: 22px
+}
+
+.rcentercell
+{
+	color:#FFB618;
+	background: url(/img/tablo/cs16/rcenter.jpg);
+	width: 25px;
+	height: 22px
+}
+
+
+

@@ -1,0 +1,182 @@
+<!--
+
+.background
+{
+	background-color:#ffffff; 
+	color:#000000;
+}
+
+.cellfont
+{
+	font-size: 9px;
+}
+
+.voidcellfull
+{
+	color:#000000;
+	background-color: #f0f0ff;
+	width: 85px;
+	height: 20px;
+	text-align:center;
+	font-size: 9px;	
+}
+
+
+.voidcellfullbackground
+{
+	color:#000000;
+	background-color:#ffffff; 
+	width: 85px;
+	height: 20px;
+	text-align:center;
+	font-size: 9px;	
+}
+
+.playercell
+{
+	text-align: right;
+	background: url(/img/tablo/skygames16/player.jpg);
+	width: 85px;
+	height: 20px;
+	text-align:center;
+	vertical-align:middle;
+	font-size: 7pt;
+}
+
+.winnercell
+{
+	text-align: center;
+	background: url(/img/tablo/skygames16/winner.jpg);
+	width: 85px;
+	height: 20px;
+	font-size: 9px;
+}
+
+.losercell
+{
+	text-align: center;
+	background: url(/img/tablo/skygames16/loser.jpg);
+	width: 85px;
+	height: 20px;
+	font-size: 9px;
+}
+
+.winnercell:hover{font-weight:bold}
+.losercell:hover{font-weight:bold}
+
+.lcentercell
+{
+	background: url(/img/tablo/skygames16/lcenter.jpg) 50% 50%;
+	width: 14px;
+	height: 20px;
+}
+
+.trcornercell
+{
+	background: url(/img/tablo/skygames16/trcorner.jpg) 50% 50%;
+	width: 14px;
+	height: 20px;
+}
+
+.brcornercell
+{
+	background: url(/img/tablo/skygames16/brcorner.jpg) 50% 50%;
+	width: 14px;
+	height: 20px;
+}
+
+.lvlinecell
+{
+	background: url(/img/tablo/skygames16/vline.jpg) 50% 50%;
+	width: 14px;
+	height: 20px;
+}
+
+.rvlinecell
+{
+	background: url(/img/tablo/skygames16/vline.jpg) 50% 50%;
+	width: 14px;
+	height: 20px;
+}
+
+.voidcell
+{
+	background-color: #f0f0ff;
+	width: 14px;
+	height: 20px;
+}
+
+.tableheader
+{
+	color:#000000;
+	border-style: solid;
+	border-color: #666666;
+	border-width: 0;
+	background: url(/img/tablo/skygames16/bg-top.jpg) 50% 50%;
+	background-color: #000000;
+	text-align: center;
+	font-family: Arial;
+	font-size: 8pt;
+	font-weight: bold;
+	height: 45px;
+}
+
+.infownd
+{
+	border-style: solid;
+	border-color: #666666;
+	border-width: 1;
+	background-color: #ffffff;
+	text-align: center;
+	font-family: Arial;
+	font-size: 8pt;
+	width: 260;
+	height: -1;
+	visibility: hidden;
+	position: absolute
+}
+
+.narrowvoidcell
+{
+	background-color: #ffffff;
+	width: 14px;
+	height: 20px;
+}
+
+.hlinecell
+{
+	background: url(/img/tablo/skygames16/hline.jpg) 50% 50%;
+	width: 14px;
+	height: 20px;
+}
+
+.bigvlinecell
+{
+	background: url(/img/tablo/skygames16/1.gif)  50% 50%;
+	width: 85px;
+	height: 37px;
+	background-color: #181A20 
+}
+
+.tlcornercell
+{
+	background: url(/img/tablo/skygames16/tlcorner.jpg) 50% 50%;
+	width: 14px;
+	height: 20px;
+}
+
+.blcornercell
+{
+	background: url(/img/tablo/skygames16/blcorner.jpg) 50% 50%;
+	width: 14px;
+	height: 20px;
+}
+
+.rcentercell
+{
+	background: url(/img/tablo/skygames16/rcenter.jpg) 50% 50%;
+	width: 14px;
+	height: 20px;
+}
+
+-->

@@ -1,0 +1,4 @@
+msgid "Email"
+msgstr "E-mail" 
+msgid "copyright"
+msgstr "&copy; SkyGames.lt | Design&Code: SkyGames-Productions | All rights reserved."
