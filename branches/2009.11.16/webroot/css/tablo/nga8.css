@@ -1,0 +1,173 @@
+<!--
+
+.background {background-color:#ffffff; color:#000000;}
+
+.voidcellfull
+{
+	background-color: #fafafa;
+	width: 146px;
+	height: 35px;
+	font-size: 11px;	
+	text-align: center;
+}
+
+.voidcellfullbackground
+{
+	background-color:#ffffff;
+	width: 146px;
+	height: 35px;
+}
+
+
+.playercell
+{
+	text-align: right;
+	background: url(/img/tablo/nga8/player.jpg);
+	width: 146px;
+	height: 35px;
+	font-size: 11px;	
+	text-align: right;
+	
+
+}
+
+.winnercell
+{
+	text-align: center;
+	background: url(/img/tablo/nga8/winner.jpg);
+	width: 146px;
+	height: 35px;
+	font-size: 11px;
+	text-align: right;
+}
+
+.losercell
+{
+	text-align: center;
+	background: url(/img/tablo/nga8/loser.jpg);
+	width: 146px;
+	height: 35px;
+	font-size: 11px;
+	text-align: right;
+}
+
+.winnercell:hover{font-weight:bold}
+.losercell:hover{font-weight:bold}
+
+.lcentercell
+{
+	background: url(/img/tablo/nga8/lcenter.jpg);
+	width: 25px;
+	height: 35px
+}
+
+.trcornercell
+{
+	background: url(/img/tablo/nga8/trcorner.jpg);
+	width: 25px;
+	height: 35px
+}
+
+.brcornercell
+{
+	background: url(/img/tablo/nga8/brcorner.jpg);
+	width: 25px;
+	height: 35px
+}
+
+.lvlinecell
+{
+	background: url(/img/tablo/nga8/vline.jpg);
+	width: 25px;
+	height: 35px
+}
+
+.rvlinecell
+{
+	background: url(/img/tablo/nga8/vline.jpg);
+	width: 25px;
+	height: 35px
+}
+
+.voidcell
+{
+	background-color: #fafafa;
+	width: 25px;
+	height: 35px
+}
+
+.tableheader
+{
+	border-style: solid;
+	border-color: #666666;
+	border-width: 0;
+	background: url(/img/tablo/nga8/bg-top.jpg);
+	background-color: #000000;
+	text-align: center;
+	font-family: Arial;
+	font-size: 8pt;
+	font-weight:bold;
+	height: 45px;
+	font-size: 11px;	
+	width: 146px;
+}
+
+.infownd
+{
+	border-style: solid;
+	border-color: #666666;
+	border-width: 1;
+	background-color: #ffffff;
+	text-align: center;
+	font-family: Arial;
+	font-size: 8pt;
+	width: 260;
+	height: -1;
+	visibility: hidden;
+	position: absolute
+}
+
+.narrowvoidcell
+{
+	background-color: #ffffff;
+	width: 25px;
+	height: 35px
+}
+
+.hlinecell
+{
+	background: url(/img/tablo/nga8/hline.jpg);
+	width: 25px;
+	height: 35px
+}
+
+.bigvlinecell
+{
+	background: url(/img/tablo/nga8/1.gif)  50% 50%;;
+	width: 45px;
+	height: 37px;
+	background-color: #181A20 
+}
+
+.tlcornercell
+{
+	background: url(/img/tablo/nga8/tlcorner.jpg);
+	width: 25px;
+	height: 35px
+}
+
+.blcornercell
+{
+	background: url(/img/tablo/nga8/blcorner.jpg);
+	width: 25px;
+	height: 35px
+}
+
+.rcentercell
+{
+	background: url(/img/tablo/nga8/rcenter.jpg);
+	width: 25px;
+	height: 35px
+}
+
+-->
