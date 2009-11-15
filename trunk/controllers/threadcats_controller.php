@@ -4,22 +4,22 @@ class ThreadcatsController extends AppController {
 	var $name = 'Threadcats';
 	var $helpers = array('Html', 'Form');
 
-	function index() {		
-		$this->Threadcat->recursive = 1;		
+	function index() {
+		$this->Threadcat->recursive = 1;
 		$this->paginate = array('limit'=>'5', 'order' => 'Threadcat.position DESC', 'conditions' => array('Lang.code' => $this->userLangCode));
 		$this->set('threadcats', $this->paginate());
 	}
 
 	function view($id = null) {
 		$this->contentHelpers = false;
-		
+
 		if (!$id) {
 			$this->Session->setFlash(__('Invalid Threadcat.', true));
 			$this->redirect(array('action'=>'index'));
 		}
 		$this->set('threadcat', $this->Threadcat->read(null, $id));
 		$threads = $this->Threadcat->Thread->recursive = 1;
-		$threads = $this->Threadcat->Thread->findAll(array('threadcat_id'=> $id));		
+		$threads = $this->Threadcat->Thread->findAll(array('threadcat_id'=> $id));
 		$this->set('threads', $threads);
 	}
 

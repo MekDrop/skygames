@@ -8,6 +8,7 @@ class GamesController extends AppController {
 	function admin_index() {
 		$this->Game->recursive = 0;
 		$this->set('games', $this->paginate());
+		
 	}
 
 	function admin_view($id = null) {

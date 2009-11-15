@@ -40,7 +40,7 @@
 <?php endif; ?>
 	<?php if($othAuth->sessionValid()): ?>
 	<div class="list">
-		<?php echo $form->button(strtoupper(__('New Thread', true)), array("class"=>"knopke", "div"=>false, "onclick"=>"window.location='" . $html->url(array('controller'=> 'threads', 'action'=>'add', $threadcat['Threadcat']['id'])) . "'")); ?>
+		<?php echo $form->button(strtoupper(__('New Thread', true)), array("class"=>"knopke", "onclick"=>"window.location='" . $html->url(array('controller'=> 'threads', 'action'=>'add', $threadcat['Threadcat']['id'])) . "'")); ?>
 	</div>
 	<?php else: ?>
 	<div class="infocomments form">		

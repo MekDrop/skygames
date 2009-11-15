@@ -10,13 +10,13 @@ class Grouptableteam extends AppModel {
 							'conditions' => '',
 							'fields' => '',
 							'order' => ''
-		),
+							),
 		'Grouptable' => array('className' => 'Grouptable',
 							'foreignKey' => 'grouptable_id',
 							'conditions' => '',
 							'fields' => '',
 							'order' => ''
-		)
-	);
+							)
+							);
 }
 ?>

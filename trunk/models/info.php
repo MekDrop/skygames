@@ -16,28 +16,28 @@ class Info extends AppModel {
 								'conditions' => '',
 								'fields' => '',
 								'order' => ''
-			),
+								),
 			'Infocat' => array('className' => 'Infocat',
 								'foreignKey' => 'infocat_id',
 								'conditions' => '',
 								'fields' => '',
 								'order' => ''
-			),
+								),
 			'Lang' => array('className' => 'Lang',
 								'foreignKey' => 'lang_id',
 								'conditions' => '',
 								'fields' => '',
 								'order' => ''
-			),
+								),
 			'Game' => array('className' => 'Game',
 								'foreignKey' => 'game_id',
 								'conditions' => '',
 								'fields' => '',
 								'order' => ''
-			)
-	);
+								)
+								);
 
-	var $hasMany = array(
+								var $hasMany = array(
 			'Infocomment' => array('className' => 'Infocomment',
 								'foreignKey' => 'info_id',
 								'dependent' => false,
@@ -49,8 +49,23 @@ class Info extends AppModel {
 								'exclusive' => '',
 								'finderQuery' => '',
 								'counterQuery' => ''
-			)
-	);
+								)
+								);
+
+								function beforeSave()
+								{
+									clearCache('element_cache_preview' , 'views', '.');
+										
+									return true;
+								}
+
+								function beforeDelete()
+								{
+									clearCache('element_cache_preview' , 'views', '.');
+										
+									return true;
+
+								}
 
 }
 ?>

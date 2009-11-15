@@ -33,31 +33,41 @@
  * its action called 'display', and we pass a param to select the view file
  * to use (in this case, /app/views/pages/home.thtml)...
  */
-	Router::connect('/', array('controller' => 'infos', 'action' => 'index'));
-	
+Router::connect('/', array('controller' => 'infos', 'action' => 'index'));
+
+Router::connect('/webroot/forum/users/*', '/users');
+
 /**
  * Then we connect url '/test' to our test controller. This is helpfull in
  * developement.
  */
-		
-	Router::connect('/lang/*', array('controller' => 'locales', 'action' => 'change'));
-	
-	//forgiving routes that allow users to change the lang of any page
-	Router::connect('/v2/eng?/*', array(
+
+//Router::connect('/event/*', array('controller' => 'events', 'action' => 'view'));
+
+Router::connect('/event/([\d]+):(.+)', array('controller' => 'events', 'action'=>'view'));
+
+Router::connect('/match/([\d]+):(.+)', array('controller' => 'matches', 'action'=>'view'));
+
+Router::connect('/info/([\d]+):(.+)', array('controller' => 'infos', 'action'=>'view'));
+
+Router::connect('/lang/*', array('controller' => 'locales', 'action' => 'change'));
+
+//forgiving routes that allow users to change the lang of any page
+Router::connect('/v2/eng?/*', array(
 	    'controller' => "locales",
 	    'action' => "shuntRequest",
 	    'lang' => 'eng'
-	));
-	
-	Router::connect('/v2/lit?/*', array(
+	    ));
+
+	    Router::connect('/v2/lit?/*', array(
 	    'controller' => "locales",
 	    'action' => "shuntRequest",
 	    'lang' => 'lit'
-	));
-	
-	Router::connect('/lv?/*', array(
+	    ));
+
+	    Router::connect('/lv?/*', array(
 	    'controller' => "locales",
 	    'action' => "shuntRequest",
 	    'lang' => 'lva'
-)); 	
-?>
+	    ));
+	    ?>

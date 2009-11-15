@@ -17,7 +17,7 @@ class Lang extends AppModel {
 								'exclusive' => '',
 								'finderQuery' => '',
 								'counterQuery' => ''
-			),
+								),
 			'Info' => array('className' => 'Info',
 								'foreignKey' => 'lang_id',
 								'dependent' => false,
@@ -29,7 +29,7 @@ class Lang extends AppModel {
 								'exclusive' => '',
 								'finderQuery' => '',
 								'counterQuery' => ''
-			),
+								),
 			'Threadcat' => array('className' => 'Threadcat',
 								'foreignKey' => 'lang_id',
 								'dependent' => false,
@@ -41,8 +41,8 @@ class Lang extends AppModel {
 								'exclusive' => '',
 								'finderQuery' => '',
 								'counterQuery' => ''
-			)
-	);
+								)
+								);
 
 }
 ?>

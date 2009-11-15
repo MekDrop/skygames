@@ -49,8 +49,22 @@
 					</tr>
 				</table>
 			</td>
+			<td>	
+				<table class="clickable">
+					<tr>
+					<td>
+						<table style="background-color: #e7e7e7;">
+						<tr>
+							<td style="background-color:#f5f5f5;">
+								<?php echo $html->link(__('Betts', true),array('action'=>'betts'),array('class'=>'nonunderline')); ?>
+							</td>
+						</tr>
+						</table>
+					</td>
+					</tr>
+				</table>
+			</td></tr>
 	</table>
-	
 </div>
 
 

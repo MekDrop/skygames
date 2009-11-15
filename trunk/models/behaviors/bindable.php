@@ -126,7 +126,7 @@ class BindableBehavior extends ModelBehavior {
 							}
 
 							$Model->bindModel(array($relation => array(
-								$name => array_merge($Model->{$relation}[$name], $children['__settings__'])
+							$name => array_merge($Model->{$relation}[$name], $children['__settings__'])
 							)), $reset);
 						}
 					}
@@ -169,7 +169,7 @@ class BindableBehavior extends ModelBehavior {
 			}
 		}
 
-   		if (!empty($unbind)) {
+		if (!empty($unbind)) {
 			if (!$reset) {
 				$this->__backupAssociations($Model);
 			}

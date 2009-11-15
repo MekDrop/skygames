@@ -29,6 +29,6 @@ Mail !
 $content = explode("\n", $content);
 
 foreach($content as $line):
-	echo '<p> ' . $line . '</p>';
+echo '<p> ' . $line . '</p>';
 endforeach;
 ?>

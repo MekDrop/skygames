@@ -17,8 +17,8 @@ class Eventtype extends AppModel {
 								'exclusive' => '',
 								'finderQuery' => '',
 								'counterQuery' => ''
-			)
-	);
+								)
+			);
 
 }
 ?>

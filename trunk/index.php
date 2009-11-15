@@ -22,5 +22,6 @@
  * @lastmodified	$Date: 2008-01-02 00:33:52 -0600 (Wed, 02 Jan 2008) $
  * @license			http://www.opensource.org/licenses/mit-license.php The MIT License
  */
+echo null;
 require 'webroot' . DIRECTORY_SEPARATOR . 'index.php';
 ?>

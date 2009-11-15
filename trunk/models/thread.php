@@ -15,16 +15,16 @@ class Thread extends AppModel {
 								'conditions' => '',
 								'fields' => '',
 								'order' => ''
-			),
+								),
 			'Threadcat' => array('className' => 'Threadcat',
 								'foreignKey' => 'threadcat_id',
 								'conditions' => '',
 								'fields' => '',
 								'order' => ''
-			)
-	);
+								)
+								);
 
-	var $hasMany = array(
+								var $hasMany = array(
 			'Post' => array('className' => 'Post',
 								'foreignKey' => 'thread_id',
 								'dependent' => false,
@@ -36,8 +36,8 @@ class Thread extends AppModel {
 								'exclusive' => '',
 								'finderQuery' => '',
 								'counterQuery' => ''
-			)
-	);
+								)
+								);
 
 }
 ?>

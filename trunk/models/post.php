@@ -3,7 +3,7 @@ class Post extends AppModel {
 
 	var $name = 'Post';
 	var $useTable = 'posts';
-	
+
 	var $validate = array(
 		'body' => VALID_NOT_EMPTY
 	);
@@ -15,14 +15,14 @@ class Post extends AppModel {
 								'conditions' => '',
 								'fields' => '',
 								'order' => ''
-			),
+								),
 			'Thread' => array('className' => 'Thread',
 								'foreignKey' => 'thread_id',
 								'conditions' => '',
 								'fields' => '',
 								'order' => ''
-			)
-	);
+								)
+								);
 
 }
 ?>

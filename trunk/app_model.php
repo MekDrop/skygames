@@ -39,145 +39,189 @@
  * @subpackage	cake.app
  */
 class AppModel extends Model{
-	
-	//var $actsAs = array('Bindable'); 
-	
+
+	//var $actsAs = array('Bindable');
+
 	var $habtm = array();
-	
-	
-	function prepareJoinStatement(){
-	    $join_statement = "";
-	    foreach($this->habtm as $key=>$value){
-	        $fk_this = $value[0];
-	        $fk_otherModel = $value[1];
-	        
-	        $otherModelName = $value[2];
-	        App::import('Model', $otherModelName);
-	        //loadModel(); 
-	        $otherModel = new $otherModelName();
-	        $otherTableName = $otherModel->useTable;
-	        
-	        $join_statement .= " JOIN ".$key." on ".$this->name.".id=".$key.".".$fk_this;
-	        $join_statement .= " JOIN ".$otherTableName." as ".$otherModelName." on ".$key.".".$fk_otherModel."=".$otherModelName.".id";
-	    }
-	    return $join_statement;
+
+	/*
+	 function prepareJoinStatement(){
+	 $join_statement = "";
+	 foreach($this->habtm as $key=>$value){
+	 $fk_this = $value[0];
+	 $fk_otherModel = $value[1];
+	  
+	 $otherModelName = $value[2];
+	 App::import('Model', $otherModelName);
+	 //loadModel();
+	 $otherModel = new $otherModelName();
+	 $otherTableName = $otherModel->useTable;
+	  
+	 $join_statement .= " JOIN ".$key." on ".$this->name.".id=".$key.".".$fk_this;
+	 $join_statement .= " JOIN ".$otherTableName." as ".$otherModelName." on ".$key.".".$fk_otherModel."=".$otherModelName.".id";
+	 }
+	 return $join_statement;
+	 }
+
+	 function findAllHabtm($conditions = null, $fields = null, $order = null, $limit = null, $page = 1, $recursive = null) {
+
+	 $db =& ConnectionManager::getDataSource($this->useDbConfig);
+	 $this->id = $this->getID();
+	 $offset = null;
+
+	 if ($page > 1 && $limit != null) {
+	 $offset = ($page - 1) * $limit;
+	 }
+
+	 if ($order == null) {
+	 $order = array();
+	 } else {
+	 $order = array($order);
+	 }
+
+	 $queryData = array('conditions' => $conditions,
+	 'fields'    => '*',
+	 'joins'     => array($this->prepareJoinStatement()),
+	 'limit'     => $limit,
+	 'offset'    => $offset,
+	 'order'     => $order
+	 );
+
+	 $ret = $this->beforeFind($queryData);
+	 if (is_array($ret)) {
+	 $queryData = $ret;
+	 } elseif ($ret === false) {
+	 return null;
+	 }
+
+	 $return = $this->afterFind($db->read($this, $queryData, $recursive));
+
+	 if (isset($this->__backAssociation)) {
+	 //$this->__resetAssociations();
+	 }
+
+	 return $return;
+	 }
+
+	 function find($conditions = null, $options = array(), $order = null, $recursive = null) {
+	 // Test if $conditions is a string, if not just call Parent::find
+	 if(is_string($conditions)){
+	 // Add here new find logics
+	 switch ($conditions) {
+	 case 'habtm':
+	 if (!isset($options['joins'])) {
+	 $options['joins'] = array();
+	 }
+	 // Hack : process 'operation' parameter to allow find('list/first/threaded/count/...', ...
+	 $conditions = isset($options['operation']) ? $options['operation'] : 'all';
+
+	 if (!isset($options['join']) || !isset($options['on'])) {
+	 break;
+	 }
+	 $assoc = $this->hasAndBelongsToMany[$options['join']];
+	 $bind = "{$assoc['with']}.{$assoc['foreignKey']} = {$this->alias}.{$this->primaryKey}";
+
+	 $options['joins'][] = array(
+	 'table' => $assoc['joinTable'],
+	 'alias' => $assoc['with'],
+	 'type' => 'inner',
+	 'foreignKey' => false,
+	 'conditions'=> array($bind)
+	 );
+
+	 $bind = $options['join'] . '.' . $this->{$options['join']}->primaryKey . ' = ';
+	 $bind .= "{$assoc['with']}.{$assoc['associationForeignKey']}";
+
+	 $options['joins'][] = array(
+	 'table' => $this->{$options['join']}->table,
+	 'alias' => $options['join'],
+	 'type' => 'inner',
+	 'foreignKey' => false,
+	 'conditions'=> array($bind) + (array)$options['on'],
+	 );
+	 unset($options['join'], $options['on']);
+
+	 break;
+	 }
+	 }
+	 return parent::find($conditions, $options, $order, $recursive);
+	 } // End function
+	 */
+
+	function unbindAll($params = array())
+	{
+		foreach($this->__associations as $ass)
+		{
+			if(!empty($this->{$ass}))
+			{
+				$this->__backAssociation[$ass] = $this->{$ass};
+				if(isset($params[$ass]))
+				{
+					foreach($this->{$ass} as $model => $detail)
+					{
+						if(!in_array($model,$params[$ass]))
+						{
+							$this->__backAssociation = array_merge($this->__backAssociation, $this->{$ass});
+							unset($this->{$ass}[$model]);
+						}
+					}
+				}else
+				{
+					$this->__backAssociation = array_merge($this->__backAssociation, $this->{$ass});
+					$this->{$ass} = array();
+				}
+
+			}
+		}
+		return true;
 	}
 
-	function findAllHabtm($conditions = null, $fields = null, $order = null, $limit = null, $page = 1, $recursive = null) {
 
-        $db =& ConnectionManager::getDataSource($this->useDbConfig);
-        $this->id = $this->getID();
-        $offset = null;
-
-        if ($page > 1 && $limit != null) {
-            $offset = ($page - 1) * $limit;
-        }
-
-        if ($order == null) {
-            $order = array();
-        } else {
-            $order = array($order);
-        }
-
-        $queryData = array('conditions' => $conditions,
-                            'fields'    => '*',
-                            'joins'     => array($this->prepareJoinStatement()),
-                            'limit'     => $limit,
-                            'offset'    => $offset,
-                            'order'     => $order
-        );
-
-        $ret = $this->beforeFind($queryData);
-        if (is_array($ret)) {
-            $queryData = $ret;
-        } elseif ($ret === false) {
-            return null;
-        }
-
-        $return = $this->afterFind($db->read($this, $queryData, $recursive));
-
-        if (isset($this->__backAssociation)) {
-            //$this->__resetAssociations();
-        }
-
-        return $return;
-    } 
-	
-    
-	function unbindAll($params = array())
-    {
-        foreach($this->__associations as $ass)
-        {
-            if(!empty($this->{$ass}))
-            {
-                 $this->__backAssociation[$ass] = $this->{$ass};
-                if(isset($params[$ass]))
-                {
-                    foreach($this->{$ass} as $model => $detail)
-                    {
-                        if(!in_array($model,$params[$ass]))
-                        {
-                             $this->__backAssociation = array_merge($this->__backAssociation, $this->{$ass});
-                            unset($this->{$ass}[$model]);
-                        }
-                    }
-                }else
-                {
-                    $this->__backAssociation = array_merge($this->__backAssociation, $this->{$ass});
-                    $this->{$ass} = array();
-                }
-                
-            }
-        }
-        return true;
-    } 
-	
-    
 	/**
-     * Get Enum Values
-     * Snippet v0.1.3
-     * http://cakeforge.org/snippet/detail.php?type=snippet&id=112
-     *
-     * Gets the enum values for MySQL 4 and 5 to use in selectTag()
-     */
-    function getEnumValues($columnName=null, $respectDefault=false)
-    {
-        if ($columnName==null) { return array(); } //no field specified
+	 * Get Enum Values
+	 * Snippet v0.1.3
+	 * http://cakeforge.org/snippet/detail.php?type=snippet&id=112
+	 *
+	 * Gets the enum values for MySQL 4 and 5 to use in selectTag()
+	 */
+	function getEnumValues($columnName=null, $respectDefault=false)
+	{
+		if ($columnName==null) { return array(); } //no field specified
 
 
-        //Get the name of the table
-        $db =& ConnectionManager::getDataSource($this->useDbConfig);
-        $tableName = $db->fullTableName($this, false);
+		//Get the name of the table
+		$db =& ConnectionManager::getDataSource($this->useDbConfig);
+		$tableName = $db->fullTableName($this, false);
 
 
-        //Get the values for the specified column (database and version specific, needs testing)
-        $result = $this->query("SHOW COLUMNS FROM {$tableName} LIKE '{$columnName}'");
+		//Get the values for the specified column (database and version specific, needs testing)
+		$result = $this->query("SHOW COLUMNS FROM {$tableName} LIKE '{$columnName}'");
 
-        //figure out where in the result our Types are (this varies between mysql versions)
-        $types = null;
-        if     ( isset( $result[0]['COLUMNS']['Type'] ) ) { $types = $result[0]['COLUMNS']['Type']; $default = $result[0]['COLUMNS']['Default']; } //MySQL 5
-        elseif ( isset( $result[0][0]['Type'] ) )         { $types = $result[0][0]['Type']; $default = $result[0][0]['Default']; } //MySQL 4
-        else   { return array(); } //types return not accounted for
+		//figure out where in the result our Types are (this varies between mysql versions)
+		$types = null;
+		if     ( isset( $result[0]['COLUMNS']['Type'] ) ) { $types = $result[0]['COLUMNS']['Type']; $default = $result[0]['COLUMNS']['Default']; } //MySQL 5
+		elseif ( isset( $result[0][0]['Type'] ) )         { $types = $result[0][0]['Type']; $default = $result[0][0]['Default']; } //MySQL 4
+		else   { return array(); } //types return not accounted for
 
-        //Get the values
-        $values = explode("','", preg_replace("/(enum)\('(.+?)'\)/","\\2", $types) );
+		//Get the values
+		$values = explode("','", preg_replace("/(enum)\('(.+?)'\)/","\\2", $types) );
 
-        if($respectDefault){
-                $assoc_values = array("$default"=>Inflector::humanize($default));
-                foreach ( $values as $value ) {
-                        if($value==$default){ continue; }
-                        $assoc_values[$value] = Inflector::humanize($value);
-                }
-        }
-        else{
-                $assoc_values = array();
-                foreach ( $values as $value ) {
-                        $assoc_values[$value] = Inflector::humanize($value);
-                }
-        }
+		if($respectDefault){
+			$assoc_values = array("$default"=>Inflector::humanize($default));
+			foreach ( $values as $value ) {
+				if($value==$default){ continue; }
+				$assoc_values[$value] = Inflector::humanize($value);
+			}
+		}
+		else{
+			$assoc_values = array();
+			foreach ( $values as $value ) {
+				$assoc_values[$value] = Inflector::humanize($value);
+			}
+		}
 
-        return $assoc_values;
+		return $assoc_values;
 
-    } //end getEnumValues
+	} //end getEnumValues
 }
 ?>

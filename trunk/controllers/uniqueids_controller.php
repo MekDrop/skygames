@@ -8,7 +8,7 @@ class UniqueidsController extends AppController {
 		if (!empty($this->data)) {
 			$this->Uniqueid->create();
 			$this->data["Uniqueid"]["user_id"] = $this->othAuth->user('id');
-			if ($this->Uniqueid->save($this->data)) {				
+			if ($this->Uniqueid->save($this->data)) {
 				$this->Session->setFlash(__('Saved.', true));
 				$this->redirect(array('controller' => 'users','action'=>'edit', $this->othAuth->user('id')));
 				exit();
@@ -21,35 +21,35 @@ class UniqueidsController extends AppController {
 		else
 		{
 			$this->redirect($this->referer(null, true));
-			exit();			
+			exit();
 		}
 	}
 
 	/*
-	function edit($id = null) {
+	 function edit($id = null) {
 		if (!$id && empty($this->data)) {
-			$this->Session->setFlash(__('Invalid Uniqueid', true));
-			$this->redirect(array('controller' => 'users','action'=>'edit', $this->othAuth->user('id')));
-			exit();
+		$this->Session->setFlash(__('Invalid Uniqueid', true));
+		$this->redirect(array('controller' => 'users','action'=>'edit', $this->othAuth->user('id')));
+		exit();
 		}
 		if (!empty($this->data)) {
-			$this->data["Uniqueid"]["user_id"] = $this->othAuth->user('id');
-			if ($this->Uniqueid->save($this->data)) {
-				$this->Session->setFlash(__('The Uniqueid has been saved', true));
-				$this->redirect(array('controller' => 'users','action'=>'edit', $this->othAuth->user('id')));
-				exit();
-			} else {
-				$this->Session->setFlash(__('The Uniqueid could not be saved. Please, try again.', true));
-			}
+		$this->data["Uniqueid"]["user_id"] = $this->othAuth->user('id');
+		if ($this->Uniqueid->save($this->data)) {
+		$this->Session->setFlash(__('The Uniqueid has been saved', true));
+		$this->redirect(array('controller' => 'users','action'=>'edit', $this->othAuth->user('id')));
+		exit();
+		} else {
+		$this->Session->setFlash(__('The Uniqueid could not be saved. Please, try again.', true));
+		}
 		}
 		if (empty($this->data)) {
-			$this->data = $this->Uniqueid->read(null, $id);
+		$this->data = $this->Uniqueid->read(null, $id);
 		}
 		$users = $this->Uniqueid->User->find('list');
 		$games = $this->Uniqueid->Game->find('list');
 		$this->set(compact('users','games'));
-	}
-	*/
+		}
+		*/
 
 	function delete($id = null) {
 		if (!$id) {

@@ -11,23 +11,11 @@ class Map extends AppModel {
 								'conditions' => '',
 								'fields' => '',
 								'order' => ''
-			)
-	);
+								)
+								
+								);
 
-	var $hasMany = array(
-			'Result' => array('className' => 'Result',
-								'foreignKey' => 'map_id',
-								'dependent' => false,
-								'conditions' => '',
-								'fields' => '',
-								'order' => '',
-								'limit' => '',
-								'offset' => '',
-								'exclusive' => '',
-								'finderQuery' => '',
-								'counterQuery' => ''
-			)
-	);
+
 
 }
 ?>

@@ -2,13 +2,13 @@
 /*
  ======================================================================
  lastRSS 0.9.1
- 
+
  Simple yet powerfull PHP class to parse RSS files.
- 
+
  by Vojtech Semecky, webmaster @ webdot . cz
- 
+
  Latest version, features, manual and examples:
- 	http://lastrss.webdot.cz/
+ http://lastrss.webdot.cz/
 
  ----------------------------------------------------------------------
  LICENSE
@@ -25,12 +25,12 @@
 
  To read the license please visit http://www.gnu.org/copyleft/gpl.html
  ======================================================================
-*/
+ */
 
 /**
-* lastRSS
-* Simple yet powerfull PHP class to parse RSS files.
-*/
+ * lastRSS
+ * Simple yet powerfull PHP class to parse RSS files.
+ */
 class lastRSS {
 	// -------------------------------------------------------------------
 	// Public properties
@@ -82,7 +82,7 @@ class lastRSS {
 		// return result
 		return $result;
 	}
-	
+
 	// -------------------------------------------------------------------
 	// Modification of preg_match(); return trimed field with index 1
 	// from 'classic' preg_match() array output
@@ -102,12 +102,12 @@ class lastRSS {
 
 			// If code page is set convert character encoding to required
 			if ($this->cp != '')
-				//$out[1] = $this->MyConvertEncoding($this->rsscp, $this->cp, $out[1]);
-				$out[1] = iconv($this->rsscp, $this->cp.'//TRANSLIT', $out[1]);
+			//$out[1] = $this->MyConvertEncoding($this->rsscp, $this->cp, $out[1]);
+			$out[1] = iconv($this->rsscp, $this->cp.'//TRANSLIT', $out[1]);
 			// Return result
 			return trim($out[1]);
 		} else {
-		// if there is NO result, return empty string
+			// if there is NO result, return empty string
 			return '';
 		}
 	}
@@ -143,10 +143,10 @@ class lastRSS {
 			$result['encoding'] = $this->my_preg_match("'encoding=[\'\"](.*?)[\'\"]'si", $rss_content);
 			// if document codepage is specified, use it
 			if ($result['encoding'] != '')
-				{ $this->rsscp = $result['encoding']; } // This is used in my_preg_match()
+			{ $this->rsscp = $result['encoding']; } // This is used in my_preg_match()
 			// otherwise use the default codepage
 			else
-				{ $this->rsscp = $this->default_cp; } // This is used in my_preg_match()
+			{ $this->rsscp = $this->default_cp; } // This is used in my_preg_match()
 
 			// Parse CHANNEL info
 			preg_match("'<channel.*?>(.*?)</channel>'si", $rss_content, $out_channel);
@@ -157,14 +157,14 @@ class lastRSS {
 			}
 			// If date_format is specified and lastBuildDate is valid
 			if ($this->date_format != '' && ($timestamp = strtotime($result['lastBuildDate'])) !==-1) {
-						// convert lastBuildDate to specified date format
-						$result['lastBuildDate'] = date($this->date_format, $timestamp);
+				// convert lastBuildDate to specified date format
+				$result['lastBuildDate'] = date($this->date_format, $timestamp);
 			}
 
 			// Parse TEXTINPUT info
 			preg_match("'<textinput(|[^>]*[^/])>(.*?)</textinput>'si", $rss_content, $out_textinfo);
-				// This a little strange regexp means:
-				// Look for tag <textinput> with or without any attributes, but skip truncated version <textinput /> (it's not beggining tag)
+			// This a little strange regexp means:
+			// Look for tag <textinput> with or without any attributes, but skip truncated version <textinput /> (it's not beggining tag)
 			if (isset($out_textinfo[2])) {
 				foreach($this->textinputtags as $textinputtag) {
 					$temp = $this->my_preg_match("'<$textinputtag.*?>(.*?)</$textinputtag>'si", $out_textinfo[2]);
@@ -193,10 +193,10 @@ class lastRSS {
 					}
 					// Strip HTML tags and other bullshit from DESCRIPTION
 					if ($this->stripHTML && $result['items'][$i]['description'])
-						$result['items'][$i]['description'] = strip_tags($this->unhtmlentities(strip_tags($result['items'][$i]['description'])));
+					$result['items'][$i]['description'] = strip_tags($this->unhtmlentities(strip_tags($result['items'][$i]['description'])));
 					// Strip HTML tags and other bullshit from TITLE
 					if ($this->stripHTML && $result['items'][$i]['title'])
-						$result['items'][$i]['title'] = strip_tags($this->unhtmlentities(strip_tags($result['items'][$i]['title'])));
+					$result['items'][$i]['title'] = strip_tags($this->unhtmlentities(strip_tags($result['items'][$i]['title'])));
 					// If date_format is specified and pubDate is valid
 					if ($this->date_format != '' && ($timestamp = strtotime($result['items'][$i]['pubDate'])) !==-1) {
 						// convert pubDate to specified date format

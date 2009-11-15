@@ -13,29 +13,29 @@ class Org extends AppModel {
 								'conditions' => '',
 								'fields' => '',
 								'order' => ''
-			)
-	);
+								)
+								);
 
-	
-	var $hasAndBelongsToMany = array(
-		
 
-		
-		
+								var $hasAndBelongsToMany = array(
+
+
+
+
 		'Admin' => array(
 		'className' => 'User',
 		'with' => 'Staff'),
-			
-		
-	);
-	
-	var $hasMany = array(
+									
+
+								);
+
+								var $hasMany = array(
 			'Event' => array('className' => 'Event',
 								'foreignKey' => 'org_id',
 								'dependent' => false,
-			)
-			
-	);
+								)
+									
+								);
 
 }
 ?>

@@ -2,22 +2,22 @@
 class CustcommentsController extends AppController {
 
 	var $name = 'Custcomments';
-	var $helpers = array('Html', 'Form', 'OthAuth', 'Paginator');	
+	var $helpers = array('Html', 'Form', 'OthAuth', 'Paginator');
 	var $commentModel = null;
 	var $autoRender = false;
-	
+
 	function beforeFilter()
 	{
-		parent::beforeFilter();		
+		parent::beforeFilter();
 		if (!$this->commentModel)
-			$this->commentModel = $this->Custcomment;
+		$this->commentModel = $this->Custcomment;
 	}
-	
+
 	function index() {
-				
+
 		$this->commentModel->recursive = 0;
 		$this->set('custcomments', $this->paginate());
-		
+
 		$this->render('index', 'skygames', '/custcomments/index');
 	}
 

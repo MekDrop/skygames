@@ -11,10 +11,10 @@ class Matchpart extends AppModel {
 								'conditions' => '',
 								'fields' => '',
 								'order' => ''
-			)
-	);
+								)
+								);
 
-	var $hasMany = array(
+								var $hasMany = array(
 			'Result' => array('className' => 'Result',
 								'foreignKey' => 'matchpart_id',
 								'dependent' => false,
@@ -26,8 +26,8 @@ class Matchpart extends AppModel {
 								'exclusive' => '',
 								'finderQuery' => '',
 								'counterQuery' => ''
-			)
-	);
+								)
+								);
 
 }
 ?>

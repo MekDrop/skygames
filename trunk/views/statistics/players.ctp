@@ -54,6 +54,22 @@
 					</tr>
 				</table>
 			</td>
+			<td>	
+				<table class="clickable">
+					<tr>
+					<td>
+						<table style="background-color: #e7e7e7;">
+						<tr>
+							<td style="background-color:#f5f5f5;">
+								<?php echo $html->link(__('Betts', true),array('action'=>'betts'),array('class'=>'nonunderline')); ?>
+							</td>
+						</tr>
+						</table>
+					</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
 	</table>
 	
 </div>
@@ -63,7 +79,7 @@
 <div class="stats index" >
 		<?php echo $form->create('Statistic', array('action' => 'players', 'id' => 'Statistic'));?>
 
-		<table>
+		<table style="width: 100%;">
 			<tr>
 				<td>
 					<?php echo $form->label('Event.game_id', __('Game', true));?>
@@ -166,7 +182,7 @@
 <?php
 
 	//echo $ajax->observeForm('Statistic', array('url' => 'select_event', 'update' => 'Events' ) );
-	echo $ajax->observeField('Games', array('url' => 'select_event_players', 'update' => 'Events', 'with' => "Form.serialize('Statistic')" ));
-	echo $ajax->observeField('Orgs', array('url' => 'select_event_players', 'update' => 'Events', 'with' => "Form.serialize('Statistic')" ));
+	echo $ajax->observeField('Games', array('url' => 'select_event/solo', 'update' => 'Events', 'with' => "Form.serialize('Statistic')" ));
+	echo $ajax->observeField('Orgs', array('url' => 'select_event/solo', 'update' => 'Events', 'with' => "Form.serialize('Statistic')" ));
 
 ?>

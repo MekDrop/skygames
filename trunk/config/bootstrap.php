@@ -56,11 +56,11 @@
 function slug($string, $replacement = '_', $length = 100) {
 	$string = strtolower(Inflector::slug($string));
 	if (strlen($string) > $length) {
-        $string = substr($string, 0, $length);
-    }
+		$string = substr($string, 0, $length);
+	}
 
 	return $string;
 }
 
-	define('DEFAULT_LANGUAGE', 'lit'); 
+define('DEFAULT_LANGUAGE', 'lit');
 ?>

@@ -1,0 +1,11 @@
+<Files *.list>
+  Order allow,deny
+  Deny from all
+  Satisfy All
+</Files>
+
+<Files *.bak>
+  Order allow,deny
+  Deny from all
+  Satisfy All
+</Files>

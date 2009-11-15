@@ -104,22 +104,22 @@
 		 		
 		 			<td>			
 					<?php
-						echo $form->input('team1_score', array ("label" => false, "div" => false, "style"=>"width:20px"));
+						echo $form->input('team1_score', array ("label" => false, "style"=>"width:20px"));
 					?>
 					</td>
 					<td>		
 					<?php
-						echo $form->input('team2_score', array ("label" => false, "div" => false, "style"=>"width:20px"));
+						echo $form->input('team2_score', array ("label" => false, "style"=>"width:20px"));
 					?>
 					</td>	
 					<td>		
 					<?php								
-						echo $form->select('matchpart_id', (count($match["Result"]) > 0 ? array_slice($translatedMatchParts, 1, count($translatedMatchParts)-1, true) : $translatedMatchParts), null, array ("label" => false, "div" => false), false);
+						echo $form->select('matchpart_id', (count($match["Result"]) > 0 ? array_slice($translatedMatchParts, 1, count($translatedMatchParts)-1, true) : $translatedMatchParts), null, array ("label" => false), false);
 					?>	
 					</td>	
 					<td>	
 					<?php		
-						echo $form->input('map_id', array ("label" => false, "div" => false));
+						echo $form->input('map_id', array ("label" => false));
 					?>
 					</td>	
 					<td>	

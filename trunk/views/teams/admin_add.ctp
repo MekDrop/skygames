@@ -7,9 +7,9 @@
 		echo $form->input('tag');
 		echo $form->input('user_id');
 		echo $form->input('game_id');
-		echo $form->input('type');
-		echo $form->input('tag');
+		echo $form->input('type');		
 		echo $form->input('Event');
+		
 	?>
 	</fieldset>
 <?php echo $form->end('Submit');?>

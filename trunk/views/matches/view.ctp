@@ -34,19 +34,19 @@
 </table>
 
 
-		<br>
+		<br />
 		
 		<table style="width: 100%;">
 			
 			<tr>
-				<td> 
+				<td style="vertical-align:top; width:50%;"> 
 					<div class="caption"><?php __('Info');?></div>
 					<br/>
 					<table class="list" >
 						<tr>		
 							<td><?php __('Event'); ?></td>
 							<td>
-								<?php echo $html->link($match['Event']['name'], array('controller'=> 'events', 'action'=>'view', $match['Event']['id'])); ?>						
+								<?php echo $html->link($match['Event']['name'], '/event/' . $match['Event']['id'] . ':' . slug($match['Event']['name'])); ?>												
 							</td>
 						</tr>						
 							<tr>
@@ -144,7 +144,7 @@
 		<!-- 
 		<?php if($userIsAdmin): ?>
 			<div class="list view">
-				<?php echo $form->button(strtoupper(__('New result', true)), array("class"=>"knopke", "div"=>false, "onclick"=>"window.location='" . $html->url(array('controller'=> 'results', 'action'=>'add', $match["Match"]["id"])) . "'")); ?>			
+				<?php echo $form->button(strtoupper(__('New result', true)), array("class"=>"knopke", "onclick"=>"window.location='" . $html->url(array('controller'=> 'results', 'action'=>'add', $match["Match"]["id"])) . "'")); ?>			
 			</div>
 		<?php endif; ?>			
  		-->
@@ -161,13 +161,12 @@
 			<?php echo $this->renderElement('latestbetts', array('match_id'=>$match['Match']['id']));?>
 		</td>
 		<td style="width: 50%;vertical-align:top;">	
-			<?php if ((!isset($match['Result'][0]) && !isset($match['Result'][0]) || (strtotime($match['Match']['date']) < time()))): ?>														
+			<?php if ( empty($match['Result']) && ((strtotime($match['Match']['date']) > time()) || !isset($match['Match']['date']))): ?>														
 				<?php echo $form->create('Bett');?>	 
 					<?php
 						echo $form->input('match_id', array("type" => "hidden","value" => $match['Match']['id']));
 						echo $form->select('team_id', array($match['Team1']['id'] => $match['Team1']['name'], $match['Team2']['id'] => $match['Team2']['name']), null, array(), false);
-						echo $form->input('sum', array('label' => __('Your betting points', true)));
-						echo $form->input('odds', array("type" => "hidden"));		
+						echo $form->input('sum', array('label' => __('Your betting points', true)));						
 					?>	
 				<br/>
 				<?php echo $form->end(strtoupper(__('Submit', true)));?>
