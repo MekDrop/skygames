@@ -11,14 +11,14 @@ class Gameword extends AppModel {
 								'conditions' => '',
 								'fields' => '',
 								'order' => ''
-			),
+								),
 			'Lang' => array('className' => 'Lang',
 								'foreignKey' => 'lang_id',
 								'conditions' => '',
 								'fields' => '',
 								'order' => ''
-			)
-	);
+								)
+								);
 
 }
 ?>

@@ -18,7 +18,7 @@ msgid "Users"
 msgstr "Vartotojai"
 
 msgid "copyright"
-msgstr "&copy; SkyGames.lt | Design&Code: SkyGames-Productions | Visos teisės saugomos."
+msgstr "&copy; SkyGames.lt | Design &amp; Code: <a href="http://www.digise.com" target="_blank">digiSE</a> | Visos teisės saugomos."
 
 msgid "by"
 msgstr "parašė"
@@ -265,16 +265,16 @@ msgid "Final score"
 msgstr "Galutinis rezultatas"
 
 msgid "matches"
-msgstr "kovos"
+msgstr "Kovos"
 
 msgid "maps"
-msgstr "žemėlapiai"
+msgstr "Žemėlapiai"
 
 msgid "won"
-msgstr "laimėta"
+msgstr "Laimėta"
 
 msgid "lost"
-msgstr "pralošta"
+msgstr "Pralaimėta"
 
 msgid "frags"
 msgstr "fragai"
@@ -283,7 +283,7 @@ msgid "deaths"
 msgstr "mirtys"
 
 msgid "events"
-msgstr "turnyrai"
+msgstr "Turnyrai"
 
 msgid "Efficiency"
 msgstr "Laimėta"
@@ -409,10 +409,10 @@ msgid "users"
 msgstr "vartotojai"
 
 msgid "events"
-msgstr "turnyrai"
+msgstr "Turnyrai"
 
 msgid "teams"
-msgstr "komandos"
+msgstr "Komandos"
 
 msgid "news"
 msgstr "naujienos"
@@ -421,7 +421,7 @@ msgid "forums"
 msgstr "forumas"
 
 msgid "stats"
-msgstr "stats"
+msgstr "statistika"
 
 msgid "News"
 msgstr "Naujienos"
@@ -919,22 +919,22 @@ msgid "Frags"
 msgstr "Fragai"
 
 msgid "frags"
-msgstr "fragai"
+msgstr "Fragai"
 
 msgid "deaths"
 msgstr "mirtys"
 
 msgid "frags"
-msgstr "fragai"
+msgstr "Fragai"
 
 msgid "deaths"
 msgstr "mirtys
 
 msgid "rounds won"
-msgstr "laimėta rnd."
+msgstr "Laimėta rnd."
 
 msgid "rounds lost"
-msgstr "pral. rnd."
+msgstr "Pral. rnd."
 
 msgid "Teams statistics"
 msgstr "Komandų statistika"
@@ -1025,3 +1025,138 @@ msgstr "Kova ištrinta."
 
 msgid "New match"
 msgstr "Nauja kova"
+
+msgid "Played"
+msgstr "Sužaista"
+
+msgid "Won"
+msgstr "Laimėta"
+
+msgid "Lost"
+msgstr "Pral."
+
+msgid "Points"
+msgstr "Tšk."
+
+msgid "No upcoming matches"
+msgstr "Nėra ateinančių kovų"
+
+msgid "Playoff table theme"
+msgstr "Tablo stilius"
+
+msgid "Matches not generated - bad status."
+msgstr "Kovos nesugeneruotos."
+
+msgid "servers"
+msgstr "serveriai"
+
+msgid "SERVERS"
+msgstr "SERVERIAI"
+
+msgid "Watch"
+msgstr "Stebėk"
+
+msgid "First place"
+msgstr "Pirma vieta"
+
+msgid "Second place"
+msgstr "Antra vieta"
+
+msgid "Best scorer"
+msgstr "Rezultatyviausias"
+
+msgid "Best scorer(team)"
+msgstr "Rezultatyviausia komanda"
+
+msgid "Players statistics"
+msgstr "Žaidėjų statistika"
+
+msgid "Teams statistics"
+msgstr "Komandų statistika"
+
+msgid "Admins statistics"
+msgstr "Adminų statistika"
+
+msgid "Betts statistics"
+msgstr "Statymų statistika"
+
+msgid "average win"
+msgstr "Vidut. laimėjimas"
+
+msgid "won points"
+msgstr "laimėta suma"
+
+msgid "lost points"
+msgstr "pralaimėta suma"
+
+msgid "betts"
+msgstr "Spėjimų"
+
+msgid "Group count"
+msgstr "Grupių skaičius"
+
+msgid "Qualify count"
+msgstr "Kiek komandų išeina iš grupės"
+
+msgid "Signup"
+msgstr "Užsirašyk"
+
+msgid "No results."
+msgstr "Rezultatų nėra."
+
+msgid "Awards"
+msgstr "Apdovanojimai"
+
+msgid "Award"
+msgstr "Apdovanojimas"
+
+msgid "Generate matches in groups"
+msgstr "Generuoti grupes"
+
+msgid "Award added"
+msgstr "Apdovanojimas įrašytas"
+
+msgid "No playoff table"
+msgstr "Nėra tablo"
+
+msgid "You dont have enough points."
+msgstr "Tu neturi pakankamai taškų."
+
+msgid "You dont have enough points."
+msgstr "Tu neturi pakankamai taškų."
+
+msgid "e-scene"
+msgstr "e-scena"
+
+msgid "Lithuanian"
+msgstr "Lietuvių"
+
+msgid "English"
+msgstr "Anglų"
+
+msgid "Player"
+msgstr "Žaidėjas"
+
+msgid "deaths"
+msgstr "Mirtys"
+
+msgid "Infos"
+msgstr "Naujienos"
+
+msgid "Advertisement"
+msgstr "Reklama"
+
+msgid "We in Social Networks"
+msgstr "Mes socialiniuose tinkluose"
+
+msgid "SkyGames.lt fans group in Frype.lt"
+msgstr "SkyGames.lt fanų grupė Frype.lt"
+
+msgid "SkyGames.lt fans group in Facebook"
+msgstr "SkyGames.lt fanų grupė FaceBook'e"
+
+msgid "Manage news"
+msgstr "Tvarkyti naujienas"
+
+msgid "New Info"
+msgstr "Pridėti naujieną"

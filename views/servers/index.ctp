@@ -10,8 +10,29 @@
 
 
 <div class="servers view" style="text-align:left;vertical-align:middle;">
-<?php echo $form->create('Server', array('action' => 'index'));?>	 	
-	<label class='horizontal'><?php __('Game'); ?></label> <?php echo $form->input('game_id', array('label' => false, 'div' => false, 'value' => $game_id, 'onchange' => "getElementById('ServerIndexForm').submit()")); ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <label class='horizontal'><?php __('Sort by'); ?></label> <?php echo $form->select(__('sort', true), array('ms' => __('ms', true), 'players' => __('players', true)), $sort, array('div' => false, 'onchange' => "getElementById('ServerIndexForm').submit()")); ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <label class='horizontal'><?php __('Refresh at'); ?></label> <?php echo $form->select(__('refresh', true), array(__('0', true) => '-', '15' => __('15 sec', true), '30' => __('30 sec', true), '60' => __('1 minute', true)), $refresh, array('div' => false, 'onchange' => "getElementById('ServerIndexForm').submit()"), false); ?> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+<?php echo $form->create('Server', array('action' => 'index'));?>
+	<table border="0" style="border-collapse: collapse;">
+		<tr>
+			<td>
+				<label class='horizontal'><?php __('Game'); ?></label>
+			</td>
+			<td>
+				<?php echo $form->input('game_id', array('label' => false, 'value' => $game_id, 'onchange' => "getElementById('ServerIndexForm').submit()")); ?>
+			</td>
+			<td style="padding-left: 30px;">
+				<label class='horizontal'><?php __('Sort by'); ?></label>
+			</td>
+			<td>
+				<?php echo $form->select(__('sort', true), array('ms' => __('ms', true), 'players' => __('players', true)), $sort, array('onchange' => "getElementById('ServerIndexForm').submit()")); ?>
+			</td>
+			<td style="padding-left: 30px;">
+				<label class='horizontal'><?php __('Refresh at'); ?></label>
+			</td>
+			<td>
+				<?php echo $form->select(__('refresh', true), array(__('0', true) => '-', '15' => __('15 sec', true), '30' => __('30 sec', true), '60' => __('1 minute', true)), $refresh, array('onchange' => "getElementById('ServerIndexForm').submit()"), false); ?>
+			</td>
+		</tr>
+	</table>		 
 <?php echo $form->end();?>
 </div>
 

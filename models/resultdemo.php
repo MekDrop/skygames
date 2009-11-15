@@ -11,8 +11,8 @@ class Resultdemo extends AppModel {
 								'conditions' => '',
 								'fields' => '',
 								'order' => ''
-			)
-	);
+								)
+								);
 
 }
 ?>

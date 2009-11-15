@@ -85,9 +85,9 @@
 			echo $form->label(__('Date',true));
 			
 			if (isset($this->data['Match']['date']))
-				echo $form->checkbox('date_is_known', array("checked"=>"true","onchange"=>"enterDateToggle();", "div" => false));
+				echo $form->checkbox('date_is_known', array("checked"=>"true","onchange"=>"enterDateToggle();"));
 			else
-		  		echo $form->checkbox('date_is_known', array("checked"=>"false","onchange"=>"enterDateToggle();", "div" => false));  
+		  		echo $form->checkbox('date_is_known', array("checked"=>"false","onchange"=>"enterDateToggle();"));  
 					
 			echo $form->dateTime('date', "YMD", "24", $this->data['Match']['date'], $monthNames, false);
 			echo $form->input('id');

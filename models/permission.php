@@ -19,8 +19,8 @@ class Permission extends AppModel {
 						'finderQuery' => '',
 						'deleteQuery' => '',
 						'insertQuery' => ''
-			)
-	);
+						)
+						);
 
 }
 ?>

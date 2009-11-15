@@ -17,19 +17,19 @@ class Game extends AppModel {
 								'exclusive' => '',
 								'finderQuery' => '',
 								'counterQuery' => ''
-			),
-			/*'Gameword' => array('className' => 'Gameword',
-								'foreignKey' => 'game_id',
-								'dependent' => false,
-								'conditions' => '',
-								'fields' => '',
-								'order' => '',
-								'limit' => '',
-								'offset' => '',
-								'exclusive' => '',
-								'finderQuery' => '',
-								'counterQuery' => ''
-			),*/
+								),
+								/*'Gameword' => array('className' => 'Gameword',
+								 'foreignKey' => 'game_id',
+								 'dependent' => false,
+								 'conditions' => '',
+								 'fields' => '',
+								 'order' => '',
+								 'limit' => '',
+								 'offset' => '',
+								 'exclusive' => '',
+								 'finderQuery' => '',
+								 'counterQuery' => ''
+								 ),*/
 			'Infocat' => array('className' => 'Infocat',
 								'foreignKey' => 'game_id',
 								'dependent' => false,
@@ -41,7 +41,7 @@ class Game extends AppModel {
 								'exclusive' => '',
 								'finderQuery' => '',
 								'counterQuery' => ''
-			),
+								),
 			'Info' => array('className' => 'Info',
 								'foreignKey' => 'game_id',
 								'dependent' => false,
@@ -53,7 +53,7 @@ class Game extends AppModel {
 								'exclusive' => '',
 								'finderQuery' => '',
 								'counterQuery' => ''
-			),
+								),
 			'Map' => array('className' => 'Map',
 								'foreignKey' => 'game_id',
 								'dependent' => false,
@@ -65,7 +65,7 @@ class Game extends AppModel {
 								'exclusive' => '',
 								'finderQuery' => '',
 								'counterQuery' => ''
-			),
+								),
 			'Matchpart' => array('className' => 'Matchpart',
 								'foreignKey' => 'game_id',
 								'dependent' => false,
@@ -77,7 +77,7 @@ class Game extends AppModel {
 								'exclusive' => '',
 								'finderQuery' => '',
 								'counterQuery' => ''
-			),
+								),
 			'Threadcat' => array('className' => 'Threadcat',
 								'foreignKey' => 'game_id',
 								'dependent' => false,
@@ -89,12 +89,12 @@ class Game extends AppModel {
 								'exclusive' => '',
 								'finderQuery' => '',
 								'counterQuery' => ''
-			),
+								),
 			'Team' => array('className' => 'Team',
 								'foreignKey' => 'game_id',
 								'dependent' => false								
-			)
-	);
+								)
+								);
 
 }
 ?>

@@ -68,7 +68,7 @@
  * Turn off all caching application-wide.
  *
  */
-	Configure::write('Cache.disable', false);
+	Configure::write('Cache.disable', true);
 /**
  * Enable cache checking.
  *
@@ -178,7 +178,7 @@
 Cache::config('default', array('engine' => 'File', //[required]
 						//'duration'=> 600, //[optional]
 						//'probability'=> 100, //[optional]
-						//'path' => 'c:\wamp\www\skygames\tmp\cache', //[optional] use system tmp directory - remember to use absolute path
+						//'path' => '/tmp', //[optional] use system tmp directory - remember to use absolute path
 						'prefix' => 'cake_', //[optional]  prefix every cache file with this string
 						'lock' => false, //[optional]  use file locking
 						'serialize' => true, //[optional]

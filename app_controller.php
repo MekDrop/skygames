@@ -37,34 +37,33 @@
  * @subpackage	cake.app
  */
 class AppController extends Controller {
-	
-	var $components  = array('othAuth', 'P28n', 'Session'); 	
+
+	var $components  = array('othAuth', 'P28n', 'Session');
 	var $helpers = array('Html', 'Form', 'OthAuth');
 	var $usesModels = array('Langs');
 
-	var $othAuthRestrictions = array( 'add', 'edit', 'delete', 'sign', 'promote', 'admin_add', 'admin_index', 'admin_edit', 'admin_delete', 'admin_view' ); 
+	var $othAuthRestrictions = array( 'add', 'edit', 'delete', 'sign', 'promote', 'admin_add', 'admin_index', 'admin_edit', 'admin_delete', 'admin_view' );
 
 	var $userLangCode = '';
 	var $userId = null;
 	var $titleForContent = '';
 	var $contentFullFill = false;
 	var $viewHelpers = array ();
-	var $contentHelpers = array(); 
-	//array("0" => array('name'=>'feeds', 'cachetime' => array('cache'=>'1 hour')));
-	
+	var $contentHelpers = array();
+
+
 	function beforeFilter()
-    {    	
-    	
-    	//	language
-    	$this->P28n->startup();
-    	$this->userLangCode = $this->P28n->get(); 
-    	
-    	
-    	//	authentication
-    		
-    	$dirs = explode('/', $_GET['url'], 2); 
-		   	
-        $auth_conf = array(
+	{
+		 
+		//	language
+		$this->P28n->startup();
+		$this->userLangCode = $this->P28n->get();
+
+		//	authentication
+
+		$dirs = explode('/', $_GET['url'], 2);
+
+		$auth_conf = array(
                     'mode'  => 'oth',
                     'login_page'  => '/users/login',
                     'logout_page' => '/users/logout',
@@ -72,38 +71,62 @@ class AppController extends Controller {
                     'hashkey'     => 'skyGamesHazhkey',
                     'noaccess_page' => '/users/login',
                     'strict_gid_check' => false);
-        
-       
-        $this->allowedAssocUserModels = array('hasMany'=>array('Team'));            
-        $this->othAuth->controller = &$this;
-        
-        
-        $this->othAuth->init($auth_conf);        
-        $this->othAuth->check();
-        
-        $this->userId = $this->othAuth->user('id');   	
-        
-        //	layout
-            	        
-	    if( $dirs[0] == 'admin' && $this->othAuth->group("level") >= 300) {
-	    	$this->layout = 'admin';	        	       	        
-	    }
-	    else 
-			$this->layout = 'skygames';	        	       	        	    					
-		
-                
-    	$this->titleForContent =  '<b>'.__($this->name, true) . '<b>';        
-    }  
-    
-    
-    function beforeRender()
-    {   
-    	$this->set('user_name', $this->othAuth->user("name"));
-    	$this->set('user_lastvisit', $this->othAuth->user("last_visit")); 	
+
+		 
+		$this->allowedAssocUserModels = array('hasMany'=>array('Team'));
+		$this->othAuth->controller = &$this;
+
+
+		$this->othAuth->init($auth_conf);
+		$this->othAuth->check();
+
+		$this->userId = $this->othAuth->user('id');
+
+		//	layout
+		 
+		if( $dirs[0] == 'admin' && $this->othAuth->group("level") >= 300) {
+			$this->layout = 'admin';
+		}
+		else
+		$this->layout = 'skygames';
+
+
+		$this->titleForContent =  '<b>'.__($this->name, true) . '</b>';
+	}
+
+
+	function beforeRender()
+	{
+		$this->set('user_name', $this->othAuth->user("name"));
+		$this->set('user_lastvisit', $this->othAuth->user("last_visit"));
 		$this->set('title_for_content',$this->titleForContent);
 		$this->set('content_full_fill', $this->contentFullFill);
 		$this->set('content_helpers', $this->contentHelpers);
-    }
-    
+		$this->set('userId', $this->userId);
+
+	}
+
+
+	function formatFilterConditions($searchParams = array())
+	{
+		$conditions = array();
+		if (!empty($searchParams))
+		{
+			foreach ($searchParams as $param)
+			{
+				if (!empty($this->data['Event'][$param]))
+				$conditions[$param] = $this->data['Event'][$param];
+				elseif (!empty($this->params['named'][$param]))
+				{
+					$this->data['Event'][$param] = $this->params['named'][$param];
+					$conditions[$param] = $this->params['named'][$param];
+				}
+			}
+			return $conditions;
+		}
+		else
+		return null;
+	}
+
 }
 ?>

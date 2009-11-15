@@ -10,8 +10,8 @@ class Statistic extends AppModel {
 								'conditions' => '',
 								'fields' => '',
 								'order' => ''
-			)
-	);
+								)
+								);
 
 }
 ?>

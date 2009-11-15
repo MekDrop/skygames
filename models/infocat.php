@@ -11,10 +11,10 @@ class Infocat extends AppModel {
 								'conditions' => '',
 								'fields' => '',
 								'order' => ''
-			)
-	);
+								)
+								);
 
-	var $hasMany = array(
+								var $hasMany = array(
 			'Info' => array('className' => 'Info',
 								'foreignKey' => 'infocat_id',
 								'dependent' => false,
@@ -26,8 +26,8 @@ class Infocat extends AppModel {
 								'exclusive' => '',
 								'finderQuery' => '',
 								'counterQuery' => ''
-			)
-	);
+								)
+								);
 
 }
 ?>

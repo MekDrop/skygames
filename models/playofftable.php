@@ -11,10 +11,10 @@ class Playofftable extends AppModel {
 								'conditions' => '',
 								'fields' => '',
 								'order' => ''
-			)
-	);
+								)
+								);
 
-	var $hasMany = array(
+								var $hasMany = array(
 			'Match' => array('className' => 'Match',
 								'foreignKey' => 'playofftable_id',
 								'dependent' => false,
@@ -26,8 +26,8 @@ class Playofftable extends AppModel {
 								'exclusive' => '',
 								'finderQuery' => '',
 								'counterQuery' => ''
-			)
-	);
+								)
+								);
 
 }
 ?>

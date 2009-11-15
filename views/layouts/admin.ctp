@@ -27,51 +27,43 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-	<title>
-		<?php __('Welcome to skygames admin page'); ?>
-		<?php echo $title_for_layout;?>
-	</title>
-	<?php
-		echo $html->charset();
-		echo $html->meta('icon');
+<title><?php __('Welcome to skygames admin page'); ?> <?php echo $title_for_layout;?>
+</title>
+<?php
+echo $html->charset();
+echo $html->meta('icon');
 
-		echo $html->css('cake.generic');
+echo $html->css('cake.generic');
 
-		echo $scripts_for_layout;
-	?>
+echo $scripts_for_layout;
+?>
 </head>
 <body>
-	<div id="container" style= "vertical-align: top;">
-		<table width="100%" style= "vertical-align: top;">
-			<tr>
-				<div id="header" style="text-align:right;">
-					 <?php __('Loged in as');?> <i><?php echo $user_name;?></i>, <?php __('last visit');?>: <i><?php echo $user_lastvisit;?></i>
-				</div>
-			</tr>
-			<tr>
-				<td  width="15%">
-					<div id="content" style= "text-align: left;">
-						<?php echo $this->renderElement('adminmenu');?> 
-					</div>
-				</td>
-				<td width="85%" style= "vertical-align: top;">
-					
-					<div id="content" style= "text-align: left;">
-						<?php
-							if ($session->check('Message.flash')):
-									$session->flash();
-							endif;
-						?>
-			
-						<?php echo $content_for_layout;?>
-			
-					</div>
-				</td>
-			</tr>
-		</table>
-		
-	</div>
-	<?php echo $cakeDebug?>
-	
+<div id="container" style="vertical-align: top;">
+<table width="100%" style="vertical-align: top;">
+	<tr>
+		<div id="header" style="text-align: right;"><?php __('Loged in as');?>
+		<i><?php echo $user_name;?></i>, <?php __('last visit');?>: <i><?php echo $user_lastvisit;?></i>
+		</div>
+	</tr>
+	<tr>
+		<td width="15%">
+		<div id="content" style="text-align: left;"><?php echo $this->renderElement('adminmenu');?>
+		</div>
+		</td>
+		<td width="85%" style="vertical-align: top;">
+
+		<div id="content" style="text-align: left;"><?php
+		if ($session->check('Message.flash')):
+		$session->flash();
+		endif;
+		?> <?php echo $content_for_layout;?></div>
+		</td>
+	</tr>
+</table>
+
+</div>
+		<?php echo $cakeDebug?>
+
 </body>
 </html>

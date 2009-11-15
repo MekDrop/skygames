@@ -3,7 +3,7 @@ class Server extends AppModel {
 
 	var $name = 'Server';
 	var $useTable = 'servers';
-	var $validate = array(		
+	var $validate = array(
 		'name' => VALID_NOT_EMPTY,		
 		'ip' => array('ip'),
 		'port' => array('numeric')
@@ -16,17 +16,17 @@ class Server extends AppModel {
 								'conditions' => '',
 								'fields' => '',
 								'order' => ''
-			)
-	);
-	
-	var $hasMany = array(
+								)
+								);
 
-			
+								var $hasMany = array(
+
+									
 			'Servercomment' => array('className' => 'Servercomment',
 								'foreignKey' => 'server_id',
-							
-			)
-	);
+									
+								)
+								);
 
 }
 ?>

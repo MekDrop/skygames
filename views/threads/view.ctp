@@ -20,9 +20,9 @@
 		<tr>
 			<td style="width:80px;vertical-align:top">							
 				<?php if ($thread['User']['avatar_url']): ?>
-					<img src="<?php echo $thread['User']['avatar_url']; ?>" />					
+					<img src="<?php echo $thread['User']['avatar_url']; ?>" alt="<?php echo $thread['User']['username'];?>" />					
 				<?php else: ?>
-					<img src="/img/uploads/avatars/no_avatar.gif" />									
+					<img src="/img/uploads/avatars/no_avatar.gif" alt="" />									
 				<?php endif; ?>
 			</td>
 			<td style="test-align:left;vertical-align: top;"><?php echo $thread['Thread']['body']; ?></td>	
@@ -54,9 +54,9 @@
 				
 				
 				<?php if ($post['User']['avatar_url']): ?>
-					<img src="<?php echo $post['User']['avatar_url']; ?>" />					
+					<img src="<?php echo $post['User']['avatar_url']; ?>" alt="<?php echo $thread['User']['username'];?>" />					
 				<?php else: ?>
-					<img src="/img/uploads/avatars/no_avatar.gif" />									
+					<img src="/img/uploads/avatars/no_avatar.gif" alt="" />									
 				<?php endif; ?>
 			</td>
 			<td style="test-align:left;vertical-align: top;">

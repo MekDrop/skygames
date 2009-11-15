@@ -14,7 +14,7 @@
 			<tr>
 				<td style="text-align: left;vertical-align:top;" colspan="2">
 					&nbsp;&nbsp;
-					<?php echo $form->input('login', array("label"=>false,"class"=>"ivestis", "div"=>false)); ?>
+					<?php echo $form->input('login', array("label"=>false,"class"=>"ivestis")); ?>
 					
 				</td>
 			</tr>
@@ -24,7 +24,7 @@
 			</tr>
 			<tr>
 				<td style="text-align: left;vertical-align:top;" colspan="2">
-					<font class="">&nbsp;&nbsp;&nbsp;<?php __('Password');?>:</font><br>
+					<font class="">&nbsp;&nbsp;&nbsp;<?php __('Password');?>:</font><br />
 				</td>
 			</tr>
 			<tr>
@@ -56,10 +56,9 @@
 				</td>
 			</tr>
 			<tr>
-				<td style="text-align: right;vertical-align:top;">
-					
-					<?php echo $form->button(strtoupper(__('Register', true)), array("class"=>"knopke", "div"=>false, "onclick"=>"window.location='" . $html->url(array('controller'=>'users', 'action'=>'register')) . "'")); ?>					
-					
+				<td style="text-align: right;vertical-align:top;">					
+					<?php echo $form->button(strtoupper(__('Register', true)), array("class"=>"knopke", "onclick"=>"window.location='" . $html->url(array('controller'=>'users', 'action'=>'register')) . "'")); ?>					
+				</td>	
 			</tr>
 		</table>
 <?php echo $form->end();?>

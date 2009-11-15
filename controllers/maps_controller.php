@@ -29,6 +29,8 @@ class MapsController extends AppController {
 		}
 		$games = $this->Map->Game->find('list');
 		$this->set(compact('games'));
+
+        
 	}
 
 	function edit($id = null) {

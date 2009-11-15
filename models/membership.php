@@ -3,7 +3,7 @@ class Membership extends AppModel {
 
 	var $useTable = 'memberships';
 	var $name = 'Membership';
-	
+
 
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 	var $belongsTo = array(
@@ -12,13 +12,13 @@ class Membership extends AppModel {
 								'conditions' => '',
 								'fields' => '',
 								'order' => ''
-			),
+								),
 			'User' => array('className' => 'User',
 								'foreignKey' => 'user_id',
 								'conditions' => '',
 								'fields' => '',
 								'order' => '')
-	);
+								);
 
 }
 ?>

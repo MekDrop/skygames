@@ -11,23 +11,23 @@ class Result extends AppModel {
 								'conditions' => '',
 								'fields' => '',
 								'order' => ''
-			),
+								),
 			'Match' => array('className' => 'Match',
 								'foreignKey' => 'match_id',
 								'conditions' => '',
 								'fields' => '',
 								'order' => ''
-			),
+								),
 			'Map' => array('className' => 'Map',
 								'foreignKey' => 'map_id',
 								'conditions' => '',
 								'fields' => '',
 								'order' => ''
-			)
-	);
+								)
+								);
 
 
-	var $hasMany = array(
+								var $hasMany = array(
 			'Resultdemo' => array('className' => 'Resultdemo',
 								'foreignKey' => 'result_id',
 								'dependent' => false,
@@ -39,7 +39,7 @@ class Result extends AppModel {
 								'exclusive' => '',
 								'finderQuery' => '',
 								'counterQuery' => ''
-			),
+								),
 			'Resultpicture' => array('className' => 'Resultpicture',
 								'foreignKey' => 'result_id',
 								'dependent' => false,
@@ -51,8 +51,23 @@ class Result extends AppModel {
 								'exclusive' => '',
 								'finderQuery' => '',
 								'counterQuery' => ''
-			)
-	);
+								)
+								);
+
+								function beforeSave()
+								{
+									clearCache('element_cache_preview' , 'views', '.');
+										
+									return true;
+								}
+
+								function beforeDelete()
+								{
+									clearCache('element_cache_preview' , 'views', '.');
+										
+									return true;
+
+								}
 
 }
 ?>

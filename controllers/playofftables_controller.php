@@ -3,12 +3,12 @@ class PlayofftablesController extends AppController {
 
 	var $name = 'Playofftables';
 	var $helpers = array('Html', 'Form');
-	
+
 	var $contentHelpers = false;
 
 	function view($id = null) {
-		
-		
+
+
 		if (!$id) {
 			$this->Session->setFlash(__('Invalid Playofftable.', true));
 			$this->redirect(array('action'=>'index'));
@@ -17,7 +17,7 @@ class PlayofftablesController extends AppController {
 		$this->set('playofftable', $pt);
 		$matches = $this->Playofftable->Match->findAll(array('playofftable_id'=>$id));
 		$this->set('matches', $matches);
-		
+
 		$this->titleForContent = '<b>' . $pt['Playofftable']['name'] . '<b/>';
 	}
 

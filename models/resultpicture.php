@@ -11,8 +11,8 @@ class Resultpicture extends AppModel {
 								'conditions' => '',
 								'fields' => '',
 								'order' => ''
-			)
-	);
+								)
+								);
 
 }
 ?>

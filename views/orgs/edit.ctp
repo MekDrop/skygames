@@ -79,7 +79,8 @@
 	<div class="caption">
 		<?php __('Org members');?>
 	</div>
-	<br/>			
+	<br/>	
+	
 	<?php if (count($members) > 0):?>
 	<table cellpadding="1" cellspacing="1">
 		<tr>			

@@ -8,7 +8,7 @@ class Feed extends AppModel {
 	var $belongsTo = array(
 			'Game' => array('className' => 'Game',
 								'foreignKey' => 'game_id',							
-			)
+	)
 	);
 
 }

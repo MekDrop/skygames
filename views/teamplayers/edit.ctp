@@ -1,24 +1,24 @@
+<?php
+  echo $javascript->link('popup');  
+?>
 <div class="view">
 <table class="contentpaneopen">
 <tr>
 <td valign="top">
-	<div class="teamplayers form">
- 		
-		<?php echo $form->create('Teamplayer');?>
-			
-			<?php echo $form->input(__('name', true));?>
-						
-			<?php echo $form->input(__('mail', true));?>
-						
-			<?php echo $form->input(__('skype', true));?>
-				
-			<?php echo $form->input(__('uniqueid', true));?>
+	<div class="teamplayers form"> 		
+		<?php echo $form->create('Teamplayer');			
+			echo $form->input('name');
+			echo $form->input('mail');
+			echo $form->input('skype');
+			echo $form->input('uniqueid');
 					
-			<?php echo $form->input('team_id', array('type'=>'hidden', 'value'=>$this->data['Team']['id']));?>
-			
+			echo $form->input('team_id', array('type'=>'hidden', 'value'=>$this->data['Team']['id']));?>			
 			<br/>
-			<?php echo $form->end(strtoupper(__('Submit', true)));?>			
-
+			<br/>
+			<?php echo $form->button(__('Submit', true), array('onClick' => "getElementById('TeamplayerEditForm').submit(); "));?>
+			<br/>
+			
+			<?php echo $form->end();?>			
 	</div >
 	</td>
 </tr>

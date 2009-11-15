@@ -11,26 +11,26 @@ class Match extends AppModel {
 								'conditions' => '',
 								'fields' => '',
 								'order' => ''
-			),
+								),
 			'Team1' => array('className' => 'Team',
 								'foreignKey' => 'team1_id',
 								'conditions' => '',
 								'fields' => '',
 								'order' => ''
-			),
+								),
 			'Team2' => array('className' => 'Team',
 								'foreignKey' => 'team2_id',
 								'conditions' => '',
 								'fields' => '',
 								'order' => ''
-			),			
+								),
 			'Playofftable' => array('className' => 'Playofftable',
 								'foreignKey' => 'playofftable_id'),
-			
+									
 			'Grouptable' => array('className' => 'Grouptable',
 								'foreignKey' => 'grouptable_id')			
-								
-	);
+
+								);
 
 
 	var $hasMany = array(
@@ -46,14 +46,28 @@ class Match extends AppModel {
 								'exclusive' => '',
 								'finderQuery' => '',
 								'counterQuery' => ''
-			)
-			/*
-			,
-			'Matchcomment' => array('className' => 'Matchcomment',
-								'foreignKey' => 'match_id',
-							
-			)*/
-	);
+								)
+								/*
+								 ,
+								 'Matchcomment' => array('className' => 'Matchcomment',
+								 'foreignKey' => 'match_id',
+								 	
+								 )*/
+								);
 
+	function beforeSave()
+	{
+		clearCache('element_cache_preview' , 'views', '.');
+			
+		return true;
+	}
+
+	function beforeDelete()
+	{
+		clearCache('element_cache_preview' , 'views', '.');
+			
+		return true;
+
+	}
 }
 ?>

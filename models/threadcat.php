@@ -11,16 +11,16 @@ class Threadcat extends AppModel {
 								'conditions' => '',
 								'fields' => '',
 								'order' => ''
-			),
+								),
 			'Lang' => array('className' => 'Lang',
 								'foreignKey' => 'lang_id',
 								'conditions' => '',
 								'fields' => '',
 								'order' => ''
-			)
-	);
+								)
+								);
 
-	var $hasMany = array(
+								var $hasMany = array(
 			'Thread' => array('className' => 'Thread',
 								'foreignKey' => 'threadcat_id',
 								'dependent' => false,
@@ -32,8 +32,8 @@ class Threadcat extends AppModel {
 								'exclusive' => '',
 								'finderQuery' => '',
 								'counterQuery' => ''
-			)
-	);
+								)
+								);
 
 }
 ?>

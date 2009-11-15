@@ -19,9 +19,10 @@
 			
 			echo $form->label(__('Clan type', true) . '*');
 			
-			echo $form->select('type', array('mix'=>'mix', 'clan'=>'clan'), 'mix', array(), false);
+			echo $form->select('type', array('mix'=>'mix', 'clan'=>'clan', 'vip'=>'vip'), 'mix', array(), false);
 			
 			echo $form->input('user_id',array('type'=>'hidden', 'value'=>$user['User']['id']));		
+			
 			
 		?>
 		<br/>

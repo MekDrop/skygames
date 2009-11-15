@@ -1,4 +1,11 @@
+msgid "Allf"
+msgstr "All matches" 
+
 msgid "Email"
 msgstr "E-mail" 
+
 msgid "copyright"
-msgstr "&copy; SkyGames.lt | Design&Code: SkyGames-Productions | All rights reserved."
+msgstr "&copy; SkyGames.lt | Design &amp; Code: <a href="http://www.digise.com" target="_blank">digiSE</a> | All rights reserved."
+
+msgid "Administrator"
+msgstr "Admin"

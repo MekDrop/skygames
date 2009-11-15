@@ -17,9 +17,6 @@
 		<br/>		
 		<?php echo $form->end(strtoupper(__('Submit', true)));?>
 
-		
-
-	
 	</div>
 	</td>
 	<td style="width:10%;">&nbsp;</td>
@@ -28,10 +25,10 @@
 		<?php __('Avatar');?>
 		</div>
 		<br/>
-		<?php if ($user['User']['avatar_url']): ?>
-			<img src="<?php echo $user['User']['avatar_url']; ?>" />					
+		<?php if (!empty($user['User']['avatar_url'])): ?>
+			<img src="<?php echo $user['User']['avatar_url']; ?>" alt="" />					
 		<?php else: ?>
-			<img src="/img/uploads/avatars/no_avatar.gif" />									
+			<img src="/img/uploads/avatars/no_avatar.gif" alt="" />									
 		<?php endif; ?>
 		
 		<?php echo $form->create('User', array('type' => 'file', 'action' => 'upload'));?>		

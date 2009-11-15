@@ -1503,6 +1503,8 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 -- 
 
+INSERT INTO `users` (`id`, `points`, `username`, `passwd`, `name`, `email`, `last_visit`, `group_id`, `active`, `created`, `modified`, `skype`, `avatar_url`) VALUES 
+(1, NULL, 'root', '47bce5c74f589f4867dbd57e9ca9f808', 'root', 'baldris@gmail.com', '2008-10-13 15:47:00', 1, 1, '0000-00-00 00:00:00', '2008-09-21 14:48:21', 'asdasd', '/skygames/img/uploads/avatars/tba0.jpg');
 -- 
 -- Constraints for dumped tables
 -- 

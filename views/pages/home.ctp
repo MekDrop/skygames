@@ -1,5 +1,3 @@
-<h2>Sweet, "Skygames" got Baked by CakePHP!</h2>
-
 <?php
 if(Configure::read() > 0):
 	Debugger::checkSessionKey();

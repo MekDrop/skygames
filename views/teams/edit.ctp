@@ -1,5 +1,6 @@
 <?php
  echo $javascript->link('prototype');
+ echo $javascript->link('popup'); 
  echo $javascript->link('effects');
  echo $javascript->link('scriptaculous');  
  
@@ -11,6 +12,11 @@
 	{
 		$('divMore').toggle();
 		$('divMoreButton').toggle();
+	}
+	
+	function refresh()
+	{
+		document.location.reload();
 	}
 </script>
 
@@ -77,6 +83,7 @@
 			echo $form->input('id');		
 		?>
 		<br/>
+		234x60
 		<br/>
 		<?php echo $form->end(strtoupper(__('Upload', true)));?>
 		
@@ -90,7 +97,7 @@
 </tr>
 <tr>
 <td valign="top" colspan="3">	
-	<?php if ($this->data['Team']['type'] == 'mix'):?>
+	<?php if ($this->data['Team']['type'] == 'mix' || $this->data['Team']['type'] == 'vip'):?>
 	<div class="teamplayers form" >
 
 	<div class="caption">
@@ -133,8 +140,10 @@
 							<td style="vertical-align: middle;">
 								<?php echo $html->image('/img/orgs/edit.png') ?>
 							</td>
-							<td style="vertical-align: middle;">
-								<?php echo $html->link(__('Edit', true), array('controller' => 'teamplayers','action'=>'edit', $teamplayer['id'])); ?>	
+							<td style="vertical-align: middle;">								
+								<?php echo $html->link(__('Edit', true), "javascript: void(0);", array('onClick' => 
+											"openWindow('".$html->url(array('controller' => 'teamplayers','action'=>'edit', $teamplayer['id']))."');"
+											)); ?>		
 							</td>																
 						</tr>
 					</table>					

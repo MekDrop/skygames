@@ -3,12 +3,24 @@ class EventsController extends AppController {
 
 	var $name = 'Events';
 	
-	var $helpers = array('Html', 'Form', 'Session', 'Javascript', 'Ajax');		
-	//var $uses = array('Team');
+	var $helpers = array('Html', 'Form', 'Session', 'Javascript', 'Ajax', 'Cache');
+			
+	var $uses = array('Event', 'Team', 'Pool', 'Nomination', 'Awardbett', 'Award');
+	
+	var $cacheAction = array(
+	 'view/' => "+1 hour",
+	 'event/' => "+1 hour",	
+	 'index' => "+1 hour",
+	 );	
+	 
+	/**
+	 * @var Model
+	 */
+	var $Event;
 	
 	function afterFilter()
 	{
-		
+					
 		
 	}
 	
@@ -16,32 +28,15 @@ class EventsController extends AppController {
 		
 		$this->Event->recursive = 0;		
 
-		$conditions = array();
-		
-		if (!empty($this->data['Event']['game_id']))
-			$conditions['game_id'] = $this->data['Event']['game_id'];
-		elseif (!empty($this->params['named']['game_id']))
-		{
-			$this->data['Event']['game_id'] = $this->params['named']['game_id'];
-			$conditions['game_id'] = $this->params['named']['game_id'];
-		}
+		$conditions = $this->formatFilterConditions( array('game_id', 'org_id') );
+										
+		$this->paginate = array('Event' => array('limit' => 10, 'page' => 'first', 'order' => 'Event.created DESC', 'conditions' =>  $conditions));
 
-		if (!empty($this->data['Event']['org_id']))
-			$conditions['org_id'] = $this->data['Event']['org_id'];
-		elseif (!empty($this->params['named']['org_id']))
-		{
-			$this->data['Event']['org_id'] = $this->params['named']['org_id'];
-			$conditions['org_id'] = $this->params['named']['org_id'];
-		}			
-		
-		if (!empty($conditions))		
-			$this->paginate = array('Event' => array('limit' => 7, 'page' => 'first', 'order' => 'Event.created DESC', 'conditions' =>  $conditions));
-		else
-			$this->paginate = array('Event' => array('limit' => 7, 'page' => 'first', 'order' => 'Event.created DESC'));
-		
+       
+
 		$events = $this->paginate();
 
-		$orgs = $this->Event->Team->User->Org->find('list');
+		$orgs = $this->Event->Pool->Team->User->Org->find('list');
 		$games = $this->Event->Game->find('list');		
 		
 		$this->set('events', $events);
@@ -87,7 +82,7 @@ class EventsController extends AppController {
 		//	Apply different logic to solo tournament signup then to team tournament						
 		if ($event['Event']['teamsize'] == 1)
 		{
-			$teams = $this->Event->Team->findAll(array('user_id' => $this->othAuth->user('id'), 'game_id' => $event['Event']['game_id']));
+			$teams = $this->Event->Pool->Team->findAll(array('user_id' => $this->othAuth->user('id'), 'game_id' => $event['Event']['game_id']));
 			
 			$soloTeamId = false;
 			
@@ -102,16 +97,16 @@ class EventsController extends AppController {
 			
 			if (!$soloTeamId)
 			{				
-				$this->Event->Team->create();
+				$this->Event->Pool->Team->create();
 				$soloTeam["Team"] = array ("user_id" => $this->othAuth->user('id'), "name" => $this->othAuth->user('username'), "tag" => $this->othAuth->user('username'), "type" => "solo", "game_id" => $event['Event']['game_id']);
 
-				if (!$this->Event->Team->save($soloTeam))
+				if (!$this->Event->Pool->Team->save($soloTeam))
 				{
 					$this->Session->setFlash(__('Error has occured while trying to create solo team', true));		
 					$this->redirect(array('controller'=>'teams','action'=>'add',$this->othAuth->user('id')));								
 				}
 				
-				$soloTeamId = $this->Event->Team->getLastInsertID();
+				$soloTeamId = $this->Event->Pool->Team->getLastInsertID();
 			} 
 			
 			$this->redirect(array('action'=>'sign', $id, $soloTeamId));
@@ -119,7 +114,8 @@ class EventsController extends AppController {
 		}
 		else
 		{
-			$teams = $this->Event->Team->findAll(array('user_id' => $this->othAuth->user('id'), 'game_id' => $event['Event']['game_id'], 'type' => '!=solo'));
+			$teams = $this->Event->Pool->Team->findAll(array('user_id' => $this->othAuth->user('id'), 'game_id' => $event['Event']['game_id'], array ('NOT' => array('type' => 'solo'))),
+														null, null, null, -1);
 			
 			//	User has no teams
 			if (count($teams) < 1)
@@ -150,11 +146,6 @@ class EventsController extends AppController {
 		
 		//	For autocomplete fields
 		
-		if ($team_id == null && isset($this->data["Team"]["name"]))
-		{
-			$team = $this->Event->Team->find(array("name" => $this->data["Team"]["name"]), array("id"), null, -1);
-			$team_id = $team['Team']['id'];
-		}	
 
 		if ($id == null && isset($this->data["Event"]["id"]))
 			$id = $this->data["Event"]["id"];			
@@ -167,9 +158,14 @@ class EventsController extends AppController {
 		}	
 		
 		
-		$appedCount = $this->Event->Eventteam->findCount(array('event_id'=>$id, 'level' => 'A'));
+		$appedCount = $this->Event->Pool->findCount(array('event_id'=>$id, 'level' => 'A'));
 		$event = $this->Event->read(null, $id);
 		
+		if ($team_id == null && isset($this->data["Team"]["name"]))
+		{
+			$team = $this->Event->Pool->Team->find(array("name" => $this->data["Team"]["name"], "game_id" => $event['Event']['game_id']), array("id"), null, -1);
+			$team_id = $team['Team']['id'];
+		}
 		
 		if ($event["Event"]["teamcount"] <= $appedCount)
 		{		
@@ -181,10 +177,10 @@ class EventsController extends AppController {
 		//	team chosen
 		if ($team_id)
 		{
-			$myTeam = $this->Event->Team->read(null, $team_id);
+			$myTeam = $this->Event->Pool->Team->read(null, $team_id);
 			
 			$signed = false;
-			foreach ($myTeam['Event'] as $event)
+			foreach ($myTeam['Venue'] as $event)
 				if ($event['id'] == $id) $signed = true;
 				
 			if ($signed)	
@@ -197,7 +193,7 @@ class EventsController extends AppController {
 			$userIsAdmin = $this->othAuth->group("level") >= 300 || $this->Event->User->Staff->findCount(array ('Staff.user_id' => $this->othAuth->user('id'), 'Staff.org_id' => $event['Event']['org_id']));			
 				
 			//	have permision
-			if (!empty($myTeam) && ($myTeam['Team']['user_id'] == $this->othAuth->user('id') || $userIsAdmin))
+			if ( (!empty($myTeam) && $myTeam['Team']['user_id'] == $this->othAuth->user('id')) || $userIsAdmin)
 			{
 				
 				//	validate
@@ -205,8 +201,8 @@ class EventsController extends AppController {
 				
 								
 				//	save															
-				$myTeam['Event'][] = $id;					
-				if ($this->Event->Team->save($myTeam, false))					
+				$this->Event->Pool->create();		
+				if ($this->Event->Pool->save( array ('team_id' => $myTeam['Team']['id'], 'event_id' => $id, 'status' => 'S')))					
 				{					
 					$this->Session->setFlash(__('You have successfully signed up', true));		
 					$this->redirect(array('controller'=>'events','action'=>'view', $id));		
@@ -246,7 +242,7 @@ class EventsController extends AppController {
 			$this->flash(__('Invalid Event', true), array('action'=>'index'));
 		}
 		
-		if ($this->Event->Eventteam->deleteAll(array("event_id"=>$id, "team_id"=>$team_id))) {
+		if ($this->Event->Pool->deleteAll(array("event_id"=>$id, "team_id"=>$team_id))) {
 			$this->flash(__('Team kicked', true), true);
 			$this->redirect(array('action'=>'index'));
 			
@@ -260,31 +256,31 @@ class EventsController extends AppController {
 		}
 				
 				
-		$ident = array('Eventteam.event_id'=>$id, 'Eventteam.team_id'=>$team_id);
-		$signedTeam = $this->Event->Eventteam->findCount($ident);
+		$ident = array('Pool.event_id'=>$id, 'Pool.team_id'=>$team_id);
+		$signedTeam = $this->Event->Pool->findCount($ident);
 		
 		if (!empty($signedTeam))
 		{
 
-			if ($this->Event->Eventteam->updateAll(array('level'=>'\'A\''), $ident))
+			if ($this->Event->Pool->updateAll(array('level'=>'\'A\''), $ident))
 			{		
 				//	Check if we are good to go
-				$cnt = $this->Event->Eventteam->findCount(array("event_id"=>$id, "level"=>"A"));
-				$teams = $this->Event->Eventteam->findAll(array("event_id"=>$id, "level"=>"A"));			
+				$cnt = $this->Event->Pool->findCount(array("event_id"=>$id, "level"=>"A"));
+				$teams = $this->Event->Pool->findAll(array("event_id"=>$id, "level"=>"A"));			
 				$event = $this->Event->read(null, $id);	
 					
 				if ($event["Event"]["teamcount"] == $cnt && !$event["Event"]["startdate"])
 				{
 					
 					if ($event["Event"]["status"] == "signup" && !$event['Eventtype']['groups'])
-					{
-						$table = $this->Event->Playofftable->find(array("Playofftable.name"=>$event["Event"]["name"]));
+					{						
+						$table = Set::extract("/Playofftable[name=".$event['Event']['name']."]", $event);
 						if ($table)
-						{
-							$this->generateInitialMatches($id, $table["Playofftable"]["id"], $teams);
+						{							
+							$this->generateInitialMatchesElminitation($id, $table["0"]["Playofftable"]["id"], $teams);
 						}
 					}
-					elseif ($event["Event"]["status"] == "signup" && $event['Eventtype']['groups'])
+					elseif ($event["Event"]["status"] == "signup" && $event['Eventtype']['groups'] && $event['Event']['gengroups'] > 0)
 					{										
 						$groups = $this->Event->Grouptable->findAll(array("Grouptable.event_id" => $event["Event"]["id"]));
 						
@@ -298,7 +294,7 @@ class EventsController extends AppController {
 					if ($this->Event->updateAll(array("status"=>'"active"'), array("Event.id" => $id)))					
 						$this->Session->setFlash(__('Team approved', true));
 					
-						
+					
 					$this->redirect(array('action'=>'view', $id));							
 				}				
 				
@@ -324,17 +320,20 @@ class EventsController extends AppController {
 			$this->flash(__('Invalid Event', true), array('action'=>'index'));
 		}
 		
+		
+		
+		
 		$areBigTables = false;
+		
 		
 		if ($this->data["Event"]["dontCache"] == '1')
 			$this->cacheAction = false;
 		
-		$event = $this->Event->read(null, $id);		
+		
+		$event = $this->Event->read(null, $id);
+				
 		$userIsAdmin = $this->othAuth->group("level") >= 300 || $this->Event->User->Staff->findCount(array ('Staff.user_id' => $this->othAuth->user('id'), 'Staff.org_id' => $event['Event']['org_id']));
 				
-		//$this->Event->Match->unbindModel(array('hasMany' => array('Matchcomment')));
-		
-		//$this->Event->Match->restrict('Result'); 		
 		$matches = $this->Event->Match->findAll(array('Match.event_id'=>$id));
 		
 		//$playofftables = $this->Event->Playofftable->findAll(array('events_id'=>$id));		
@@ -345,18 +344,29 @@ class EventsController extends AppController {
 														JOIN grouptables ON matches.grouptable_id = grouptables.id
 														WHERE grouptables.event_id = " . $id);
 		
-		if (($groupMatchesVsResults['0']['0']['matchCount'] == $groupMatchesVsResults['0']['0']['resultCount']) and ($groupMatchesVsResults['0']['0']['resultCount'] == count($matches))) 
+		$areGroupsPlayed =  ($groupMatchesVsResults['0']['0']['matchCount'] == $groupMatchesVsResults['0']['0']['resultCount']) && $groupMatchesVsResults['0']['0']['matchCount'] > 0;
+		
+		$nominations = $this->Nomination->findAll(array ('eventtype_id' => $event['Eventtype']['id']), array ('Nomination.id', 'Awardtype.name') );
+		$nominations = Set::combine($nominations, '{n}.Nomination.id', '{n}.Awardtype.name');
+		
+		$awardbetts = $this->Awardbett->findAll(array ('event_id' => $event['Event']['id']), null, 'Awardbett.created DESC', 10);
+		
+		if (($areGroupsPlayed) and ($groupMatchesVsResults['0']['0']['resultCount'] == count($matches))) 
 			$canStartPlayoff = true;
 		else
-			$canStartPlayoff = false;		
+			$canStartPlayoff = false;
 		
-		//foreach ($playofftables as $table)
-		//	$areBigTables = ($areBigTables || ($table['Playofftable']['type'] == 'D' && $table['Playofftable']['size'] >= 8) ? $areBigTables = true : $areBigTables = false);
-
-		//$this->Event->Team->unbindModel(array('hasMany'=>array('Teamplayer'),'hasAndBelongsToMany'=>array('Event')));
-		//$teams = $this->Event->Team->unbindModel();
-		$teams = $this->Event->Team->findAllHabtm(array('Event.id' => $id));
-		
+			
+		$this->Team->unbindAll();
+		$this->Team->bindModel( array ( 'belongsTo' => array( 'User' => array('className' => 'User', 'foreignKey' => 'user_id') ) ) );
+			
+		$teams = $this->Team->find('all', array('joins' => array( array('table' => 'pools', 'alias' => 'Pool', 'type' => 'INNER', 'foreignKey' => false, 
+																	'conditions'=> array( 'Pool.team_id = Team.id', 'Pool.event_id = ' . $id ) ) ),
+												'fields' => array('Pool.*', 'User.*', 'Team.*')
+								  )); 
+								  
+		$teamList = Set::combine($teams, '{n}.Team.id', '{n}.Team.name');
+					
 		if (!empty($event['Playofftable']))
 		{
 			$this->set('playofftable', array ( 'Playofftable' => $event['Playofftable'][0]) );				
@@ -370,13 +380,6 @@ class EventsController extends AppController {
 			$this->set('pmatches', false);
 		}
 		
-		//$teams = false;
-
-		//$teams = $event['Team'];
-		
-		//$teams = $this->Event->Team->findAll(array('Event.id' => $id));
-		//$teams = $this->Event->Team->query(array('Event.id' => $id));	
-
 		
 		$this->set('event', $event);
 		$this->set('matches', $matches);
@@ -384,12 +387,16 @@ class EventsController extends AppController {
 		$this->set('groups', $groups);
 		$this->set('userIsAdmin', $userIsAdmin);
 		$this->set('userCanStartPlayoff', $canStartPlayoff);		
+		$this->set('groupsPlayed', $areGroupsPlayed);
+		$this->set('nominations', $nominations);
+		$this->set('teamList', $teamList);
+		$this->set('betts', $awardbetts);
 		
 		
 		$this->contentHelpers = false;
 		
 		$this->titleForContent = '<b>' . $event["Event"]["name"] . '</b>';
-				
+		
 	}
 
 	
@@ -534,11 +541,11 @@ class EventsController extends AppController {
 		$teamsPerTable = $event['Event']['qualifycount'] / $groupCount;
 		
 		$setTeamsPerGroup = array ();
+		
 		$teams = array();
 		
 		foreach ($groupteams as $team)
-		{
-			//$team
+		{			
 			if (!isset($setTeamsPerGroup[$team['groupmatchesordered']['grouptable_id']]) ||
 				$setTeamsPerGroup[$team['groupmatchesordered']['grouptable_id']] < $teamsPerTable )
 			{
@@ -580,28 +587,28 @@ class EventsController extends AppController {
 				
 				
 		//	Check if we are good to go
-		$cnt = $this->Event->Eventteam->findCount(array("event_id"=>$id, "level"=>"A"));	
-		$teams = $this->Event->Eventteam->findAll(array("event_id"=>$id, "level"=>"A")); 	
+		$cnt = $this->Event->Pool->findCount(array("event_id"=>$id, "level"=>"A"));	
+		$teams = $this->Event->Pool->findAll(array("event_id"=>$id, "level"=>"A")); 	
 		$event = $this->Event->read(null, $id);	
 			
 		if ($event["Event"]["teamcount"] == $cnt && $event["Event"]["teamcount"])
 		{								
+			
 			if ($this->Event->updateAll(array("status"=>'"active"'), array("Event.id" => $id)))
-			//if ($this->Event->updateAll(array("status"=>'"active"', "startdate" => date("Y-m-d h:m:00")), array("Event.id" => $id)))
 			{
-				$table = $this->Event->Playofftable->find(array("Playofftable.name" => $event["Event"]["name"]));				
+				$table = Set::extract("/Playofftable[name=".$event['Event']['name']."]", $event);
 				$groups = $this->Event->Grouptable->findAll(array("Grouptable.event_id" => $event["Event"]["id"]));
 				
 				//	Start event w/o groups
 				if ($event["Event"]["status"] == "signup" && !$event['Eventtype']['groups'] && $table)
 				{
-					$this->generateInitialMatchesElminitation($id, $table["Playofftable"]["id"], $teams);									
+					$this->generateInitialMatchesElminitation($id, $table["0"]["Playofftable"]["id"], $teams);									
 					{
 						$this->Session->setFlash(__('Event started. Table generated.', true));							
 					}
 				}	
 				//	Start event with groups
-				elseif ($event["Event"]["status"] == "signup" && $event['Eventtype']['groups'] && $groups)
+				elseif ($event["Event"]["status"] == "signup" && $event['Eventtype']['groups'] && $groups && $event['Event']['gengroups'] > 0)
 				{										
 					$this->generateInitialMatchesGroups($id, $groups, $teams, $event['Event']['grouprounds']);									
 					{
@@ -611,7 +618,7 @@ class EventsController extends AppController {
 				//	
 				else
 				{
-					$this->Session->setFlash(__('Event started.', true) . " " . __('Matches not generated - bad status', true));											
+					$this->Session->setFlash(__('Event started.', true) . " " . __('Matches not generated - bad status.', true));											
 				}												
 			}		
 		}		
@@ -628,9 +635,9 @@ class EventsController extends AppController {
 	{
 		if (!$id) {
 			$this->flash(__('Invalid Event', true), array('action'=>'index'));
-		}
+		}		
 		
-		if ($this->Event->updateAll(array("status"=>'"closed"'), array("Event.id" => $id)))
+		if ($this->Event->save( array("Event" => array( "status" => "closed", "id" => $id) ) ))
 		{
 			$this->Session->setFlash(__('Event closed', true));	
 			$this->redirect(array('action'=>'view', $id));
@@ -643,11 +650,113 @@ class EventsController extends AppController {
 			$this->flash(__('Invalid Event', true), array('action'=>'index'));
 		}
 
-		if ($this->Event->updateAll(array("status"=>'"finished"'), array("Event.id" => $id)))
+			if ($this->Event->save( array("Event" => array( "status" => "finished", "id" => $id) ) ))
 			{
 				$this->Session->setFlash(__('Event finished', true));	
 				$this->redirect(array('action'=>'view', $id));
 		}			
+	}
+	
+	function award($id = null)
+	{
+		$this->layout = 'popup';
+		Configure::write('debug', '2');		
+		
+		if (!$id) {
+			$this->flash(__('Invalid Event', true), array('action'=>'index'));
+		}
+
+		if (!empty($this->data)) {
+			$this->Award->create();	
+			if ($this->Award->save( $this->data ))
+			{
+				//	Update odds
+						
+				$this->Award->query("				
+						update awardbetts b set b.odds = 
+						(
+							select claim from
+							(
+								select (stake.sum / winsum * lostsum) / stake.sum as claim, id, bid, winsum, lostsum from 
+						
+								(select sum(awardbetts.sum) winsum from awardbetts where awardbetts.event_id = ".$this->data["Award"]["event_id"]."
+								and awardbetts.team_id = ".$this->data["Award"]["team_id"]." and nomination_id = ".$this->data["Award"]["nomination_id"].") 
+								 win
+						
+								join
+									 
+								(select sum(awardbetts.sum) lostsum from awardbetts where awardbetts.event_id = ".$this->data["Award"]["event_id"]."
+								and awardbetts.team_id != ".$this->data["Award"]["team_id"]." and nomination_id = ".$this->data["Award"]["nomination_id"]."
+								) lost
+						
+								join 
+						
+								(select awardbetts.sum, awardbetts.id as bid, awardbetts.user_id as id from awardbetts where awardbetts.event_id = ".$this->data["Award"]["event_id"]." and
+								awardbetts.nomination_id = ".$this->data["Award"]["nomination_id"]." and awardbetts.team_id = ".$this->data["Award"]["team_id"]."
+								) stake
+							) odds
+							where odds.bid = b.id
+						)						
+						where b.event_id = ".$this->data["Award"]["event_id"]." and b.team_id = ".$this->data["Award"]["team_id"]." and b.claimed != 1
+				");
+					
+				//	Update sums
+					
+				$this->Award->query("update awardbetts b set b.won = sum * b.odds + sum
+										where b.nomination_id = ".$this->data["Award"]["nomination_id"]." and b.event_id = ".$this->data["Award"]["event_id"]." and b.team_id = ".$this->data["Award"]["team_id"]." and b.claimed != 1");
+					
+				//	Update claims - user points
+					
+				$this->Award->query("
+							update users u set 
+								u.points = u.points + 
+								(
+								select sum(won) from awardbetts where awardbetts.nomination_id = ".$this->data["Award"]["nomination_id"]." and awardbetts.team_id = ".$this->data["Award"]["team_id"]." and awardbetts.event_id = ".$this->data["Award"]["event_id"]." and awardbetts.claimed != 1
+								and awardbetts.user_id = u.id
+								group by awardbetts.user_id 
+								)
+								where u.id in
+								(
+								select awardbetts.user_id from awardbetts where awardbetts.nomination_id = ".$this->data["Award"]["nomination_id"]." and awardbetts.team_id = ".$this->data["Award"]["team_id"]." and awardbetts.event_id = ".$this->data["Award"]["event_id"]." and awardbetts.claimed != 1
+								)
+				");
+					
+				//	Update bett status
+					
+				$this->Award->query("
+					update awardbetts b set 
+					b.claimed = 1
+					where b.nomination_id = ".$this->data["Award"]["nomination_id"]." and b.team_id = ".$this->data["Award"]["team_id"]." and b.event_id = ".$this->data["Award"]["event_id"]."");
+					
+				/* End betts */
+				
+				
+				$this->Session->setFlash(__('Award added', true));	
+				$this->redirect(array('action'=>'view', $this->data["Award"]["event_id"]));
+			}				
+		}
+		else
+		{
+			$event = $this->Event->read(null, $id);
+			
+			$nominations = $this->Nomination->findAll(array ('eventtype_id' => $event['Eventtype']['id']), array ('Nomination.id', 'Awardtype.name') );
+			$nominations = Set::combine($nominations, '{n}.Nomination.id', '{n}.Awardtype.name');
+			
+			$teams = $this->Team->find('all', array('joins' => array( array('table' => 'pools', 'alias' => 'Pool', 'type' => 'INNER', 'foreignKey' => false, 
+																	'conditions'=> array( 'Pool.team_id = Team.id', 'Pool.event_id = ' . $id ) ) ),
+												'fields' => array('Pool.*', 'User.*', 'Team.*')
+								  )); 
+								  
+			$teamList = Set::combine($teams, '{n}.Team.id', '{n}.Team.name');
+			
+			$this->set('nominations', $nominations);
+			$this->set('teamList', $teamList);			
+		
+			$this->data['Award']['event_id'] = $id;
+			
+		}
+		
+		$this->titleForContent = __("Awards", true);
 	}
 	
 	
@@ -658,15 +767,34 @@ class EventsController extends AppController {
 			$this->Event->create();						
 			if ($this->Event->save($this->data)) {
 				
+				if (($this->data["Event"]["groups"] > 0) && ($this->data["Event"]["qualifycount"] > 0))
+				{					
+					$ptableSize	= $this->data["Event"]["groups"] * $this->data["Event"]["qualifycount"];
+				}
+				else
+				{
+					$ptableSize	= $this->data["Event"]["teamcount"];	
+				}
+				
 				$eve = $this->Event->getLastInsertID();
 				if ($this->data["Event"]["create_ptable"] != null)
 				{
 					$playofftable["Playofftable"] = array ("name" => $this->data["Event"]["name"], "type" => $this->data["Event"]["table_type"], 
-														   "type" => $this->data["Event"]["table_theme"],
-														   "events_id" => $eve, "size" => $this->data["Event"]["teamcount"]);
+														   "theme" => $this->data["Event"]["table_theme"],
+														   "events_id" => $eve, "size" => $ptableSize);
 					$this->Event->Playofftable->create();	
 					$this->Event->Playofftable->save($playofftable);
 				
+				}
+				
+				if (($this->data["Event"]["groups"] > 0) && ($this->data["Event"]["qualifycount"] > 0))
+				{
+					for ($i=0;$i<$this->data["Event"]["groups"];$i++)
+					{
+						$this->Event->Grouptable->create();	
+						$this->Event->Grouptable->save( array('Grouptable' => array ( 'name' => $this->data["Event"]["name"] . " GROUP " . chr(ord('A')+$i), 
+																						'event_id' => $eve)) );
+					}
 				}
 				
 				$this->Session->setFlash(__('Event created', true));				
@@ -679,9 +807,9 @@ class EventsController extends AppController {
 			}
 		}
 		
-		$orgs = $this->Event->Team->User->Org->Staff->findAll(array('User.id' => $this->othAuth->user('id')));
+		$orgs = $this->Event->Pool->Team->User->Org->Staff->findAll(array('User.id' => $this->othAuth->user('id')));
 		
-		$teams = $this->Event->Team->find('list');
+		$teams = $this->Event->Pool->Team->find('list');
 		$games = $this->Event->Game->find('list');
 		$eventtypes = $this->Event->Eventtype->find('list');
 		$this->set(compact('teams', 'games', 'eventtypes', 'orgs'));
@@ -720,7 +848,7 @@ class EventsController extends AppController {
 			} else {
 			}
 		}
-		$teams = $this->Event->Team->find('list');
+		$teams = $this->Event->Pool->Team->find('list');
 		$games = $this->Event->Game->find('list');
 		$eventtypes = $this->Event->Eventtype->find('list');
 		$this->set(compact('teams', 'games', 'eventtypes'));
@@ -741,7 +869,7 @@ class EventsController extends AppController {
 		if (empty($this->data)) {
 			$this->data = $this->Event->read(null, $id);
 		}
-		$teams = $this->Event->Team->find('list', array( 'order' => 'name ASC'));
+		$teams = $this->Event->Pool->Team->find('list', array( 'order' => 'name ASC'));
 		$games = $this->Event->Game->find('list');
 		$eventtypes = $this->Event->Eventtype->find('list');
 		$this->set(compact('teams','games','eventtypes'));

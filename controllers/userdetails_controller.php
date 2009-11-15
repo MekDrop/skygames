@@ -11,12 +11,12 @@ class UserdetailsController extends AppController {
 			$this->data['Userdetail']['pers_more'] = nl2br($this->data['Userdetail']['pers_more']);
 			$this->Userdetail->create();
 			if ($this->Userdetail->save($this->data)) {
-				$this->Session->setFlash(__('The User has been saved', true));				
+				$this->Session->setFlash(__('The User has been saved', true));
 			} else {
 				$this->Session->setFlash(__('The User could not be saved. Please, try again.', true));
 			}
 		}
-		$this->redirect(array('controller'=>'users', 'action'=>'edit', $this->data['Userdetail']['user_id']));										
+		$this->redirect(array('controller'=>'users', 'action'=>'edit', $this->data['Userdetail']['user_id']));
 		exit();
 	}
 
@@ -32,8 +32,8 @@ class UserdetailsController extends AppController {
 				$this->Session->setFlash(__('The User could not be saved. Please, try again.', true));
 			}
 		}
-	
-		$this->redirect(array('controller'=>'users', 'action'=>'edit', $this->data['Userdetail']['user_id']));										
+
+		$this->redirect(array('controller'=>'users', 'action'=>'edit', $this->data['Userdetail']['user_id']));
 		exit();
 	}
 

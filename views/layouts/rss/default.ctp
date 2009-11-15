@@ -9,9 +9,9 @@ if (!isset($channel['title'])) {
 }
 
 echo $rss->document(
-	$rss->channel(
-		array(), $channel, $content_for_layout
-	)
+$rss->channel(
+array(), $channel, $content_for_layout
+)
 );
 
 ?>

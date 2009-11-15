@@ -2,19 +2,26 @@
 class InfosController extends AppController {
 
 	var $name = 'Infos';
-	var $helpers = array('Html','Form','Javascript','othAuth','Cache');
+	var $helpers = array('Html', 'Form', 'Javascript', 'othAuth', 'Cache');
 	var $paginate = array('Infocomment' => array('limit' => 8, 'page' => 'last'));
 
+	
 	var $cacheAction = array(
-	 'latest/' => 600,
-	 'index/' => 600,
+	 //'index' => "+1 hour",
+	 'view/' => "+1 hour",
+	 'info/' => "+1 hour",	
+	 'event' => "+1 hour",
 	 );
 	 
-    var $contentHelpers = array("0" => array('name'=>'feeds', 'cachetime' => array('cache'=>'1 hour')));
+	 
+
+    var $contentHelpers = array("0" => array('name'=>'feeds', 'cachetime' => array('cache'=>'+1 hour')));
 	 
 
 	function index() {
 
+
+		
 		$this->Info->recursive = 1;
 		$this->paginate = array('limit'=>'5', 'order' => 'Info.created DESC', 'conditions' => array('Lang.code' => $this->userLangCode));
 		$infos = $this->paginate();				
@@ -27,7 +34,7 @@ class InfosController extends AppController {
 		$this->Event->recursive = 0;
 		
 		$this->Info->unbindModel(array('hasMany' => array('Infocomment')));
-		$infos = $this->Info->findAll(null, null, 'Info.created DESC', 5);
+		$infos = $this->Info->findAll(array('Lang.code' => $this->userLangCode), null, 'Info.created DESC', 5);
 		if(isset($this->params['requested'])) {		 	 
              return $infos;
         } 
@@ -94,11 +101,39 @@ class InfosController extends AppController {
 			$this->flash(__('Info deleted', true), array('action'=>'index'));
 		}
 	}*/
+	
+	function addcomment($id = null)
+	{
+		if (!empty($this->data)) {
+
+		$this->Info->bindModel(array('hasMany'=>array (		
+			'Infocomment' => array('className' => 'Infocomment',
+								'foreignKey' => 'info_id',
+							
+			)
+		)));	
+
+			$this->data['Infocomment']['user_id'] = $this->othAuth->user('id');
+			$this->Info->Infocomment->create();
+			if ($this->Info->Infocomment->save($this->data)) {
+				$this->Session->setFlash(__('Comment has been submited', true));		
+				$this->redirect(array('action'=>'view', $this->data['Infocomment']['info_id']));										
+				exit();
+			} else {
+				$this->Session->setFlash(__('Error occured', true));
+				$this->redirect(array('action'=>'view', $this->data['Infocomment']['info_id']));										
+				exit();
+			}
+		}		
+	}
 
 
 	function admin_index() {
 		$this->Info->recursive = 0;
-		$this->set('infos', $this->paginate());
+		$this->paginate = array('order' => 'Info.created DESC');
+		$paginate =  $this->paginate();		
+		$this->set('infos', $paginate);
+		$this->contentFullFill = true;
 	}
 
 	function admin_view($id = null) {
@@ -116,6 +151,8 @@ class InfosController extends AppController {
 				$this->flash(__('Info saved.', true), array('action'=>'index'));
 				exit();
 			} else {
+				//$this->flash(__('Info saved.', true), array('action'=>'index'));
+				//exit();
 			}
 		}
 		

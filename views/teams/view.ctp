@@ -112,11 +112,11 @@
 
 <div class="related">
 	<div class="caption"><?php __('Team Events');?></div><br/>
-	<?php if (!empty($team['Event'])):?>
+	<?php if (!empty($team['Venue'])):?>
 	<table cellpadding = "1" cellspacing = "1" class="list">
 	<?php
 		$i = 0;
-		foreach ($team['Event'] as $event):
+		foreach ($team['Venue'] as $event):
 			$class = null;
 			if ($i++ % 2 != 0) {
 				$class = ' class="altrow"';

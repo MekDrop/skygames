@@ -11,27 +11,27 @@ class Teamplayer extends AppModel {
 								'conditions' => '',
 								'fields' => '',
 								'order' => ''
-			)
-	);
+								)
+								);
 
-	var $validate = array(
+								var $validate = array(
 	 	'uniqueid' => array('rule' => 'isUnique', 'required' => false,
 			'message' => 'Error'),
 		'name' => array(
 		 	'required' => array('rule' =>  VALID_NOT_EMPTY, 'required' => true, 'message' => 'Error'),
 			 'unique' => array('rule' =>  'isUnique', 'required' => true, 'message' => 'Error')
-		)
-	);
-	
-	
-	function beforeValidate()	
-	{
-		$this->validate['uniqueid']['message'] = __('Gameid must be UNIQUE', true);	
-		$this->validate['name']['unique']['message'] = __('Player must be UNIQUE', true);
-		$this->validate['name']['required']['message'] = __('Enter name', true);
-		
-		return true;
-	}	
-	
+								)
+								);
+
+
+								function beforeValidate()
+								{
+									$this->validate['uniqueid']['message'] = __('Gameid must be UNIQUE', true);
+									$this->validate['name']['unique']['message'] = __('Player must be UNIQUE', true);
+									$this->validate['name']['required']['message'] = __('Enter name', true);
+
+									return true;
+								}
+
 }
 ?>

@@ -3,9 +3,9 @@
 		<tr>
 			<td style="width:75px;vertical-align:top">									
 				<?php if ($user['User']['avatar_url']): ?>
-					<img src="<?php echo $user['User']['avatar_url']; ?>" />					
+					<img src="<?php echo $user['User']['avatar_url']; ?>" alt="<?php echo $user['User']['name']; ?>" />					
 				<?php else: ?>
-					<img src="/img/uploads/avatars/no_avatar.gif" />									
+					<img src="/img/uploads/avatars/no_avatar.gif" alt="" />									
 				<?php endif; ?>
 			</td>
 			<td style="width:15px;vertical-align:top">									
