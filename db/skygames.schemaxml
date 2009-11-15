@@ -1,0 +1,736 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemadesigner version="6.5">
+<source>
+<database charset="utf8" collation="utf8_unicode_ci">skygames</database>
+</source>
+<canvas zoom="100">
+<tables>
+<table name="adminmenus" view="colnames">
+<left>0</left>
+<top>0</top>
+<width>95</width>
+<height>116</height>
+<sql_create_table>CREATE TABLE `adminmenus` (
+  `id` int(11) NOT NULL auto_increment,
+  `title` varchar(64) character set latin1 default NULL,
+  `link` varchar(255) character set latin1 default NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8</sql_create_table>
+</table>
+<table name="betts" view="colnames">
+<left>1142</left>
+<top>574</top>
+<width>90</width>
+<height>176</height>
+<sql_create_table>CREATE TABLE `betts` (
+  `id` int(11) NOT NULL auto_increment,
+  `match_id` int(11) default NULL,
+  `team_id` int(11) default NULL,
+  `sum` int(11) default NULL,
+  `odds` float(9,3) default NULL,
+  `user_id` int(11) default NULL,
+  `created` date default NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci</sql_create_table>
+</table>
+<table name="custcomments" view="colnames">
+<left>229</left>
+<top>16</top>
+<width>102</width>
+<height>160</height>
+<sql_create_table>CREATE TABLE `custcomments` (
+  `id` int(11) unsigned NOT NULL auto_increment,
+  `body` text collate utf8_unicode_ci,
+  `created` datetime default NULL,
+  `user_id` int(11) unsigned default NULL,
+  `seqnumber` int(11) default NULL,
+  `parent_id` int(11) default NULL,
+  PRIMARY KEY  (`id`),
+  KEY `user_id` (`user_id`),
+  CONSTRAINT `custcomments_fk` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci</sql_create_table>
+</table>
+<table name="users" view="colnames">
+<left>443</left>
+<top>118</top>
+<width>97</width>
+<height>272</height>
+<sql_create_table>CREATE TABLE `users` (
+  `id` int(10) unsigned NOT NULL auto_increment,
+  `points` bigint(20) default NULL,
+  `username` varchar(10) character set latin1 NOT NULL default '',
+  `passwd` varchar(32) character set latin1 NOT NULL default '',
+  `name` varchar(10) character set latin1 NOT NULL default '',
+  `email` varchar(100) character set latin1 NOT NULL default '',
+  `last_visit` datetime NOT NULL default '0000-00-00 00:00:00',
+  `group_id` int(10) unsigned NOT NULL default '0',
+  `active` tinyint(1) unsigned NOT NULL default '0',
+  `created` datetime NOT NULL default '0000-00-00 00:00:00',
+  `modified` datetime NOT NULL default '0000-00-00 00:00:00',
+  `skype` varchar(50) default NULL,
+  `avatar_url` varchar(255) default NULL,
+  PRIMARY KEY  (`id`),
+  UNIQUE KEY `username` (`username`),
+  UNIQUE KEY `email` (`email`,`username`),
+  UNIQUE KEY `username_2` (`username`),
+  KEY `group_id` (`group_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8 COMMENT='InnoDB free: 3072 kB'</sql_create_table>
+</table>
+<table name="events" view="colnames">
+<left>372</left>
+<top>265</top>
+<width>116</width>
+<height>282</height>
+<sql_create_table>CREATE TABLE `events` (
+  `id` int(10) unsigned NOT NULL auto_increment,
+  `name` varchar(45) collate utf8_unicode_ci default NULL,
+  `game_id` int(10) unsigned NOT NULL,
+  `eventtype_id` int(10) unsigned NOT NULL,
+  `status` enum('signup','postsignup','active','closed','finished') collate utf8_unicode_ci default 'signup',
+  `created` datetime default NULL,
+  `teamcount` int(11) default NULL,
+  `genmatches` tinyint(4) default NULL,
+  `regdate` datetime default NULL,
+  `startdate` datetime default NULL,
+  `matchinterval` int(11) default NULL,
+  `desc` text collate utf8_unicode_ci,
+  `user_id` int(11) unsigned NOT NULL,
+  `teamsize` int(11) default NULL,
+  `org_id` int(11) unsigned NOT NULL,
+  `enddate` datetime default NULL,
+  PRIMARY KEY  (`id`),
+  KEY `fk_Events_Games` (`game_id`),
+  KEY `fk_Events_Event_types` (`eventtype_id`),
+  KEY `user_id` (`user_id`),
+  KEY `org_id` (`org_id`),
+  CONSTRAINT `events_fk1` FOREIGN KEY (`org_id`) REFERENCES `orgs` (`id`) ON UPDATE NO ACTION,
+  CONSTRAINT `events_fk` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Events_Event_types` FOREIGN KEY (`eventtype_id`) REFERENCES `eventtypes` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Events_Games` FOREIGN KEY (`game_id`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci PACK_KEYS=0</sql_create_table>
+</table>
+<table name="orgs" view="colnames">
+<left>502</left>
+<top>254</top>
+<width>98</width>
+<height>208</height>
+<sql_create_table>CREATE TABLE `orgs` (
+  `id` int(10) unsigned NOT NULL auto_increment,
+  `show` bit(1) default NULL,
+  `name` varchar(50) collate utf8_unicode_ci default NULL,
+  `user_id` int(10) unsigned default NULL,
+  `created` datetime default NULL,
+  `website` varchar(40) collate utf8_unicode_ci default NULL,
+  `irc` varchar(40) collate utf8_unicode_ci default NULL,
+  `logo_url` varchar(40) collate utf8_unicode_ci default NULL,
+  `country_id` int(11) default NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci</sql_create_table>
+</table>
+<table name="eventtypes" view="colnames">
+<left>674</left>
+<top>258</top>
+<width>70</width>
+<height>96</height>
+<sql_create_table>CREATE TABLE `eventtypes` (
+  `id` int(10) unsigned NOT NULL auto_increment,
+  `name` varchar(45) collate utf8_unicode_ci default NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci PACK_KEYS=0</sql_create_table>
+</table>
+<table name="games" view="colnames">
+<left>667</left>
+<top>0</top>
+<width>75</width>
+<height>128</height>
+<sql_create_table>CREATE TABLE `games` (
+  `id` int(10) unsigned NOT NULL auto_increment,
+  `name` varchar(45) collate utf8_unicode_ci default NULL,
+  `icon` varchar(50) collate utf8_unicode_ci default NULL,
+  `avatar` varchar(50) collate utf8_unicode_ci default NULL,
+  PRIMARY KEY  (`id`),
+  KEY `name` (`name`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci PACK_KEYS=0</sql_create_table>
+</table>
+<table name="eventteams" view="colnames">
+<left>747</left>
+<top>0</top>
+<width>87</width>
+<height>128</height>
+<sql_create_table>CREATE TABLE `eventteams` (
+  `event_id` int(10) unsigned NOT NULL,
+  `team_id` int(10) unsigned NOT NULL,
+  `id` int(11) NOT NULL auto_increment,
+  `level` enum('S','A','K') collate utf8_unicode_ci NOT NULL default 'S',
+  PRIMARY KEY  (`id`),
+  KEY `fk_events_has_teams_events` (`event_id`),
+  KEY `fk_events_has_teams_teams` (`team_id`),
+  CONSTRAINT `fk_events_has_teams_events` FOREIGN KEY (`event_id`) REFERENCES `events` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_events_has_teams_teams` FOREIGN KEY (`team_id`) REFERENCES `teams` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=143 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci</sql_create_table>
+</table>
+<table name="teams" view="colnames">
+<left>808</left>
+<top>207</top>
+<width>98</width>
+<height>240</height>
+<sql_create_table>CREATE TABLE `teams` (
+  `id` int(10) unsigned NOT NULL auto_increment,
+  `name` varchar(50) collate utf8_unicode_ci default NULL,
+  `user_id` int(10) unsigned default NULL,
+  `tag` varchar(8) collate utf8_unicode_ci default NULL,
+  `game_id` int(11) unsigned default NULL,
+  `type` enum('mix','clan','solo') collate utf8_unicode_ci default NULL,
+  `created` datetime default NULL,
+  `website` varchar(40) collate utf8_unicode_ci default NULL,
+  `irc` varchar(40) collate utf8_unicode_ci default NULL,
+  `logo_url` varchar(40) collate utf8_unicode_ci default NULL,
+  `country_id` int(11) default NULL,
+  PRIMARY KEY  (`id`),
+  KEY `game_id` (`game_id`),
+  CONSTRAINT `teams_fk` FOREIGN KEY (`game_id`) REFERENCES `games` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=67 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AVG_ROW_LENGTH=1365 PACK_KEYS=0 COMMENT='InnoDB free: 10240 kB; (`game_id`) REFER `skygames/games`(`i'</sql_create_table>
+</table>
+<table name="gamewords" view="colnames">
+<left>1034</left>
+<top>0</top>
+<width>87</width>
+<height>144</height>
+<sql_create_table>CREATE TABLE `gamewords` (
+  `id` int(11) unsigned NOT NULL auto_increment,
+  `label` varchar(45) collate utf8_unicode_ci default NULL,
+  `value` varchar(45) collate utf8_unicode_ci default NULL,
+  `game_id` int(10) unsigned NOT NULL,
+  `lang_id` int(11) unsigned NOT NULL,
+  PRIMARY KEY  (`id`),
+  KEY `fk_gamedict_games` (`game_id`),
+  KEY `fk_gamewords_langs` (`lang_id`),
+  CONSTRAINT `fk_gamedict_games` FOREIGN KEY (`game_id`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION,
+  CONSTRAINT `gamewords_fk` FOREIGN KEY (`lang_id`) REFERENCES `langs` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci</sql_create_table>
+</table>
+<table name="langs" view="colnames">
+<left>1126</left>
+<top>0</top>
+<width>70</width>
+<height>112</height>
+<sql_create_table>CREATE TABLE `langs` (
+  `id` int(11) unsigned NOT NULL auto_increment,
+  `name` varchar(45) collate utf8_unicode_ci default NULL,
+  `code` char(3) collate utf8_unicode_ci default NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci</sql_create_table>
+</table>
+<table name="groups" view="colnames">
+<left>1201</left>
+<top>0</top>
+<width>100</width>
+<height>176</height>
+<sql_create_table>CREATE TABLE `groups` (
+  `id` int(10) unsigned NOT NULL auto_increment,
+  `name` varchar(50) character set utf8 collate utf8_unicode_ci NOT NULL,
+  `level` int(11) NOT NULL,
+  `redirect` varchar(50) character set utf8 collate utf8_unicode_ci NOT NULL,
+  `perm_type` enum('allow','deny') character set latin1 NOT NULL default 'allow',
+  `created` datetime NOT NULL default '0000-00-00 00:00:00',
+  `modified` datetime NOT NULL default '0000-00-00 00:00:00',
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8</sql_create_table>
+</table>
+<table name="groups_permissions" view="colnames">
+<left>0</left>
+<top>186</top>
+<width>117</width>
+<height>96</height>
+<sql_create_table>CREATE TABLE `groups_permissions` (
+  `group_id` int(10) unsigned NOT NULL default '0',
+  `permission_id` int(10) unsigned NOT NULL default '0',
+  KEY `group_id` (`group_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql_create_table>
+</table>
+<table name="grouptables" view="colnames">
+<left>114</left>
+<top>211</top>
+<width>87</width>
+<height>112</height>
+<sql_create_table>CREATE TABLE `grouptables` (
+  `id` int(11) NOT NULL auto_increment,
+  `name` varchar(50) collate utf8_unicode_ci default NULL,
+  `event_id` int(11) unsigned NOT NULL,
+  PRIMARY KEY  (`id`),
+  KEY `event_id` (`event_id`),
+  CONSTRAINT `grouptables_fk` FOREIGN KEY (`event_id`) REFERENCES `events` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci</sql_create_table>
+</table>
+<table name="infocomments" view="colnames">
+<left>656</left>
+<top>525</top>
+<width>102</width>
+<height>160</height>
+<sql_create_table>CREATE TABLE `infocomments` (
+  `id` int(11) unsigned NOT NULL auto_increment,
+  `body` text collate utf8_unicode_ci,
+  `created` datetime default NULL,
+  `user_id` int(11) unsigned default NULL,
+  `info_id` int(10) unsigned default NULL,
+  `seqnumber` int(11) default NULL,
+  PRIMARY KEY  (`id`),
+  KEY `user_id` (`user_id`),
+  KEY `info_id` (`info_id`),
+  CONSTRAINT `infocomments_fk` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION,
+  CONSTRAINT `infocomments_fk_info` FOREIGN KEY (`info_id`) REFERENCES `infos` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci</sql_create_table>
+</table>
+<table name="infos" view="colnames">
+<left>792</left>
+<top>544</top>
+<width>93</width>
+<height>224</height>
+<sql_create_table>CREATE TABLE `infos` (
+  `id` int(11) unsigned NOT NULL auto_increment,
+  `title` varchar(50) collate utf8_unicode_ci default NULL,
+  `desc` text collate utf8_unicode_ci,
+  `body` text collate utf8_unicode_ci,
+  `created` datetime default NULL,
+  `modified` datetime default NULL,
+  `user_id` int(11) unsigned default NULL,
+  `infocat_id` int(11) unsigned NOT NULL,
+  `lang_id` int(11) unsigned NOT NULL,
+  `game_id` int(11) unsigned default NULL,
+  PRIMARY KEY  (`id`),
+  KEY `user_id` (`user_id`),
+  KEY `infocat_id` (`infocat_id`),
+  KEY `lang_id` (`lang_id`),
+  KEY `game_id` (`game_id`),
+  CONSTRAINT `infos_fk` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION,
+  CONSTRAINT `infos_fk1` FOREIGN KEY (`infocat_id`) REFERENCES `infocats` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `infos_fk2` FOREIGN KEY (`lang_id`) REFERENCES `langs` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `infos_fk3` FOREIGN KEY (`game_id`) REFERENCES `games` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci</sql_create_table>
+</table>
+<table name="maps" view="colnames">
+<left>908</left>
+<top>534</top>
+<width>87</width>
+<height>112</height>
+<sql_create_table>CREATE TABLE `maps` (
+  `id` int(11) NOT NULL auto_increment,
+  `title` varchar(45) collate utf8_unicode_ci default NULL,
+  `game_id` int(11) unsigned NOT NULL,
+  PRIMARY KEY  (`id`),
+  KEY `game_id` (`game_id`),
+  CONSTRAINT `maps_fk` FOREIGN KEY (`game_id`) REFERENCES `games` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci</sql_create_table>
+</table>
+<table name="matchcomments" view="colnames">
+<left>1026</left>
+<top>567</top>
+<width>102</width>
+<height>160</height>
+<sql_create_table>CREATE TABLE `matchcomments` (
+  `id` int(11) unsigned NOT NULL auto_increment,
+  `body` text collate utf8_unicode_ci,
+  `created` datetime default NULL,
+  `user_id` int(11) unsigned default NULL,
+  `match_id` int(10) unsigned default NULL,
+  `seqnumber` int(11) default NULL,
+  PRIMARY KEY  (`id`),
+  KEY `user_id` (`user_id`),
+  KEY `match_id` (`match_id`),
+  CONSTRAINT `matchcomments_fk` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION,
+  CONSTRAINT `matchcomments_fk_match` FOREIGN KEY (`match_id`) REFERENCES `matches` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AVG_ROW_LENGTH=5461 COMMENT='InnoDB free: 10240 kB; (`user_id`) REFER `skygames/users`(`i'</sql_create_table>
+</table>
+<table name="matches" view="colnames">
+<left>599</left>
+<top>11</top>
+<width>122</width>
+<height>224</height>
+<sql_create_table>CREATE TABLE `matches` (
+  `id` int(10) unsigned NOT NULL auto_increment,
+  `team1_id` int(10) unsigned NOT NULL,
+  `team2_id` int(10) unsigned NOT NULL,
+  `event_id` int(10) unsigned default NULL,
+  `tposition_x` int(11) default NULL,
+  `tposition_y` int(11) default NULL,
+  `playofftable_id` int(11) default NULL,
+  `date` datetime default NULL,
+  `modified` datetime default NULL,
+  `user_id` int(11) default NULL,
+  PRIMARY KEY  (`id`),
+  KEY `fk_Matches_Teams` (`team1_id`),
+  KEY `fk_Matches_Teams1` (`team2_id`),
+  KEY `fk_Matches_Events` (`event_id`),
+  KEY `fk_matches_playofftables` (`playofftable_id`),
+  CONSTRAINT `fk_Matches_Events` FOREIGN KEY (`event_id`) REFERENCES `events` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION,
+  CONSTRAINT `fk_matches_playofftables` FOREIGN KEY (`playofftable_id`) REFERENCES `playofftables` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Matches_Teams` FOREIGN KEY (`team1_id`) REFERENCES `teams` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Matches_Teams1` FOREIGN KEY (`team2_id`) REFERENCES `teams` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=143 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AVG_ROW_LENGTH=1820 PACK_KEYS=0 COMMENT='InnoDB free: 10240 kB; (`event_id`) REFER `skygames/events`('</sql_create_table>
+</table>
+<table name="playofftables" view="colnames">
+<left>1134</left>
+<top>186</top>
+<width>93</width>
+<height>160</height>
+<sql_create_table>CREATE TABLE `playofftables` (
+  `id` int(11) NOT NULL auto_increment,
+  `name` varchar(45) collate utf8_unicode_ci default NULL,
+  `events_id` int(10) unsigned default NULL,
+  `size` int(11) default NULL,
+  `type` enum('S','D') collate utf8_unicode_ci NOT NULL,
+  `theme` varchar(50) collate utf8_unicode_ci default NULL,
+  PRIMARY KEY  (`id`),
+  KEY `fk_playofftables_events` (`events_id`),
+  CONSTRAINT `fk_playofftables_events` FOREIGN KEY (`events_id`) REFERENCES `events` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci</sql_create_table>
+</table>
+<table name="matchparts" view="colnames">
+<left>0</left>
+<top>356</top>
+<width>87</width>
+<height>144</height>
+<sql_create_table>CREATE TABLE `matchparts` (
+  `id` int(11) NOT NULL auto_increment,
+  `title` varchar(45) collate utf8_unicode_ci default NULL,
+  `game_id` int(10) unsigned default NULL,
+  `constant` tinyint(1) default NULL,
+  `final` tinyint(1) default NULL,
+  PRIMARY KEY  (`id`),
+  KEY `fk_matchparts_games` (`game_id`),
+  CONSTRAINT `fk_matchparts_games` FOREIGN KEY (`game_id`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci</sql_create_table>
+</table>
+<table name="memberships" view="colnames">
+<left>92</left>
+<top>356</top>
+<width>84</width>
+<height>128</height>
+<sql_create_table>CREATE TABLE `memberships` (
+  `user_id` int(11) unsigned default NULL,
+  `team_id` int(11) unsigned default NULL,
+  `id` int(11) NOT NULL auto_increment,
+  `status` enum('invited','member') collate utf8_unicode_ci NOT NULL,
+  PRIMARY KEY  (`id`),
+  KEY `team_id` (`team_id`),
+  KEY `user_id` (`user_id`),
+  CONSTRAINT `members_fk` FOREIGN KEY (`team_id`) REFERENCES `teams` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION,
+  CONSTRAINT `members_fk1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=58 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci</sql_create_table>
+</table>
+<table name="menus" view="colnames">
+<left>181</left>
+<top>356</top>
+<width>59</width>
+<height>112</height>
+<sql_create_table>CREATE TABLE `menus` (
+  `id` int(11) NOT NULL auto_increment,
+  `title` varchar(64) character set latin1 default NULL,
+  `link` varchar(255) character set latin1 default NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8</sql_create_table>
+</table>
+<table name="permissions" view="colnames">
+<left>245</left>
+<top>356</top>
+<width>87</width>
+<height>128</height>
+<sql_create_table>CREATE TABLE `permissions` (
+  `id` int(10) unsigned NOT NULL auto_increment,
+  `name` varchar(50) character set latin1 NOT NULL default '',
+  `created` datetime NOT NULL default '0000-00-00 00:00:00',
+  `modified` datetime NOT NULL default '0000-00-00 00:00:00',
+  PRIMARY KEY  (`id`),
+  UNIQUE KEY `name` (`name`)
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8</sql_create_table>
+</table>
+<table name="posts" view="colnames">
+<left>337</left>
+<top>356</top>
+<width>92</width>
+<height>176</height>
+<sql_create_table>CREATE TABLE `posts` (
+  `id` int(11) unsigned NOT NULL auto_increment,
+  `title` varchar(50) character set latin1 default NULL,
+  `body` text character set latin1,
+  `created` datetime default NULL,
+  `modified` datetime default NULL,
+  `user_id` int(11) unsigned default NULL,
+  `thread_id` int(11) unsigned default NULL,
+  PRIMARY KEY  (`id`),
+  KEY `user_id` (`user_id`),
+  KEY `thread_id` (`thread_id`),
+  CONSTRAINT `posts_fk` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION,
+  CONSTRAINT `posts_fk1` FOREIGN KEY (`thread_id`) REFERENCES `threads` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8</sql_create_table>
+</table>
+<table name="threads" view="colnames">
+<left>434</left>
+<top>356</top>
+<width>109</width>
+<height>176</height>
+<sql_create_table>CREATE TABLE `threads` (
+  `id` int(11) unsigned NOT NULL auto_increment,
+  `title` varchar(120) collate utf8_unicode_ci default NULL,
+  `body` text collate utf8_unicode_ci,
+  `created` datetime default NULL,
+  `modified` datetime default NULL,
+  `user_id` int(11) unsigned NOT NULL,
+  `threadcat_id` int(11) unsigned NOT NULL,
+  PRIMARY KEY  (`id`),
+  KEY `user_id` (`user_id`),
+  KEY `threadcat_id` (`threadcat_id`),
+  CONSTRAINT `threads_fk` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION,
+  CONSTRAINT `threads_fk1` FOREIGN KEY (`threadcat_id`) REFERENCES `threadcats` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci</sql_create_table>
+</table>
+<table name="threadcats" view="colnames">
+<left>548</left>
+<top>356</top>
+<width>87</width>
+<height>144</height>
+<sql_create_table>CREATE TABLE `threadcats` (
+  `id` int(11) unsigned NOT NULL auto_increment,
+  `name` varchar(20) collate utf8_unicode_ci default NULL,
+  `game_id` int(11) unsigned default NULL,
+  `lang_id` int(11) unsigned default NULL,
+  `position` int(11) default NULL,
+  PRIMARY KEY  (`id`),
+  KEY `game_id` (`game_id`),
+  KEY `lang_id` (`lang_id`),
+  CONSTRAINT `threadcats_fk` FOREIGN KEY (`game_id`) REFERENCES `games` (`id`),
+  CONSTRAINT `threadcats_fk1` FOREIGN KEY (`lang_id`) REFERENCES `langs` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci</sql_create_table>
+</table>
+<table name="resultdemos" view="colnames">
+<left>640</left>
+<top>356</top>
+<width>87</width>
+<height>144</height>
+<sql_create_table>CREATE TABLE `resultdemos` (
+  `id` int(11) NOT NULL auto_increment,
+  `title` varchar(45) collate utf8_unicode_ci default NULL,
+  `desc` varchar(45) collate utf8_unicode_ci default NULL,
+  `url` varchar(45) collate utf8_unicode_ci default NULL,
+  `result_id` int(11) default NULL,
+  PRIMARY KEY  (`id`),
+  KEY `fk_resultdemos_results` (`result_id`),
+  CONSTRAINT `fk_resultdemos_results` FOREIGN KEY (`result_id`) REFERENCES `results` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci</sql_create_table>
+</table>
+<table name="results" view="colnames">
+<left>732</left>
+<top>356</top>
+<width>113</width>
+<height>160</height>
+<sql_create_table>CREATE TABLE `results` (
+  `id` int(11) NOT NULL auto_increment,
+  `team1_score` int(11) default NULL,
+  `team2_score` int(11) default NULL,
+  `matchpart_id` int(11) default NULL,
+  `match_id` int(10) unsigned default NULL,
+  `map_id` int(11) default NULL,
+  PRIMARY KEY  (`id`),
+  KEY `fk_results_matchparts` (`matchpart_id`),
+  KEY `fk_results_matches` (`match_id`),
+  KEY `fk_results_maps` (`map_id`),
+  CONSTRAINT `fk_results_maps` FOREIGN KEY (`map_id`) REFERENCES `maps` (`id`) ON DELETE SET NULL ON UPDATE SET NULL,
+  CONSTRAINT `fk_results_matches` FOREIGN KEY (`match_id`) REFERENCES `matches` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION,
+  CONSTRAINT `fk_results_matchparts` FOREIGN KEY (`matchpart_id`) REFERENCES `matchparts` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=170 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AVG_ROW_LENGTH=1489 COMMENT='InnoDB free: 10240 kB; (`map_id`) REFER `skygames/maps`(`id`'</sql_create_table>
+</table>
+<table name="resultpictures" view="colnames">
+<left>850</left>
+<top>356</top>
+<width>87</width>
+<height>144</height>
+<sql_create_table>CREATE TABLE `resultpictures` (
+  `id` int(11) NOT NULL auto_increment,
+  `title` varchar(45) collate utf8_unicode_ci default NULL,
+  `desc` text collate utf8_unicode_ci,
+  `url` varchar(45) collate utf8_unicode_ci default NULL,
+  `result_id` int(11) default NULL,
+  PRIMARY KEY  (`id`),
+  KEY `fk_resultpictures_results` (`result_id`),
+  CONSTRAINT `fk_resultpictures_results` FOREIGN KEY (`result_id`) REFERENCES `results` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci</sql_create_table>
+</table>
+<table name="servercomments" view="colnames">
+<left>942</left>
+<top>356</top>
+<width>102</width>
+<height>160</height>
+<sql_create_table>CREATE TABLE `servercomments` (
+  `id` int(11) unsigned NOT NULL auto_increment,
+  `body` text collate utf8_unicode_ci,
+  `created` datetime default NULL,
+  `user_id` int(11) unsigned default NULL,
+  `server_id` int(11) NOT NULL,
+  `seqnumber` int(11) default NULL,
+  PRIMARY KEY  (`id`),
+  KEY `user_id` (`user_id`),
+  KEY `server_id` (`server_id`),
+  CONSTRAINT `servercomments_fk` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `servercomments_fk1` FOREIGN KEY (`server_id`) REFERENCES `servers` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci</sql_create_table>
+</table>
+<table name="servers" view="colnames">
+<left>1049</left>
+<top>356</top>
+<width>117</width>
+<height>192</height>
+<sql_create_table>CREATE TABLE `servers` (
+  `id` int(11) NOT NULL auto_increment,
+  `name` varchar(64) collate utf8_unicode_ci default NULL,
+  `game_id` int(11) default NULL,
+  `last_response` date default NULL,
+  `created` date default NULL,
+  `ip` varchar(15) collate utf8_unicode_ci default NULL,
+  `port` int(11) default NULL,
+  `cachetime` int(11) default NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci</sql_create_table>
+</table>
+<table name="staffs" view="colnames">
+<left>1171</left>
+<top>356</top>
+<width>82</width>
+<height>144</height>
+<sql_create_table>CREATE TABLE `staffs` (
+  `user_id` int(11) unsigned default NULL,
+  `org_id` int(11) unsigned default NULL,
+  `id` int(11) NOT NULL auto_increment,
+  `status` enum('invited','member') collate utf8_unicode_ci NOT NULL,
+  `position` enum('admin','headadmin') collate utf8_unicode_ci NOT NULL default 'admin',
+  PRIMARY KEY  (`id`),
+  KEY `org_id` (`org_id`),
+  KEY `user_id` (`user_id`),
+  CONSTRAINT `staff_fk` FOREIGN KEY (`org_id`) REFERENCES `orgs` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION,
+  CONSTRAINT `staff_fk1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci</sql_create_table>
+</table>
+<table name="statistics" view="colnames">
+<left>0</left>
+<top>510</top>
+<width>86</width>
+<height>224</height>
+<sql_create_table>CREATE TABLE `statistics` (
+  `id` int(11) NOT NULL auto_increment,
+  `team_id` int(11) unsigned default NULL,
+  `matches` int(11) default NULL,
+  `maps` int(11) default NULL,
+  `won` int(11) default NULL,
+  `lost` int(11) default NULL,
+  `frags` int(11) default NULL,
+  `deaths` int(11) default NULL,
+  `events` int(11) default NULL,
+  `created` datetime default NULL,
+  PRIMARY KEY  (`id`),
+  KEY `fk_statistics_teams` (`team_id`),
+  CONSTRAINT `statistics_fk` FOREIGN KEY (`team_id`) REFERENCES `teams` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci</sql_create_table>
+</table>
+<table name="teamplayers" view="colnames">
+<left>117</left>
+<top>621</top>
+<width>86</width>
+<height>160</height>
+<sql_create_table>CREATE TABLE `teamplayers` (
+  `id` int(11) NOT NULL auto_increment,
+  `name` varchar(45) collate utf8_unicode_ci default NULL,
+  `mail` varchar(45) collate utf8_unicode_ci default NULL,
+  `skype` varchar(45) collate utf8_unicode_ci default NULL,
+  `uniqueid` int(11) default NULL,
+  `team_id` int(10) unsigned default NULL,
+  PRIMARY KEY  (`id`),
+  KEY `fk_teamplayers_teams` (`team_id`),
+  KEY `fk_t` (`uniqueid`),
+  CONSTRAINT `teamplayers_fk` FOREIGN KEY (`team_id`) REFERENCES `teams` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `teamplayers_fk1` FOREIGN KEY (`team_id`) REFERENCES `teams` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci</sql_create_table>
+</table>
+<table name="uniqueids" view="colnames">
+<left>263</left>
+<top>635</top>
+<width>87</width>
+<height>128</height>
+<sql_create_table>CREATE TABLE `uniqueids` (
+  `id` int(11) NOT NULL auto_increment,
+  `user_id` int(11) unsigned default NULL,
+  `game_id` int(11) unsigned default NULL,
+  `value` char(50) collate utf8_unicode_ci default NULL,
+  PRIMARY KEY  (`id`),
+  KEY `user_id` (`user_id`),
+  KEY `game_id` (`game_id`),
+  CONSTRAINT `uniqueids_fk` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION,
+  CONSTRAINT `uniqueids_fk1` FOREIGN KEY (`game_id`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci</sql_create_table>
+</table>
+<table name="usercomments" view="colnames">
+<left>366</left>
+<top>629</top>
+<width>102</width>
+<height>160</height>
+<sql_create_table>CREATE TABLE `usercomments` (
+  `id` int(11) unsigned NOT NULL auto_increment,
+  `body` text collate utf8_unicode_ci,
+  `created` datetime default NULL,
+  `user_id` int(11) unsigned default NULL,
+  `guest_id` int(11) unsigned default NULL,
+  `seqnumber` int(11) default NULL,
+  PRIMARY KEY  (`id`),
+  KEY `user_id` (`user_id`),
+  KEY `parent_id` (`guest_id`),
+  CONSTRAINT `usercomments_fk1` FOREIGN KEY (`guest_id`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `usercomments_fk` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci</sql_create_table>
+</table>
+<table name="userdetails" view="colnames">
+<left>503</left>
+<top>532</top>
+<width>139</width>
+<height>282</height>
+<sql_create_table>CREATE TABLE `userdetails` (
+  `id` int(11) NOT NULL auto_increment,
+  `hardw_mouse` varchar(32) collate utf8_unicode_ci default NULL,
+  `hardw_mousepad` varchar(32) collate utf8_unicode_ci default NULL,
+  `hardw_headset` varchar(32) collate utf8_unicode_ci default NULL,
+  `hardw_graphcard` varchar(32) collate utf8_unicode_ci default NULL,
+  `hardw_memory` varchar(32) collate utf8_unicode_ci default NULL,
+  `hardw_cpu` varchar(32) collate utf8_unicode_ci default NULL,
+  `hardw_monitor` varchar(32) collate utf8_unicode_ci default NULL,
+  `fav_drink` varchar(32) collate utf8_unicode_ci default NULL,
+  `fav_movie` varchar(32) collate utf8_unicode_ci default NULL,
+  `fav_game` varchar(32) collate utf8_unicode_ci default NULL,
+  `fav_music` varchar(96) collate utf8_unicode_ci default NULL,
+  `fav_sport` varchar(32) collate utf8_unicode_ci default NULL,
+  `fav_car` varchar(32) collate utf8_unicode_ci default NULL,
+  `pers_country` varchar(2) collate utf8_unicode_ci default NULL,
+  `pers_city` varchar(32) collate utf8_unicode_ci default NULL,
+  `pers_age` int(11) default NULL,
+  `user_id` int(11) NOT NULL,
+  `pers_more` text collate utf8_unicode_ci,
+  PRIMARY KEY  (`id`),
+  KEY `NewIndex1` (`user_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci</sql_create_table>
+</table>
+<table name="teamdetails" view="colnames">
+<left>976</left>
+<top>188</top>
+<width>137</width>
+<height>159</height>
+<sql_create_table>CREATE TABLE `teamdetails` (
+  `id` int(11) NOT NULL auto_increment,
+  `website` varchar(40) collate utf8_unicode_ci default NULL,
+  `irc` varchar(40) collate utf8_unicode_ci default NULL,
+  `logo` varchar(20) collate utf8_unicode_ci default NULL,
+  `country` int(11) default NULL,
+  `team_id` int(11) unsigned NOT NULL,
+  PRIMARY KEY  (`id`),
+  KEY `FK_teamdetails` (`team_id`),
+  CONSTRAINT `FK_teamdetails` FOREIGN KEY (`team_id`) REFERENCES `teams` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci</sql_create_table>
+</table>
+</tables>
+</canvas>
+</schemadesigner>

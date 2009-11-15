@@ -1,0 +1,181 @@
+<!--
+
+.background
+{
+	background-color:#ffffff; 
+	color:#000000;
+}
+
+.cellfont
+{
+	font-size: 11px;
+}
+
+.voidcellfull
+{
+	color:#FFB618;
+	background-color: #f0f0ff;
+	width: 146px;
+	height: 35px;
+	text-align:center;
+	font-size: 11px;	
+}
+
+
+.voidcellfullbackground
+{
+	color:#FFB618;
+	background-color:#ffffff; 
+	width: 146px;
+	height: 35px;
+	text-align:center;
+	font-size: 11px;	
+}
+
+.playercell
+{
+	text-align: right;
+	background: url(/img/tablo/skygames8/player.jpg);
+	width: 146px;
+	height: 35px;
+	text-align:center;
+	font-size: 11px;
+}
+
+.winnercell
+{
+	text-align: center;
+	background: url(/img/tablo/skygames8/winner.jpg);
+	width: 146px;
+	height: 35px;
+	font-size: 11px;
+}
+
+.losercell
+{
+	text-align: center;
+	background: url(/img/tablo/skygames8/loser.jpg);
+	width: 146px;
+	height: 35px;
+	font-size: 11px;
+}
+
+.winnercell:hover{font-weight:bold}
+.losercell:hover{font-weight:bold}
+
+.lcentercell
+{
+	background: url(/img/tablo/skygames8/lcenter.jpg);
+	width: 25px;
+	height: 35px
+}
+
+.trcornercell
+{
+	background: url(/img/tablo/skygames8/trcorner.jpg);
+	width: 25px;
+	height: 35px
+}
+
+.brcornercell
+{
+	background: url(/img/tablo/skygames8/brcorner.jpg);
+	width: 25px;
+	height: 35px
+}
+
+.lvlinecell
+{
+	background: url(/img/tablo/skygames8/vline.jpg);
+	width: 25px;
+	height: 35px
+}
+
+.rvlinecell
+{
+	background: url(/img/tablo/skygames8/vline.jpg);
+	width: 25px;
+	height: 35px
+}
+
+.voidcell
+{
+	background-color: #f0f0ff;
+	width: 25px;
+	height: 35px
+}
+
+.tableheader
+{
+	border-style: solid;
+	border-color: #666666;
+	border-width: 0;
+	background: url(/img/tablo/skygames8/bg-top.jpg);
+	background-color: #000000;
+	text-align: center;
+	font-family: Arial;
+	font-size: 8pt;
+	font-weight:bold;
+	height: 45px;
+	font-size: 11px;
+}
+
+.infownd
+{
+	border-style: solid;
+	border-color: #666666;
+	border-width: 1;
+	background-color: #ffffff;
+	text-align: center;
+	font-family: Arial;
+	font-size: 8pt;
+	width: 260;
+	height: -1;
+	visibility: hidden;
+	position: absolute
+}
+
+.narrowvoidcell
+{
+	background-color: #ffffff;
+	width: 25px;
+	height: 35px
+}
+
+.hlinecell
+{
+	background: url(/img/tablo/skygames8/hline.jpg);
+	width: 25px;
+	height: 35px
+}
+
+.bigvlinecell
+{
+	background: url(/img/tablo/skygames8/1.gif)  50% 50%;;
+	width: 45px;
+	height: 37px;
+	background-color: #181A20 
+}
+
+.tlcornercell
+{
+	background: url(/img/tablo/skygames8/tlcorner.jpg);
+	width: 25px;
+	height: 35px
+}
+
+.blcornercell
+{
+	background: url(/img/tablo/skygames8/blcorner.jpg);
+	width: 25px;
+	height: 35px
+}
+
+.rcentercell
+{
+	background: url(/img/tablo/skygames8/rcenter.jpg);
+	width: 25px;
+	height: 35px
+}
+
+-->

@@ -1,0 +1,1027 @@
+
+msgid "Email"
+msgstr "E-paštas"
+
+msgid "email"
+msgstr "E-paštas"
+
+msgid "Edit my profile"
+msgstr "Redaguoti profilį"
+
+msgid "Submit"
+msgstr "Tinka"
+
+msgid "skype"
+msgstr "Skypeas"
+
+msgid "Users"
+msgstr "Vartotojai"
+
+msgid "copyright"
+msgstr "&copy; SkyGames.lt | Design&Code: SkyGames-Productions | Visos teisės saugomos."
+
+msgid "by"
+msgstr "parašė"
+
+msgid "Events"
+msgstr "Turnyrai"
+
+msgid "Event"
+msgstr "Turnyras"
+
+msgid "Username"
+msgstr "Vartotojas"
+
+msgid "Password"
+msgstr "Slaptažodis"
+
+msgid "Register"
+msgstr "Registruotis"
+
+msgid "Last login"
+msgstr "Prisijungta"
+
+msgid "Administrate"
+msgstr "Administruoti"
+
+msgid "Logout"
+msgstr "Atsijungti"
+
+msgid "Edit"
+msgstr "Redaguoti"
+
+msgid "Invitation from"
+msgstr "Kvietimas nuo"
+
+msgid "Accept invitation to"
+msgstr "Priimti kvietimą į"
+
+msgid "Edit other teams"
+msgstr "Redaguoti kitas kom."
+
+msgid "Add new team"
+msgstr "Pridėti nauja komandą"
+
+msgid "For users"
+msgstr "Vartotojams"
+
+msgid "Error: Missing action - wrong url."
+msgstr "Klaida - blogas url !"
+
+msgid "Team count"
+msgstr "Komandų skaičius"
+
+msgid "Team type"
+msgstr "Komandos tipas"
+
+msgid "Cup starts when enough teams approved"
+msgstr "Prasidės kai bus pakankamai komandų"
+
+msgid "Cup start date"
+msgstr "Turnyro pradžia"
+
+msgid "Create playofftable"
+msgstr "Sukurti tablo"
+
+msgid "Single Elimination"
+msgstr "Vieno minuso"
+
+msgid "Double Elminitation"
+msgstr "Dviejų minusų"
+
+msgid "Generate matches in playoff table"
+msgstr "Generuoti kovas lentelėje"
+
+msgid "Generate matches in playoff table"
+msgstr "Generuoti kovas lentelėje"
+
+msgid "Choose team"
+msgstr "Išsirinkite komandą"
+
+msgid "Sign up"
+msgstr "Užsirašyti"
+
+msgid "Created"
+msgstr "Sukurta"
+
+msgid "Game"
+msgstr "Žaidimas"
+
+msgid "Name"
+msgstr "Vardas"
+
+msgid "Cup team type"
+msgstr "Tipas"
+
+msgid "Created"
+msgstr "Sukurta"
+
+msgid "Sign-up"
+msgstr "Užsirašyk"
+
+msgid "Active"
+msgstr "Vyksta"
+
+msgid "Stoped"
+msgstr "Sustabdyta"
+
+msgid "Finished"
+msgstr "Baigta"
+
+msgid "Eventtype"
+msgstr "Turnyro tipas"
+
+msgid "Eventsize"
+msgstr "Komandų skaičius"
+
+msgid "Teamsize"
+msgstr "Komandos dydis"
+
+msgid "Finished"
+msgstr "Baigta"
+
+msgid "Start"
+msgstr "Pradžia"
+
+msgid "Finished"
+msgstr "Baigta"
+
+msgid "When enough teams approved"
+msgstr "Kai visos komandos patvirtintos"
+
+msgid "Start cup"
+msgstr "Pradėti"
+
+msgid "Stop cup"
+msgstr "Sustabdyti"
+
+msgid "Finish cup"
+msgstr "Pabaigti"
+
+msgid "Close cup"
+msgstr "Uždaryti"
+
+msgid "Event Tables"
+msgstr "Tablo"
+
+msgid "Event Matches"
+msgstr "Turnyro kovos"
+
+msgid "Details"
+msgstr "Detaliau"
+
+msgid "Event Teams"
+msgstr "Komandos"
+
+msgid "Owner"
+msgstr "Savininkas"
+
+msgid "Status"
+msgstr "Statusas"
+
+msgid "Unapproved"
+msgstr "Nepatvirtinta"
+
+msgid "Approved"
+msgstr "Patvirtinta"
+
+msgid "Kicked"
+msgstr "Išspirta"
+
+msgid "General"
+msgstr "Bendra"
+
+msgid "more"
+msgstr "daugiau"
+
+msgid "Read"
+msgstr "Skaityti"
+
+msgid "Comments"
+msgstr "Komentarai"
+
+msgid "Read"
+msgstr "Skaityti"
+
+msgid "previous"
+msgstr "atgal"
+
+msgid "next"
+msgstr "toliau"
+
+msgid "No comments"
+msgstr "Komentarų nėra"
+
+msgid "Your comment"
+msgstr "Tavo komentaras"
+
+msgid "Logon if you want to comment"
+msgstr "Prisijunk jeigu nori komentuoti"
+
+msgid "For users"
+msgstr "Vartotojams"
+
+msgid "Playofftable"
+msgstr "Tablo lentelė"
+
+msgid "Date"
+msgstr "Data"
+
+msgid "Date undecided"
+msgstr "Data nenustatyta"
+
+msgid "Undecided"
+msgstr "Nenustatyta"
+
+msgid "New result"
+msgstr "Įvesti rez."
+
+msgid "Playoff round"
+msgstr "Turas"
+
+msgid "Final"
+msgstr "Finalas"
+
+msgid "Loser round"
+msgstr "Pralaimėtojų turas"
+
+msgid "Team1_score"
+msgstr "Pirmos komandos"
+
+msgid "Matchpart"
+msgstr "Kovos dalis"
+
+msgid "Map"
+msgstr "Map'as"
+
+msgid "Maps"
+msgstr "Map'ai"
+
+
+msgid "Matchpart"
+msgstr "Kovos dalis"
+
+msgid "Final score"
+msgstr "Galutinis rezultatas"
+
+msgid "matches"
+msgstr "kovos"
+
+msgid "maps"
+msgstr "žemėlapiai"
+
+msgid "won"
+msgstr "laimėta"
+
+msgid "lost"
+msgstr "pralošta"
+
+msgid "frags"
+msgstr "fragai"
+
+msgid "deaths"
+msgstr "mirtys"
+
+msgid "events"
+msgstr "turnyrai"
+
+msgid "Efficiency"
+msgstr "Laimėta"
+
+msgid "Title"
+msgstr "Pavadinimas"
+
+msgid "Team"
+msgstr "Komanda"
+
+msgid "Mail"
+msgstr "E-paštas"
+
+msgid "Team"
+msgstr "Komanda"
+
+msgid "uniqueid"
+msgstr "Unikalus žaidimo ID"
+
+msgid "UniqueId"
+msgstr "Žaidimo ID"
+
+msgid "Uniqueid"
+msgstr "Žaidimo unikalus ID"
+
+msgid "gameid"
+msgstr "Unikalus žaidimo ID"
+
+msgid "gameids"
+msgstr "Unikalūs žaidimų ID"
+
+msgid "Gameids"
+msgstr "Unikalūs žaidimų ID"
+
+msgid "uniqueids"
+msgstr "Unikalūs žaidimų ID"
+
+msgid "Actions"
+msgstr "Veiksmai"
+
+msgid "Delete"
+msgstr "Trinti"
+
+msgid "Moto"
+msgstr "Šūkis"
+
+msgid "Tag"
+msgstr "Tagas"
+
+msgid "Clan type"
+msgstr "Tipas"
+
+msgid "Type"
+msgstr "Tipas"
+
+msgid "Mix - for team consisting of unregistered players. Clan - all members must be registered users."
+msgstr "Mix - paprastoms komandoms. <br/>*Clan - dideliems turnyrams (visi komandos nariai turi būti užsiregistravę tinklapyje)."
+
+msgid "Team Players"
+msgstr "Žaidėjai"
+
+msgid "Team Events"
+msgstr "Komandos turnyrai"
+
+msgid "User"
+msgstr "Vartotojas"
+
+msgid "Registered by"
+msgstr "Užregistravo"
+
+msgid "Found"
+msgstr "Įkūrėjas"
+
+msgid "Team has no players"
+msgstr "Komandoje nėra žaidėjų"
+
+msgid "Team has no events"
+msgstr "Komanda nedalyvauja turnyruose"
+
+msgid "All"
+msgstr "Visi"
+
+msgid "Posts"
+msgstr "Atsakymų"
+
+msgid "Author"
+msgstr "Autorius"
+
+msgid "New thread"
+msgstr "Nauja tema"
+
+msgid "Logon if you want to create a thread"
+msgstr "Prisijunk jei nori sukurti temą"
+
+msgid "Your post"
+msgstr "Tavo žinutė"
+
+msgid "Username"
+msgstr "Vartotojas"
+
+msgid "Passwd"
+msgstr "Slaptažodis"
+
+msgid "Register"
+msgstr "Registruotis"
+
+msgid "Last Visit"
+msgstr "Paskutinis apsilankymas"
+
+msgid "Threadcats"
+msgstr "Forumas"
+
+msgid "Member of teams"
+msgstr "Komandose"
+
+msgid "Threadcats"
+msgstr "Forumas"
+
+msgid "Threadcats"
+msgstr "Forumas"
+
+msgid "users"
+msgstr "vartotojai"
+
+msgid "events"
+msgstr "turnyrai"
+
+msgid "teams"
+msgstr "komandos"
+
+msgid "news"
+msgstr "naujienos"
+
+msgid "forums"
+msgstr "forumas"
+
+msgid "stats"
+msgstr "stats"
+
+msgid "News"
+msgstr "Naujienos"
+
+msgid "Last matches"
+msgstr "Kovos"
+
+msgid "Last threads"
+msgstr "Forumas"
+
+msgid "By"
+msgstr "Autorius"
+
+msgid "Threads count"
+msgstr "Temų skaičius"
+
+msgid "Last thread"
+msgstr "Paskutinė tema"
+
+msgid "Statistics"
+msgstr "Statistika"
+
+msgid "New password"
+msgstr "Naujas slaptažodis"
+
+msgid "Value"
+msgstr "Reikšmė"
+
+msgid "Avatar"
+msgstr "Avataras"
+
+msgid "User properties"
+msgstr "Nustatymai"
+
+msgid "Must be unique and only one per game"
+msgstr "Turi būti ūnikalus ir tik vienas vienam žaidimui"
+
+msgid "Team has no players yet."
+msgstr "Komandoje nėra žaidėjų."
+
+msgid "The player could not be saved. Please, try again."
+msgstr "Žaidėjas neišaugotas, bandykite dar kartą."
+
+msgid "Gameid must be UNIQUE"	
+msgstr "Žaidimo ID turi būti unikalus."
+
+msgid "Player must be UNIQUE"
+msgstr "Žaidėjo vardas turi būti unikalus"
+
+msgid "Enter name"
+msgstr "Įveskite vardą"
+		
+msgid "This username already registered."
+msgstr "Toks vartotojas jau egzistuoja"
+
+msgid "Enter username."
+msgstr "Įveskite vardą"
+
+msgid "Enter password (min 3 charcters)."
+msgstr "Įveskite slaptažodį (3 simboliai minimum)"
+
+msgid "Email is incorrect."
+msgstr "E-paštas neteisingas"
+
+msgid "Name must be UNIQUE and at least 3 characters long."
+msgstr "Vardas turi būti unikalus"
+
+msgid "Enter name."
+msgstr "Įveskite vardą"
+
+msgid "Type is required."
+msgstr "Tipas būtinas"
+
+msgid "Tag must be at leas 2 characters long."
+msgstr "Tagas minimum 2 simboliai"
+
+msgid "The Teamplayer has been saved"
+msgstr "Žaidėjas išsaugotas."
+
+msgid "Teamplayer saved"
+msgstr "Žaidėjas išsaugotas."
+
+msgid "The player could not be saved. Please, try again."
+msgstr "Žaidėjas neišsaugotas, bandykit dar kartą"
+
+msgid "Teamplayer deleted"
+msgstr "Žaidėjas ištrintas."
+
+msgid "The Image has been uploaded"
+msgstr "Paveiksliukas nusiųstas."
+
+msgid "Could'nt upload the image"
+msgstr "Paveiksliukas nenusiųstas."
+
+msgid "The User has been registered. You can now login."
+msgstr "Vartotojas užregistruotas, galite prisijungti."
+
+msgid "The User could not be saved. Please, try again."
+msgstr "Vartotojas neišsaugotas, bandykit dar kartą."
+
+msgid "The User has been saved"
+msgstr "Vartotojas išsaugotas."
+
+msgid "The Team has been saved"
+msgstr "Komanda išsaugota."
+
+msgid "The Team could not be saved. Please, try again."
+msgstr "Komanda neišsaugota, bandykit dar kartą
+
+msgid "Team deleted"
+msgstr "Komanda ištrinta."
+
+msgid "You have login to sign up"
+msgstr "Tu turi būti prisijungęs, norėdamas užsiregistruoti."
+
+msgid "You have to create team first to sign up"
+msgstr "Norėdamas dalyvauti turnyre - turi sukurti komandą. Sukūręs komandą vel spausk [užsirašymo] nuorodą."
+
+msgid "The event is full"
+msgstr "Turnyras pilnas"
+
+msgid "The team is already signed"
+msgstr "Tokia komanda jau užrašyta."
+
+msgid "You have successfully signed up"
+msgstr "Tu sėkmingai užsirašei."
+
+msgid "You can't signup this team"
+msgstr "Tu negali užrašyti šitos komandos."
+
+msgid "Choose team to sign up"
+msgstr "Išsirink komandą kurią nori užrašyti."
+
+msgid "Team approved"
+msgstr "Komanda patvirtinta."
+
+msgid "Event started"
+msgstr "Turnyras prasidėjo."
+
+msgid "Event closed"
+msgstr "Turnyras uždarytas."
+
+msgid "Event finished"
+msgstr "Turnyras užbaigtas."
+
+msgid "Event created"
+msgstr "Turnyras sukurtas."
+
+msgid "Other teams"
+msgstr "Kitos komandos"
+
+msgid "You are now logged out!"
+msgstr "Tu atsijungei."
+
+msgid "Approve"
+msgstr "Patvirtinti"
+
+msgid "Add"
+msgstr "Pridėti"
+
+msgid "Invite"
+msgstr "Pakviesti"
+
+msgid "You have joined the team"
+msgstr "Tu prisijungei prie komandos."
+
+msgid "Player deleted"
+msgstr "Žaidėjas ištrintas."
+
+msgid "User Name"
+msgstr "Vartotojo vardas"
+
+msgid "Add Me As A Player"
+msgstr "Įtraukti mane kaip žaidėją"
+
+msgid "Team properties"
+msgstr "Komandos nustatymai"
+
+msgid "Team players"
+msgstr "Žaidėjai"
+
+msgid "Threads"
+msgstr "Forumas"
+
+msgid "Teams"
+msgstr "Komandos"
+
+msgid "Matches"
+msgstr "Kovos"
+
+msgid "View"
+msgstr "Žiūrėti"
+
+msgid "Please add players to your team"
+msgstr "Įrašykite žaidėjus į komandą"
+
+msgid "Team has no members yet."
+msgstr "Komandoje nėra žaidėjų"
+
+msgid "Owned Teams"
+msgstr "Priklauso komandos"
+
+msgid "Uniqueid deleted"
+msgstr "Žaidimo ID ištrintas"
+
+msgid "We will send you a new password. Please type your email"
+msgstr "Mes atsiūsime tau naują slaptažodį. Įveskite e-pašto adresą kuriuo registravotės"
+
+msgid "Letter with your new password sent successfully. Check your email."
+msgstr "Laiškas su nauju slaptažodžiu išsiųstas sėkmingai. Pasitikrinkite pašto dėžutę."
+
+msgid "The email you provided can not be found."
+msgstr "Email nerastas"
+
+msgid "Error has occured while sending mail. Please contact web administrator."
+msgstr "Klaida siunčiant laišką. Susisiekite su adminu."
+
+msgid "You requested password reset"
+msgstr "Tu užsakei slaptažodžio pakeitimą"
+
+msgid "Your new password is"
+msgstr "Tavo naujas slaptažodis"
+
+msgid "You can change your password to more suitable when you login"
+msgstr "Prisijungęs gali savo slaptažodį pasikeisti į tinkamesnį"
+
+msgid "SkyGames.lt: Password Reset"
+msgstr "SkyGames.lt: Slaptažodžio pakeitimas"
+
+msgid "Forgot your password?"
+msgstr "Pamiršai Slaptažodį?"
+
+msgid "Login"
+msgstr "Prisijungimas"
+
+msgid "Not enough teams approved"
+msgstr "Nepakankamai komandų patvirtinta"
+
+msgid "No event tables"
+msgstr "Tablo nėra"
+
+msgid "No teams"
+msgstr "Komandų nėra"
+
+msgid "No matches"
+msgstr "Kovų nėra"
+
+msgid "Team title"
+msgstr "Komandos pavadinimas"
+
+msgid "Player has no uniqueids"
+msgstr "Žaidėjas neturi ID"
+
+msgid "Finish cup"
+msgstr "Pabaigti"
+
+msgid "Team has only 1 player."
+msgstr "Komandoje tik vienas žaidėjas"
+
+msgid "Your username is"
+msgstr "Tavo vartotojo vardas"
+
+msgid "Double Elimination"
+msgstr "Dvigubo minuso"
+
+msgid "Are you sure you want to delete # %s?"
+msgstr "Ar tikrai norite ištrinti %s?"
+
+msgid "Body"
+msgstr "Tekstas"
+
+msgid "Registered"
+msgstr "Įrašytas"
+
+msgid "Squad"
+msgstr "Sudėtis"
+
+msgid "Players"
+msgstr "Žaidėjai"
+
+msgid "Second half"
+msgstr "Antra pusė"
+
+msgid "First half"
+msgstr "Pirma pusė"
+
+msgid "Not accepted yet"
+msgstr "Nepriėmė pakv."
+
+msgid "Comment has been submited"
+msgstr "Komentaras patalpintas."
+
+msgid "User has been invited. Wait till he accepts."
+msgstr "Žaidėjas pakviestas. Jis turi patvirtinti kvietimą."
+
+msgid "The Team could not be saved. Please, try again."
+msgstr "Klaida išsaugojant komandą. Bandykite dar kartą."
+
+msgid "Refresh"
+msgstr "Atnaujinti"
+
+msgid "Servers"
+msgstr "Serveriai"
+
+msgid "Refresh at"
+msgstr "Atnaujinti kas"
+
+msgid "players"
+msgstr "žaidėjus"
+ 
+msgid "Sort by"
+msgstr "Rūšiuoti pagal"
+
+msgid "Post has been submited"
+msgstr "Komentaras išsaugotas."
+
+msgid "Thread has been posted"
+msgstr "Tema sukurta"
+
+msgid "New avatar"
+msgstr "Naujas avataras"
+
+msgid "New logo"
+msgstr "Naujas logotipas"
+
+msgid "Error, check input data"
+msgstr "Klaida, patikrinkite įvestus duomenis."
+
+msgid "Error"
+msgstr "Klaida, patikrinkite įvestus duomenis."
+
+msgid "Frags"
+msgstr "Fragai"
+
+msgid "Time"
+msgstr "Laikas"
+
+msgid "Guestbook"
+msgstr "Svečių knyga"
+
+msgid "Your message"
+msgstr "Tavo žinutė"
+
+msgid "Logon if you want to leave a message"
+msgstr "Prisijunk jei nori palikti žinutę"
+
+msgid "Fav Game"
+msgstr "Žaidimas"
+
+msgid "Fav Drink"
+msgstr "Tavo gėrimas"
+
+msgid "Fav Music"
+msgstr "Muzika"
+
+msgid "Fav Sport"
+msgstr "Sportas?"
+
+msgid "Fav Car"
+msgstr "Tavo mašina"
+
+msgid "Fav Movie"
+msgstr "Filmas"
+
+msgid "Hardw Mouse"
+msgstr "Pelė"
+
+msgid "Hardw Mousepad"
+msgstr "Kilimėlis"
+
+msgid "Hardw Headset"
+msgstr "Ausinės"
+
+msgid "Hardw Memory"
+msgstr "RAM"
+
+msgid "Hardw Graphcard"
+msgstr "Video plokštė"
+
+msgid "Hardw Cpu"
+msgstr "Procas"
+
+msgid "Hardw Monitor"
+msgstr "Monitorius"
+
+msgid "Pers City"
+msgstr "Tavo miestas"
+
+msgid "Pers Age"
+msgstr "Amžius"
+
+msgid "City"
+msgstr "Miestas"
+
+msgid "Age"
+msgstr "Amžius"
+
+msgid "More about you (achievements, ex-teams)"
+msgstr "Daugiau apie save (buvusios komandos, lan turnyrai...)"
+
+msgid "Other"
+msgstr "Kita"
+
+msgid "Personal"
+msgstr "Asm."
+
+msgid "Hardware"
+msgstr "Įranga"
+
+msgid "Interests"
+msgstr "Pomėgiai"
+
+msgid "Achievements, other..."
+msgstr "Pasiekimai, kita..."
+
+msgid "less"
+msgstr "mažiau"
+
+msgid "Website"
+msgstr "Tinklapis"
+
+msgid "Your betting points"
+msgstr "Tavo statomi taškai"
+
+msgid "Betts"
+msgstr "Statymai"
+
+msgid "The Match has been saved"
+msgstr "Kova išsaugota."
+
+msgid "No betts"
+msgstr "Statymų nėra"
+
+msgid "No statistics"
+msgstr "Statistikos nėra"
+
+msgid "Demote to admin"
+msgstr "Grąžinti į adminus"
+
+msgid "Promote to head admin"
+msgstr "Paskirti į vadovus"
+
+msgid "Will be able to change organization settings, invite new members"
+msgstr "Galės keisti organizacijos nustatymus, priimti naujus narius"
+
+msgid "Create Playoff table"
+msgstr "Iš karto kurti tablo"
+
+msgid "Org properties"
+msgstr "Organizacijos nustatymai"
+
+msgid "Org members"
+msgstr "Organizacijos nariai"
+
+msgid "User has been promoted/demoted."
+msgstr "Vartotojas pakeistas."
+
+msgid "Organization"
+msgstr "Organizacija"
+
+msgid "Unexpected error"
+msgstr "Netikėta klaida. Pasitkrinkite ar turite teises veiksmui atlikti."
+
+msgid "Create event"
+msgstr "Sukurti turnyrą"
+
+msgid "End"
+msgstr "Pabaiga"
+
+msgid "Org"
+msgstr "Organizatoriai"
+
+msgid "All"
+msgstr "Visi"
+
+msgid "Filter"
+msgstr "Atrinkti"
+
+msgid "Administrator"
+msgstr "Adminas"
+
+msgid "Admin"
+msgstr "Adminas"
+
+msgid "Admins"
+msgstr "Adminai"
+
+msgid "Matches/Event"
+msgstr "Kovų per turnyrą"
+
+msgid "Admin statistics"
+msgstr "Adminų statistika"
+
+msgid "Frags"
+msgstr "Fragai"
+
+msgid "frags"
+msgstr "fragai"
+
+msgid "deaths"
+msgstr "mirtys"
+
+msgid "frags"
+msgstr "fragai"
+
+msgid "deaths"
+msgstr "mirtys
+
+msgid "rounds won"
+msgstr "laimėta rnd."
+
+msgid "rounds lost"
+msgstr "pral. rnd."
+
+msgid "Teams statistics"
+msgstr "Komandų statistika"
+
+msgid "Allf"
+msgstr "Visos"
+
+msgid "Admins statistics"
+msgstr "Adminų statistika"
+
+msgid "The Bett has been saved"
+msgstr "Statymas priimtas."
+
+msgid "Upcoming"
+msgstr "Ateinančios"
+
+msgid "Edit result"
+msgstr "Keisti rez."
+
+msgid "Result saved"
+msgstr "Rezultatas išsaugotas."
+
+msgid "Result deleted"
+msgstr "Rezultatas ištrintas."
+
+msgid "Close this window"
+msgstr "Uždaryti"
+
+msgid "Tposition X"
+msgstr "Kovos turas lentelėje (Jei praleimėtojų pusėje - su minuso ženklu. Pvz.:1,2,3,-1,-2...)"
+
+msgid "Tposition Y"
+msgstr "Kovos pozicija nuo viršaus (Pvz.:1,2,3,...)"
+
+msgid "Team1"
+msgstr "Komanda 1"
+
+msgid "Team2"
+msgstr "Komanda 2"
+
+msgid "date"
+msgstr "data"
+
+msgid "Organized by"
+msgstr "Organizavo"
+
+msgid "Match"
+msgstr "Kova"
+
+msgid "Edit match"
+msgstr "Redaguoti kovą"
+
+msgid "Match for"
+msgstr "Kova"
+
+msgid "Community"
+msgstr "Dalyviai"
+
+msgid "You can not add second final result"
+msgstr "Negalima įrašyti antro galutinio rezultato"
+
+msgid "Upload"
+msgstr "Įkelti"
+
+msgid "Winner"
+msgstr "Nugalėtojas"
+
+msgid "Sign"
+msgstr "Užrašyti"
+
+msgid "Groups"
+msgstr "Grupės"
+
+msgid "Event started. Groups generated."
+msgstr "Turnyras prasidėjo. Grupės sugeneruotos."
+
+msgid "Not enough teams approved or too many teams approved"
+msgstr "Patvirtinta per daug arba per mažai komandų."
+
+msgid "Start playoff"
+msgstr "Pradėti atkrentam."
+
+msgid "Grouptable"
+msgstr "Grupė"
+
+msgid "Match deleted"
+msgstr "Kova ištrinta."
+
+msgid "New match"
+msgstr "Nauja kova"

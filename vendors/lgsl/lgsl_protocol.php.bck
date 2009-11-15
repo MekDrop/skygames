@@ -1,0 +1,1687 @@
+<?php
+
+
+
+ /*_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
+ \_|                                                                                                      |_/
+ \_|                                                                                                      |_/
+ \_|                                                                                                      |_/
+ \_|	                            LIVE GAME SERVER LIST PROTOCOL 2.4                                    |_/
+ \_|                                                                                                      |_/
+ \_|	                       © Richard Perry from http://www.greycube.com                               |_/
+ \_|                                                                                                      |_/
+ \_|	                      Released under the terms and conditions of the                              |_/
+ \_|	                   GNU General Public License Version 2 (http://gnu.org)                          |_/
+ \_|                                                                                                      |_/
+ \_|                                                                                                      |_/
+ \_|                   By using the script or any of its code, you agree to the license.                  |_/
+ \_|                                                                                                      |_/
+ \_|                                                                                                      |_/
+ \_|                                                                                                      |_/
+ \_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_*/
+
+
+
+//------------------------------------------------------------------------------------------------------------+
+//------------------------------------------------------------------------------------------------------------+
+
+
+  function lgsl_get($request, $ip, $port, $game)
+  {
+//---------------------------------------------------------+
+
+    $lgsl_support = array("halflife"    => "Half-Life",
+                          "halflifeold" => "Half-Life Old",
+                          "quake3"      => "Quake 3",
+                          "callofduty"  => "Call Of Duty",
+                          "callofduty2" => "Call Of Duty 2",
+                          "jediknight2" => "JediKnight 2",
+                          "wolfenstein" => "Wolfenstein",
+                          "startrekef"  => "StarTrek Elite-Force",
+                          "sof2"        => "Soldier of Fortune 2",
+                          "quake2"      => "Quake 2",
+                          "mohq3"       => "Medal Of Honour Method 1",
+                          "mohgs"       => "Medal Of Honour Method 2",
+                          "ut"          => "Unreal Tournament",
+                          "ut2003"      => "UT2003",
+                          "ut2004"      => "UT2004",
+                          "bf1942"      => "Battlefield 1942",
+                          "bfvietnam"   => "Battlefield Vietnam",
+                          "aarmy"       => "Americas Army",
+                          "halo"        => "Halo",
+                          "swat4"       => "SWAT 4",
+                          "vietcong"    => "Vietcong",
+                          "cnc"         => "Command and Conquer",
+                          "ravenshield" => "Raven Shield",
+                          "halflife2"   => "Half-Life 2",
+                          "bf2"         => "Battlefield 2",
+                          "quakew"      => "Quake World",
+                          "farcry"      => "Far Cry",
+                          "painkiller"  => "PainKiller",                          
+                          "neverwinter" => "NeverWinter Nights",
+                          "fear"        => "F.E.A.R.",
+                          "vietcong2"   => "Vietcong 2",
+                          "doom3"       => "Doom 3",
+                          "quake4"      => "Quake 4");
+
+//---------------------------------------------------------+
+
+    $lgsl_protocol = array("halflife"    => "one",
+                           "halflifeold" => "one",
+                           "quake3"      => "two",
+                           "callofduty"  => "two",
+                           "callofduty2" => "two",
+                           "jediknight2" => "two",
+                           "wolfenstein" => "two",
+                           "startrekef"  => "two",
+                           "sof2"        => "two",
+                           "mohq3"       => "two",
+                           "quake2"      => "two",
+                           "mohgs"       => "three",
+                           "ut"          => "three",
+                           "ut2003"      => "three",
+                           "ut2004"      => "three",
+                           "bf1942"      => "three",
+                           "bfvietnam"   => "three",
+                           "aarmy"       => "three",
+                           "halo"        => "three",
+                           "swat4"       => "three",
+                           "vietcong"    => "three",
+                           "cnc"         => "three",
+                           "ravenshield" => "four",
+                           "halflife2"   => "five",
+                           "bf2"         => "six",
+                           "quakew"      => "seven",
+                           "farcry"      => "eight",
+                           "painkiller"  => "eight",
+                           "neverwinter" => "nine",
+                           "fear"        => "nine",
+                           "vietcong2"   => "nine",
+                           "doom3"       => "ten",
+                           "quake4"      => "ten");
+
+//---------------------------------------------------------+
+
+    $lgsl_launch = array("halflife"     => "EYE://HL://",
+                         "halflifeold"  => "EYE://HL://",
+                         "quake3"       => "EYE://Q3://",
+                         "callofduty"   => "EYE://COD://",
+                         "callofduty2"  => "EYE://COD://",
+                         "jediknight2"  => "EYE://JK2://",
+                         "wolfenstein"  => "EYE://RTCW://",
+                         "startrekef"   => "EYE://EF://",
+                         "sof2"         => "EYE://SOF2://",
+                         "mohq3"        => "EYE://MOH://",
+                         "quake2"       => "EYE://Q2://",
+                         "mohgs"        => "EYE://MOH://",
+                         "ut"           => "EYE://UT://",
+                         "ut2003"       => "EYE://UT2://",
+                         "ut2004"       => "EYE://UT2://",
+                         "bf1942"       => "EYE://NEW://",
+                         "bfvietnam"    => "EYE://GS://",
+                         "aarmy"        => "EYE://GS://",
+                         "halo"         => "EYE://GS://",
+                         "swat4"        => "EYE://GS://",
+                         "vietcong"     => "EYE://OLD://",
+                         "cnc"          => "CNC://",
+                         "ravenshield"  => "EYE://RVS://",
+                         "halflife2"    => "EYE://SRC://",
+                         "bf2"          => "EYE://GS://",
+                         "quakew"       => "EYE://QW://",
+                         "farcry"       => "EYE://NEW://",
+                         "painkiller"   => "EYE://NEW://",
+                         "neverwinter"  => "EYE://GS://",
+                         "fear"         => "EYE://GS://",
+                         "vietcong2"    => "EYE://GS://",
+                         "doom3"        => "EYE://D3://",
+                         "quake4"       => "EYE://D3://");
+
+//---------------------------------------------------------+
+
+    if ($request == "support")  { return $lgsl_support;  }
+    if ($request == "protocol") { return $lgsl_protocol; }
+
+    if ($request == "launch")
+    {
+      if ($ip != "" && $port != "" && $game != "") // CHECK FOR GAME SPECIFIC LAUNCH CODE
+      {
+        // GET PORTS FOR LAUNCHING THE ASE - NOT USED FOR QUERYING
+
+        if ($game == "ut" || $game == "ut2003" || $game == "ut2004")         { $port = $port + 1;     }
+        if ($game == "aarmy" || $game == "swat4")                            { $port = $port + 1;     }
+        if ($game == "bf1942" || $game == "farcry" || $game == "painkiller") { $port = $port + 123;   }
+        if ($game == "ravenshield")                                          { $port = $port + 1000;  }
+        if ($game == "vietcong")                                             { $port = $port + 10000; }
+        if ($game == "vietcong2" && $port <= 10000)                          { $port = 19967;         }
+        if ($game == "bfvietnam" && $port == 15567)                          { $port = 23000;         }
+        if ($game == "bf2"       && $port == 16567)                          { $port = 29900;         }
+
+        $lgsl_launch = $lgsl_launch[$game].$ip.":".$port;
+      }
+
+      return $lgsl_launch;
+    }
+  }
+
+//------------------------------------------------------------------------------------------------------------+
+//------------------------------------------------------------------------------------------------------------+
+
+
+  function lgsl_query($ip, $port, $game, $request)
+  {
+
+
+//_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
+//
+//  THE FEED SYSTEM ALLOWS LGSL TO GET INFORMATION FROM
+//  ANOTHER LGSL OVER PORT 80 TO BYPASS BLOCKED PORTS
+
+    $lgsl_feed_url = "";
+
+//_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
+
+
+    $lgsl_protocol = lgsl_get("protocol","","","");
+
+    if (!$lgsl_protocol[$game])
+    {
+      echo "UKNOWN GAME '$game'"; exit;
+    }
+    
+    if ($request != "info" && $request != "settings" && $request != "players")
+    {
+      echo "INVALID TYPE ( info, settings, players )"; exit;
+    }
+
+//---------------------------------------------------------+
+
+    if ($lgsl_feed_url)
+    {
+      $data = lgsl_query_feed($ip, $port, $game, $request, $lgsl_feed_url);
+
+      $lgsl_protocol[$game] = "feed"; // TO BYPASS QUERY FUNCTIONS BELOW
+    }      
+
+//-------------------------+
+
+    if ($lgsl_protocol[$game] == "one")
+    {
+      $data = lgsl_query_one($ip, $port, $game, $request);
+    }
+    
+//-------------------------+
+
+    if ($lgsl_protocol[$game] == "two")
+    {
+      $data = lgsl_query_two($ip, $port, $game, $request);
+    }
+
+//-------------------------+
+
+    if ($lgsl_protocol[$game] == "three")
+    {
+      $queryport = $port;
+
+      if ($game == "ut"     || $game == "aarmy" || $game == "swat4") { $queryport = $port + 1;  }
+      if ($game == "ut2003" || $game == "ut2004")                    { $queryport = $port + 10; }
+      if ($game == "bf1942"    && $queryport == 14567)               { $queryport = 23000; }
+      if ($game == "bfvietnam" && $queryport == 15567)               { $queryport = 23000; }
+      if ($game == "vietcong"  && $queryport <= 10000)               { $queryport = 15425; }
+      if ($game == "mohgs")                                          { $queryport = 12300; }
+
+      $data = lgsl_query_three($ip, $port, $queryport, $game, $request);
+    }
+
+//-------------------------+
+
+    if ($lgsl_protocol[$game] == "four")
+    {
+      $queryport = $port + 1000;
+
+      $data = lgsl_query_four($ip, $port, $queryport, $game, $request);
+    }
+
+//-------------------------+
+    
+    if ($lgsl_protocol[$game] == "five")
+    {
+      $data = lgsl_query_five($ip, $port, $game, $request);
+    }
+
+//-------------------------+
+
+    if ($lgsl_protocol[$game] == "six")
+    {
+      $queryport = $port;
+
+      if ($game == "bf2" && $queryport == 16567) { $queryport = 29900; }
+
+      $data = lgsl_query_six($ip, $port, $queryport, $game, $request);
+    }
+
+//-------------------------+
+
+    if ($lgsl_protocol[$game] == "seven")
+    {
+      $data = lgsl_query_seven($ip, $port, $game, $request);
+    }
+
+//-------------------------+
+
+    if ($lgsl_protocol[$game] == "eight")
+    {
+      $queryport = $port + 123;
+
+      $data = lgsl_query_eight($ip, $port, $queryport, $game, $request);
+    }
+
+//-------------------------+
+    
+    if ($lgsl_protocol[$game] == "nine")
+    {
+      $queryport = $port;
+
+      if ($game == "vietcong2" && $queryport <= 10000) { $queryport = 19967; }
+    
+      $data = lgsl_query_nine($ip, $port, $queryport, $game, $request);
+    }
+
+//-------------------------+
+
+    if ($lgsl_protocol[$game] == "ten")
+    {
+      $data = lgsl_query_ten($ip, $port, $game, $request);
+    }    
+
+//---------------------------------------------------------+
+
+    if ($request == "info")
+    {
+      $data['status']   = TRUE;
+      $data['ip']       = $ip;   // MAKE SURE THAT
+      $data['port']     = $port; // THESE VALUES
+      $data['gametype'] = $game; // ARE ALWAYS SET
+
+      if (isset($data['gamemod']))
+      {
+      	$data['gamemod']  = str_replace(" ", "", $data['gamemod']); // REMOVE EXTRA SPACING FOR THE GAMEMOD
+      	$data['gamemod']  = trim(strtolower($data['gamemod']));     // LOWERCASE AND TRIM
+      }
+      
+      if (isset($data['mapname']))
+      	$data['mapname']  = trim(strtolower($data['mapname']));     // LOWERCASE AND TRIM
+
+      if (isset($data['gamemod']))
+      	if (!trim($data['gamemod']))                           { $data['gamemod']  = $game; } // ALWAYS RETURN A GAMEMOD
+
+      if (isset($data['password']))
+      	if (!trim($data['password']))                          { $data['password'] = FALSE; } // CONVERT EMPTY PASSWORDS
+      	
+      if (isset($data['password']))
+      	if (strtolower($data['password']) == "false")          { $data['password'] = FALSE; } // CONVERT TEXT FALSE
+      	
+	 if (isset($data['password']))      	
+      if (strtolower($data['password']) == "true")           { $data['password'] = TRUE;  } // CONVERT TEXT TRUE
+
+      if (!isset($data['hostname']) || !trim($data['hostname']) || !isset($data['mapname']) || !trim($data['mapname']))    // MISSING DATA SO SERVER IS OFFLINE
+      { 
+        $data['status']     = FALSE;
+        $data['players']    = 0;
+        $data['maxplayers'] = 0;
+      }
+    }
+
+    return $data;
+
+//---------------------------------------------------------+    
+  }
+
+//------------------------------------------------------------------------------------------------------------+
+//------------------------------------------------------------------------------------------------------------+
+
+
+  function lgsl_query_one($ip, $port, $game, $request)
+  {
+//---------------------------------------------------------+
+
+    $fp = @fsockopen("udp://$ip", $port, $errno, $errstr, 1);
+
+    if (!$fp) { return FALSE; } // RETURN AS CONNECTION WAS REFUSED
+    
+    stream_set_timeout($fp, 1, 0); stream_set_blocking($fp, true);  // SET TIMEOUT FOR OFFLINE SERVERS
+
+//---------------------------------------------------------+
+
+    if (($request == "settings" || $request == "players") && $game != "halflifeold")
+    {
+      $getchallengenumber = "\xFF\xFF\xFF\xFF\x57"; // AUTHORISATION FOR PLAYERS AND SETTINGS
+
+      fwrite($fp, $getchallengenumber);
+
+      $tmp = fread($fp, 4096);
+    
+      $challengenumber = substr($tmp, 5, 4);
+    }
+    
+//---------------------------------------------------------+
+
+    if ($game == "halflifeold")
+    {
+      if ($request == "info")     { $challenge = "\xFF\xFF\xFF\xFFdetails\x00"; }
+      if ($request == "players")  { $challenge = "\xFF\xFF\xFF\xFFplayers\x00"; }
+      if ($request == "settings") { $challenge = "\xFF\xFF\xFF\xFFrules\x00";   }
+    }
+    else
+    {
+      if ($request == "info")     { $challenge = "\xFF\xFF\xFF\xFFTSource Engine Query\x00"; }
+      if ($request == "players")  { $challenge = "\xFF\xFF\xFF\xFFU".$challengenumber;       }
+      if ($request == "settings") { $challenge = "\xFF\xFF\xFF\xFFV".$challengenumber;       }
+    }
+
+//---------------------------------------------------------+
+
+    fwrite($fp, $challenge);
+
+    $buffer = fread($fp, 4096);
+    
+    if (!$buffer) { fclose($fp); return FALSE; } // IF BUFFER EMPTY RETURN BLANK
+    
+    if ($request == "settings")
+    {
+      $second_packet = fread($fp, 4096);
+
+      if (strlen($second_packet) > 0)
+      {
+        $reverse_check = dechex(ord($buffer[8]));      // WORKS BUT MUST BE A CLEANER METHOD
+        
+        if ($reverse_check[0] == "1")
+        {
+          $tmp           = $buffer;                    // SWAP THE PACKETS AROUND 
+          $buffer        = $second_packet;
+          $second_packet = $tmp;
+        }                 
+
+        $buffer        = substr($buffer, 13);          // REMOVE LONG PACKET HEADER
+        $second_packet = substr($second_packet, 9);    // REMOVE SECOND PACKET HEADER
+        $buffer        = trim($buffer.$second_packet); // JOIN PACKETS AND TRIM
+      }
+      else
+      {
+        $buffer = trim(substr($buffer, 4)); // REMOVE SINGLE PACKET HEADER AND TRIM
+      }
+    }
+    else
+    {
+      $buffer = trim(substr($buffer, 4)); // REMOVE SINGLE PACKET HEADER AND TRIM
+    }
+
+    fclose($fp); // CLOSE CONNECTION;
+
+    if (!trim($buffer)) { return FALSE; } // IF BUFFER EMPTY RETURN BLANK
+   
+//---------------------------------------------------------+
+
+    if ($request == "info")
+    {
+      unset($data);
+
+      $tmp = explode("\x00", $buffer);
+
+      $place = strlen($tmp[0].$tmp[1].$tmp[2].$tmp[3].$tmp[4]) + 5;
+      
+      $data['gamemod']        = $tmp[3];
+      $data['hostname']       = $tmp[1];
+      $data['mapname']        = $tmp[2];
+      $data['players']        = ord($buffer[$place]);
+      $data['maxplayers']     = ord($buffer[$place + 1]);
+      $data['password']       = ord($buffer[$place + 5]);
+
+//--- NONSTANDARD INFORMATION ----------------------------+
+      $data['datatype']       = $buffer[0];               // m for steam info
+      $data['version']        = ord($buffer[$place + 2]); // Network Version
+      $data['description']    = $tmp[4];
+      $data['server_type']    = $buffer[$place + 3];      // D edicated or L isten
+      $data['server_os']      = $buffer[$place + 4];      // W indows or L inux
+      $data['server_secure']  = ord($tmp[14]);            // VAC
+      $data['server_bots']    = ord($tmp[15]);            // Number of Bots
+//--------------------------------------------------------+
+
+      return $data;  // RETURN INFO
+    }
+
+//---------------------------------------------------------+
+
+    if ($request == "players")
+    {
+      // $buffer[0]      = datatype = D for steam players
+      // ord($buffer[1]) = number of rules returned
+    
+      $player_number = 0;
+      $position = 2;                                            // START POINT
+    
+      do
+      { 
+        $player_number++;                                       // INCREMENT PLAYER NUMBER
+
+        $player[$player_number]['id'] = ord($buffer[$position]);
+        $position ++;                                           // GET PLAYER GAME ID
+
+        while($buffer[$position] != "\x00" && $position < 4000) // NAME LOOP WITH 4000 CHARACTER TIMEOUT
+        {
+          $player[$player_number]['name'] .= $buffer[$position];  // COLLECT PLAYER NAME
+          $position ++;
+        }
+
+        $player[$player_number]['score'] = (ord($buffer[$position + 1]))
+                                       + (ord($buffer[$position + 2]) * 256)
+                                       + (ord($buffer[$position + 3]) * 65536)
+                                       + (ord($buffer[$position + 4]) * 16777216);
+
+        if ($player[$player_number]['score'] > 2147483648) { $player[$player_number]['score'] -= 4294967296; }  // NEGATIVE SCORES ( -1 )
+
+        $time = substr($buffer, $position + 5, 4);              // PLAYER TIME IN BYTES
+        if (strlen($time) < 4) { return FALSE; }                // CHECK FOR MISSING BYTES
+        list(,$time) = unpack("f", $time);                      // CONVERT BYTES TO DECIMAL
+        $time = mktime(0, 0, $time);                            // CONVERT DECIMAL TO UNIX TIMESTAMP
+        $player[$player_number]['time'] = date("H:i:s", $time);   // CONVERT TIMESTAMP TO HUMAN READABLE TIME
+
+        $position += 9;
+      }
+      while ($position < strlen($buffer));                      // REPEAT UNTIL THE END OF THE BUFFER
+
+      return $player;
+    }
+
+//---------------------------------------------------------+
+
+    if ($request == "settings")
+    {
+      // $buffer[0]      = datatype = E for steam rules
+      // ord($buffer[1]) = number of rules returned
+     
+      $tmp     = substr($buffer, 2); // REMOVE BEGINNING DATA BYTES
+      $rawdata = explode("\x00", $tmp);    
+    
+      for($i=1; $i<count($rawdata); $i=$i+2)
+      {
+        $rawdata[$i] = strtolower($rawdata[$i]);  // MAKE ARRAY KEYS LOWERCASE
+        $setting[$rawdata[$i]] = $rawdata[$i+1];  // LOAD DATA IN AN ARRAY
+      }
+
+      return $setting;  // RETURN INFO
+    }
+
+//---------------------------------------------------------+
+  }
+
+//------------------------------------------------------------------------------------------------------------+
+//------------------------------------------------------------------------------------------------------------+
+
+
+  function lgsl_query_two($ip, $port, $game, $request)
+  {
+//---------------------------------------------------------+
+
+    if ($game == "mohq3")
+    {
+      $challenge = "\xFF\xFF\xFF\xFF\x02getstatus\x00";
+    }
+    else if ($game == "quake2")
+    {
+      $challenge = "\xFF\xFF\xFF\xFFstatus\x00";
+    }
+    else
+    {
+      $challenge = "\xFF\xFF\xFF\xFFgetstatus\x00";
+    }
+
+//---------------------------------------------------------+
+
+    $fp = @fsockopen("udp://$ip", $port, $errno, $errstr, 1);
+
+    if (!$fp) { return FALSE; } // RETURN AS CONNECTION WAS REFUSED
+
+    stream_set_timeout($fp, 1, 0); stream_set_blocking($fp, true);  // SET TIMEOUT FOR OFFLINE SERVERS
+
+    fwrite($fp, $challenge);
+
+    $tmp = fread($fp, 4096);
+    
+    fclose($fp); // CLOSE CONNECTION;
+
+    $tmp = trim($tmp);  // TRIM WHITE SPACE FROM PACKET
+
+    if (!$tmp) { return FALSE; } // IF BUFFER EMPTY RETURN BLANK
+    
+//---------------------------------------------------------+
+
+    $rawdata = explode("\n", $tmp);     // EXPLODE BY NEWLINE
+
+    $rawsetting = explode("\\", $rawdata[1]); // EXPLODE BY BACKSLASH
+
+    for($i=1; $i<count($rawsetting); $i=$i+2)
+    {
+      $rawsetting[$i] = strtolower($rawsetting[$i]);                     // MAKE ARRAY KEY LOWERCASE
+      $rawsetting[$i] = preg_replace("/\^./", "", $rawsetting[$i]);      // REMOVE COLORCODES FROM KEY
+      $rawsetting[$i+1] = preg_replace("/\^./", "", $rawsetting[$i+1]);  // REMOVE COLORCODES FROM VALUE
+      $setting[$rawsetting[$i]] = $rawsetting[$i+1];                     // LOAD DATA IN AN ARRAY
+    }
+
+    if ($request == "settings") { return $setting;  }  // RETURN SETTINGS
+
+//---------------------------------------------------------+
+
+    unset($data);
+
+    $data['gamemod']    = $setting['gamename'];
+    $data['hostname']   = $setting['sv_hostname'];
+    $data['mapname']    = $setting['mapname'];
+    $data['players']    = count($rawdata) - 2;
+    $data['maxplayers'] = $setting['sv_maxclients'];
+    
+    if (isset($setting['g_needpass']))
+    	$data['password']   = $setting['g_needpass'];
+
+    if (!$data['hostname'])            { $data['hostname']   = $setting['hostname']; }   // HOSTNAME ALTERNATIVE
+    if (isset($setting['pswrd']))      { $data['password']   = $setting['pswrd']; }      // CALL OF DUTY
+    if (isset($setting['needpass']))   { $data['password']   = $setting['needpass']; }   // QUAKE2
+    if (isset($setting['maxclients'])) { $data['maxplayers'] = $setting['maxclients']; } // QUAKE2
+
+    if ($request == "info") { return $data; }  // RETURN INFO
+
+//---------------------------------------------------------+
+
+    for($i=2; $i<count($rawdata); $i++)
+    {
+      if ($game == "sof2")  // SOF RETURNS AN EXTRA DEATHS FIELD
+      {
+        $tmp = explode(" ", $rawdata[$i], 4); // LIMIT TO FOUR OR NAME WITH SPACING WOULD BE EXPLODED
+        $player[$i-1]['score']  = $tmp[0];
+        $player[$i-1]['ping']   = $tmp[1];
+        $player[$i-1]['deaths'] = $tmp[2];
+        $player[$i-1]['name']   = substr(preg_replace("/\^./", "", $tmp[3]) , 1, -1); // REMOVE QUOTES AND COLORCODES
+      }
+      else if ($game == "mohq3")  // MOH RETURNS JUST PING
+      {
+        $tmp = explode(" ", $rawdata[$i], 2); // LIMIT TO TWO OR NAME WITH SPACING WOULD BE EXPLODED
+        $player[$i-1]['ping']   = $tmp[0];
+        $player[$i-1]['name']   = substr(preg_replace("/\^./", "", $tmp[1]) , 1, -1); // REMOVE QUOTES AND COLORCODES
+      }
+      else
+      {
+        $tmp = explode(" ", $rawdata[$i], 3); // LIMIT TO THREE OR NAME WITH SPACING WOULD BE EXPLODED
+        $player[$i-1]['score'] = $tmp[0];
+        $player[$i-1]['ping']  = $tmp[1];
+        $player[$i-1]['name']  = substr(preg_replace("/\^./", "", $tmp[2]) , 1, -1); // REMOVE QUOTES AND COLORCODES
+      }
+    }
+
+    if ($request == "players") { return $player; }  // RETURN PLAYERS
+
+//---------------------------------------------------------+
+  }
+
+//------------------------------------------------------------------------------------------------------------+
+//------------------------------------------------------------------------------------------------------------+
+
+
+  function lgsl_query_three($ip, $port, $queryport, $game, $request)
+  {
+//---------------------------------------------------------+
+
+    if ($request == "info" || $request == "settings") { $challenge = "\\basic\\\\info\\\\rules\\"; }
+    if ($request == "players")                        { $challenge = "\\players\\";                }
+   
+//---------------------------------------------------------+
+    
+    $fp = @fsockopen("udp://$ip", $queryport, $errno, $errstr, 1);
+
+    if (!$fp) { return FALSE; } // RETURN AS CONNECTION WAS REFUSED
+
+    stream_set_timeout($fp, 1, 0); stream_set_blocking($fp, true);  // SET TIMEOUT FOR OFFLINE SERVERS
+
+    fwrite($fp, $challenge);
+
+    $buffer = fread($fp, 4096);
+
+    if (!$buffer) { fclose($fp); return FALSE; } // IF BUFFER EMPTY RETURN BLANK
+
+    if (!strstr($buffer, "\\final\\"))
+    {
+      $buffer .= fread($fp, 4096);  // MULTI-PACKET SENT IN ORDER
+    }
+
+    if ($request == "settings" && !strstr($buffer, "\\mapname\\") && strstr($buffer, "\\final\\") )
+    {
+      $buffer = fread($fp, 4096) . $buffer; // SETTINGS MULTI-PACKET IN REVERSE
+    }
+
+    if ($request == "players" && !strstr($buffer, "\\player_0\\") && strstr($buffer, "\\final\\") )
+    {
+      $buffer = fread($fp, 4096) . $buffer; // PLAYER MULTI-PACKET IN REVERSE
+    }
+
+    fclose($fp); // CLOSE CONNECTION;
+
+    $buffer = trim($buffer);  // TRIM WHITE SPACE FROM PACKET
+    
+//---------------------------------------------------------+
+
+    if ($request == "info" || $request == "settings")
+    {
+      $buffer = explode("\\player_0", $buffer); // REMOVE PLAYER INFORMATION
+      $buffer = $buffer[0];                     // AS SOME GAMES JUST SEND EVERYTHING IGNORING CHALLENGE
+
+      $buffer = explode("\\leader_0", $buffer); // REMOVE PLAYER INFORMATION ( AMERICA'S ARMY )
+      $buffer = $buffer[0];                     // AS SOME GAMES JUST SEND EVERYTHING IGNORING CHALLENGE
+
+      $rawsetting = explode("\\", $buffer);  // EXPLODE BY BACKSLASH
+      
+      for($i=1; $i<count($rawsetting); $i=$i+2)
+      {
+        $rawsetting[$i] = strtolower("$rawsetting[$i]");  // MAKE ARRAY KEY LOWERCASE
+
+        if ($rawsetting[$i] != "final" && $rawsetting[$i] != "queryid")  // MAKE SURE KEY IS NOT PACKET CHECKING STUFF
+        {
+          $setting[$rawsetting[$i]] = $rawsetting[$i+1];  // LOAD DATA IN AN ARRAY
+        }
+      }
+
+      if ($request == "settings") { return $setting; }  // RETURN SETTINGS
+
+//---------------------------------------------------------+
+
+      unset($data);
+
+      $data['gamemod'] = $setting[gamename];
+
+      if (!$data['gamemod'] || $game == "bf1942")
+      {
+        $data['gamemod'] = $setting[gameid]; // GAMEMOD ALTERNATIVE
+      }
+
+      $data['hostname'] = $setting[sv_hostname];
+
+      if (!$data['hostname']) { $data['hostname'] = $setting['hostname']; } // HOSTNAME ALTERNATIVE
+      
+      if ($game == "swat4") { $data['hostname'] = preg_replace("/\[c=......\]/iU", "", $data['hostname']); } // REMOVE COLORCODES FROM HOSTNAME
+
+      $data['mapname']    = $setting['mapname'];
+      $data['players']    = $setting['numplayers'];
+      $data['maxplayers'] = $setting['maxplayers'];
+      $data['password']   = $setting['password'];
+      
+      return $data;  // RETURN INFO
+    }
+
+//---------------------------------------------------------+
+
+    if ($request == "players")
+    {
+      if ($game == "cnc") { $player[1]['name'] = "This Game Does Not Provide Player Information"; return $player; }
+
+      $rawsetting = explode("\\", $buffer); // EXPLODE BY BACKSLASH
+
+      for($i=1; $i<count($rawsetting); $i=$i+2)
+      {
+        if (!strstr($rawsetting[$i], "_")) { $i++; continue; } // SKIP NON PLAYER DATA
+        
+        $rawsetting[$i] = strtolower("$rawsetting[$i]");  // MAKE ARRAY KEY LOWERCASE
+
+        $buffer = explode("_", $rawsetting[$i], 2);  // SEPERATE KEY AND PLAYERID
+          
+        if ($buffer[0] == "player")     { $buffer[0] = "name";  } // CONVERT TO LGSL STANDARD
+        if ($buffer[0] == "playername") { $buffer[0] = "name";  } // CONVERT TO LGSL STANDARD
+        if ($buffer[0] == "frags")      { $buffer[0] = "score"; } // CONVERT TO LGSL STANDARD
+        if ($buffer[0] == "ngsecret")   { $buffer[0] = "stats"; } // CONVERT TO LGSL STANDARD
+
+        if ($buffer[0] == "ping" && !$rawsetting[$i+1]) { $buffer[0] = "null"; } // WHEN GAME RETURNS BLANK KEY
+
+        if (is_numeric($buffer[1]))  // CHECK FOR A PLAYERID
+        {
+          $player[$buffer[1]+1][$buffer[0]] = $rawsetting[$i+1]; // LOAD DATA INTO ARRAY
+        }
+      }
+      
+      return $player;  // RETURN PLAYERS
+    }
+
+//---------------------------------------------------------+
+  }
+
+//------------------------------------------------------------------------------------------------------------+
+//------------------------------------------------------------------------------------------------------------+
+
+
+  function lgsl_query_four($ip, $port, $queryport, $game, $request)
+  {
+//---------------------------------------------------------+
+
+    $challenge = "REPORT";
+
+    $fp = @fsockopen("udp://$ip", $queryport, $errno, $errstr, 1);
+
+    if (!$fp) { return FALSE; } // RETURN AS CONNECTION WAS REFUSED
+
+    stream_set_timeout($fp, 1, 0); stream_set_blocking($fp, true);  // SET TIMEOUT FOR OFFLINE SERVERS
+
+    fwrite($fp, $challenge);
+
+    $tmp = fread($fp, 4096);
+
+    fclose($fp); // CLOSE CONNECTION;
+
+    if (!$tmp) { return FALSE; } // IF BUFFER EMPTY RETURN BLANK
+
+    $tmp = trim($tmp);  // TRIM WHITE SPACE FROM PACKET
+
+//---------------------------------------------------------+
+  
+    $lgsl_ravenshield_codes = array(	"P1" => "queryport",
+					"E1" => "mapname",
+					"I1" => "hostname",
+					"F1" => "maptype",
+					"A1" => "maxplayers",
+					"G1" => "password",
+					"H1" => "dedicated",
+					"L1" => "playername",
+					"M1" => "playertime",
+					"N1" => "playerping",
+					"O1" => "playerscore",
+					"B1" => "players",
+					"Q1" => "rounds",
+					"R1" => "roundtime",
+					"S1" => "bombtimer",
+					"T1" => "bomb",
+					"W1" => "allowteammatenames",
+					"X1" => "iserver",
+					"Y1" => "friendlyfire",
+					"Z1" => "autobalance",
+					"A2" => "tkpenalty",
+					"D2" => "version",
+					"B2" => "allowradar",
+					"E2" => "lid",
+					"F2" => "gid",
+					"G2" => "hostport",
+					"H2" => "terroristcount",
+					"I2" => "aibackup",
+					"J2" => "rotatemaponsuccess",
+					"K2" => "forcefirstpersonweapons",
+					"L2" => "gamename",
+					"L3" => "punkbuster",
+					"K1" => "mapcycle",
+					"J1" => "mapcycletypes");
+
+//---------------------------------------------------------+
+
+    $rawdata = explode("\xB6", $tmp);     // EXPLODE BY NEWLINE
+ 
+    for($i=0; $i<count($rawdata); $i++)
+    {
+      $lgsl_setting_code = substr($rawdata[$i], 0, 2);
+      $lgsl_setting_code = $lgsl_ravenshield_codes[$lgsl_setting_code];
+      $rawdata[$i] = substr($rawdata[$i], 3);
+      $setting[$lgsl_setting_code] = trim($rawdata[$i]);  // LOAD INTO ARRAY AND TRIM BLANK SPACING
+    }
+
+//---------------------------------------------------------+
+
+    if ($request == "settings")
+    {
+      unset($setting[""]); // REMOVE BLANK AND PLAYER DATA
+      unset($setting[playername]); 
+      unset($setting[playertime]);
+      unset($setting[playerping]);
+      unset($setting[playerscore]);
+      
+      $setting[mapcycle] = str_replace("/"," ", $setting[mapcycle]); // BREAK UP LIST SO THAT IT WRAPS
+      $setting[mapcycletypes] = str_replace("/"," ", $setting[mapcycletypes]);
+
+
+      return $setting;  // RETURN SETTINGS
+    }
+
+//---------------------------------------------------------+
+
+    if ($request == "info")
+    {
+      unset($data);
+
+      $data['gamemod']    = $setting['gamename'];
+      $data['hostname']   = $setting['hostname'];
+      $data['mapname']    = $setting['mapname'];
+      $data['players']    = $setting['players'];
+      $data['maxplayers'] = $setting['maxplayers'];
+      $data['password']   = $setting['password'];
+      
+      return $data;  // RETURN INFO
+    }
+
+//---------------------------------------------------------+
+
+    if ($request == "players")
+    {
+      $playername  = explode("/", $setting[playername]);  // EXPLODE BY FORWARDSLASH
+      $playertime  = explode("/", $setting[playertime]);  
+      $playerping  = explode("/", $setting[playerping]);  
+      $playerscore = explode("/", $setting[playerscore]);
+      
+      for($i=1; $i<count($playername); $i++)
+      {
+        $player[$i]['name']   = $playername[$i];
+        $player[$i]['time']   = $playertime[$i];
+        $player[$i]['ping']   = $playerping[$i];
+        $player[$i]['score']  = $playerscore[$i];
+      }
+
+      return $player;  // RETURN PLAYERS
+    }
+
+//---------------------------------------------------------+
+  }
+
+//------------------------------------------------------------------------------------------------------------+
+//------------------------------------------------------------------------------------------------------------+
+
+
+  function lgsl_query_five($ip, $port, $game, $request)
+  {
+//---------------------------------------------------------+
+
+    $getchallengenumber = "\xFF\xFF\xFF\xFF\x57"; // AUTHORISATION FOR PLAYERS AND SETTINGS
+
+    $fp = @fsockopen("udp://$ip", $port, $errno, $errstr, 1);
+
+    if (!$fp) { return FALSE; } // RETURN AS CONNECTION WAS REFUSED
+
+    stream_set_timeout($fp, 1, 0); stream_set_blocking($fp, true);  // SET TIMEOUT FOR OFFLINE SERVERS
+
+//---------------------------------------------------------+
+
+    if ($request == "settings" || $request == "players")
+    {
+      fwrite($fp, $getchallengenumber);
+
+      $tmp = fread($fp, 4096);
+    
+      if (!$tmp) { fclose($fp); return FALSE; } // CHALLENGE NUMBER REQUIRED
+
+      $challengenumber = substr($tmp, 5, 4);
+    }
+
+//---------------------------------------------------------+
+    
+    if ($request == "info")     { $challenge = "\xFF\xFF\xFF\xFFTSource Engine Query\x00"; }
+    if ($request == "players")  { $challenge = "\xFF\xFF\xFF\xFFU".$challengenumber;       }
+    if ($request == "settings") { $challenge = "\xFF\xFF\xFF\xFFV".$challengenumber;       }
+
+    fwrite($fp, $challenge);
+
+    $buffer = fread($fp, 4096);
+    
+    if (!$buffer) { fclose($fp); return FALSE; } // IF BUFFER EMPTY RETURN BLANK
+    
+    if ($request == "settings")
+    {
+      $second_packet = fread($fp, 4096);
+
+      if (strlen($second_packet) > 0)
+      {
+        $reverse_check = dechex(ord($buffer[8]));      // WORKS BUT MUST BE A CLEANER METHOD
+        
+        if ($reverse_check[0] == "1")
+        {
+          $tmp           = $buffer;                    // SWAP THE PACKETS AROUND 
+          $buffer        = $second_packet;
+          $second_packet = $tmp;
+        }                 
+
+        $buffer        = substr($buffer, 13);          // REMOVE LONG PACKET HEADER
+        $second_packet = substr($second_packet, 9);    // REMOVE SECOND PACKET HEADER
+        $buffer        = trim($buffer.$second_packet); // JOIN PACKETS AND TRIM
+      }
+      else
+      {
+        $buffer = trim(substr($buffer, 4)); // REMOVE SINGLE PACKET HEADER AND TRIM
+      }
+    }
+    else
+    {
+      $buffer = trim(substr($buffer, 4)); // REMOVE SINGLE PACKET HEADER AND TRIM
+    }
+
+    fclose($fp); // CLOSE CONNECTION;
+
+    if (!trim($buffer)) { return FALSE; } // IF BUFFER EMPTY RETURN BLANK
+
+//---------------------------------------------------------+
+
+    if ($request == "info")
+    {
+      $tmp = substr($buffer, 2); // REMOVE BEGINNING DATA BYTES
+      $tmp = explode("\x00", $tmp);
+
+      $place = strlen($tmp[0].$tmp[1].$tmp[2].$tmp[3]) + 8;
+
+      $data['gamemod']       = $tmp[2];
+      $data['hostname']      = $tmp[0];
+      $data['mapname']       = $tmp[1];
+      $data['players']       = ord($buffer[$place]);
+      $data['maxplayers']    = ord($buffer[$place + 1]);
+      $data['password']      = ord($buffer[$place + 5]);
+
+//--- NONSTANDARD INFORMATION ----------------------------+
+      $data['datatype']      = $buffer[0];               // I for source info
+      $data['version']       = ord($buffer[1]);          // Network Version
+      $data['description']   = $tmp[3];
+      $data['botplayers']    = ord($buffer[$place + 2]);
+      $data['server_type']   = $buffer[$place + 3];      // D edicated or L isten
+      $data['server_os']     = $buffer[$place + 4];      // W indows or L inux
+      $data['server_bots']   = ord($buffer[$place + 2]); // Number of Bots
+      $data['server_secure'] = ord($buffer[$place + 6]); // VAC
+//--------------------------------------------------------+
+
+      return $data;
+    }
+
+//---------------------------------------------------------+
+
+    if ($request == "players")
+    {
+      // $buffer[0]      = datatype = D for source players
+      // ord($buffer[1]) = number of players returned
+
+      $player_number = 0;
+      $position = 2;                                            // START POINT
+    
+      do
+      { 
+        $player_number++;                                       // INCREMENT PLAYER NUMBER
+
+        $player[$player_number]['id'] = ord($buffer[$position]);
+        $position ++;                                           // GET PLAYER GAME ID
+
+        while($buffer[$position] != "\x00" && $position < 4000) // NAME LOOP WITH 4000 CHARACTER TIMEOUT
+        {
+          if (isset($player[$player_number]['name']))
+          	$player[$player_number]['name'] .= $buffer[$position];  // COLLECT PLAYER NAME
+          else
+          	$player[$player_number]['name'] = $buffer[$position];
+          $position ++;
+        }
+
+        $player[$player_number]['score'] = (ord($buffer[$position + 1]))
+                                       + (ord($buffer[$position + 2]) * 256)
+                                       + (ord($buffer[$position + 3]) * 65536)
+                                       + (ord($buffer[$position + 4]) * 16777216);
+
+        if ($player[$player_number]['score'] > 2147483648) { $player[$player_number]['score'] -= 4294967296; }  // NEGATIVE SCORES ( -1 )
+
+        $time = substr($buffer, $position + 5, 4);              // PLAYER TIME IN BYTES
+        if (strlen($time) < 4) { return FALSE; }                // CHECK FOR MISSING BYTES
+        list(,$time) = unpack("f", $time);                      // CONVERT BYTES TO DECIMAL
+        $time = mktime(0, 0, $time);                            // CONVERT DECIMAL TO UNIX TIMESTAMP
+        $player[$player_number]['time'] = date("H:i:s", $time);   // CONVERT TIMESTAMP TO HUMAN READABLE TIME
+
+        $position += 9;
+      }
+      while ($position < strlen($buffer));                      // REPEAT UNTIL THE END OF THE BUFFER
+ 
+      return $player;
+    }
+
+//---------------------------------------------------------+
+
+    if ($request == "settings")
+    {
+      // $buffer[0]      = datatype = E for source rules
+      // ord($buffer[1]) = number of rules returned
+
+      $tmp     = substr($buffer, 2); // REMOVE BEGINNING DATA BYTES
+      $rawdata = explode("\x00", $tmp);
+      
+      for($i=1; $i<count($rawdata); $i=$i+2)
+      {
+        $rawdata[$i] = strtolower($rawdata[$i]);  // MAKE ARRAY KEYS LOWERCASE
+        $setting[$rawdata[$i]] = $rawdata[$i+1];  // LOAD DATA IN AN ARRAY
+      }
+      
+      return $setting;
+    }
+
+//---------------------------------------------------------+
+  }
+
+//------------------------------------------------------------------------------------------------------------+
+//------------------------------------------------------------------------------------------------------------+
+
+  function lgsl_query_six($ip, $port, $queryport, $game, $request)
+  {
+//---------------------------------------------------------+
+
+    $challenge = "\xFE\xFD\x00\xAA\xAA\xAA\xAA\xFF\xFF\xFF\x01"; // ALL
+
+    $fp = @fsockopen("udp://$ip", $queryport, $errno, $errstr, 1);
+
+    if (!$fp) { return FALSE; } // RETURN AS CONNECTION WAS REFUSED
+
+    stream_set_timeout($fp, 1, 0); stream_set_blocking($fp, true);  // SET TIMEOUT FOR OFFLINE SERVERS
+
+    fwrite($fp, $challenge);
+
+//---------------------------------------------------------+
+
+    $packet1 = fread($fp, 1400);
+    
+    if (!trim($packet1)) { fclose($fp); return FALSE; }
+    
+    // CHECK IF PACKET1 IS LAST OR REVERSED BEFORE REQUESTING THE SECOND TO AVOID DELAYS
+    
+    if (!strstr($packet1, "score_t") || !strstr($packet1, "hostname\x00"))
+    {
+      $packet2 = fread($fp, 1400);
+      
+      if (substr($packet1, -2) != "\x00\x00")
+      {
+        $tmp = explode("\x00", $packet1); // EXPLODE INTO BITS
+        array_pop($tmp);                  // REMOVE x00
+        array_pop($tmp);                  // REMOVE INCOMPLETE FIELD
+        $tmp = implode("\x00", $tmp);     // RE-JOIN BITS
+        $tmp .= "\x00\x00";               // ADD END x00x00
+        $packet1 = $tmp;                  // SET PACKET
+      }
+
+      if (!strstr($packet2, "score_t"))
+      {
+        $packet3 = fread($fp, 1400);
+        
+        if (substr($packet2, -2) != "\x00\x00")
+        {
+          $tmp = explode("\x00", $packet2); // EXPLODE INTO BITS
+          array_pop($tmp);                  // REMOVE x00
+          array_pop($tmp);                  // REMOVE INCOMPLETE FIELD
+          $tmp = implode("\x00", $tmp);     // RE-JOIN BITS
+          $tmp .= "\x00\x00";               // ADD END x00x00
+          $packet2 = $tmp;                  // SET PACKET
+        }
+      }
+    }
+    
+    fclose($fp); // CLOSE CONNECTION;
+
+//---------------------------------------------------------+
+
+    if (!strstr($packet1, "hostname\x00"))
+    {
+      $tmp     = $packet1; // SOMETIMES DATA IS SENT IN REVERSE ORDER
+      $packet1 = $packet2; // SO SWAP THEM AROUND AFTER PROCESSING
+      $packet2 = $tmp;
+    }
+    
+//---------------------------------------------------------+
+
+    $buffer = $packet1.$packet2.$packet3;
+    $buffer = preg_replace("/\\x00\\x00....splitnum/U", "", $buffer);
+    
+//---------------------------------------------------------+
+
+    $server = substr($buffer, 16);
+    $server = explode("\x01", $server, 2);
+    $server = explode("\x00", $server[0]);
+
+    for($i=0; $i<count($server); $i=$i+2)
+    {
+      if (!trim($server[$i])) { continue; }
+
+      $server[$i] = strtolower("$server[$i]"); // MAKE ARRAY KEY LOWERCASE
+      $setting[$server[$i]] = $server[$i+1];   // LOAD DATA IN AN ARRAY
+    }
+
+    if ($request == "settings") { return $setting; }  // RETURN SETTINGS
+
+//---------------------------------------------------------+
+
+    if ($request == "info")
+    {
+      unset($data);
+
+      $data['gamemod']    = $setting[gamename];
+      $data['hostname']   = $setting['hostname'];
+      $data['mapname']    = $setting['mapname'];
+      $data[players]    = $setting[numplayers];
+      $data[maxplayers] = $setting[maxplayers];
+      $data['password']   = $setting['password'];
+
+      return $data;  // RETURN INFO
+    }
+    
+//---------------------------------------------------------+    
+
+    if ($request == "players")
+    {
+      $buffer = explode("\x01", $buffer, 2);
+      $buffer = $buffer[1]; // REMOVE SERVER INFO FROM PLAYER INFO FOR BETTER MATCHING
+     
+      $name     = preg_match_all("/player_\\x00.(.*)\\x00\\x00/U", $buffer, $match);
+      $name     = explode("\x00", $match[1][0]."\x00".$match[1][1]);
+      
+      if (!$name[0]) { return FALSE; } // FIRST NAME IS EMPTY WHEN THERE IS NO PLAYERS
+      
+      $score    = preg_match_all(" /score_\\x00.(.*)\\x00\\x00/U", $buffer, $match);
+      $score    = explode("\x00", $match[1][0]."\x00".$match[1][1]);
+      $ping     = preg_match_all("  /ping_\\x00.(.*)\\x00\\x00/U", $buffer, $match);
+      $ping     = explode("\x00", $match[1][0]."\x00".$match[1][1]);      
+      $deaths   = preg_match_all("/deaths_\\x00.(.*)\\x00\\x00/U", $buffer, $match);
+      $deaths   = explode("\x00", $match[1][0]."\x00".$match[1][1]);
+      $pid      = preg_match_all("   /pid_\\x00.(.*)\\x00\\x00/U", $buffer, $match);
+      $pid      = explode("\x00", $match[1][0]."\x00".$match[1][1]);
+      $skill    = preg_match_all(" /skill_\\x00.(.*)\\x00\\x00/U", $buffer, $match);
+      $skill    = explode("\x00", $match[1][0]."\x00".$match[1][1]);
+      $team     = preg_match_all("  /team_\\x00.(.*)\\x00\\x00/U", $buffer, $match);
+      $team     = explode("\x00", $match[1][0]."\x00".$match[1][1]);
+      $teamname = preg_match_all(" /team_t\\x00.(.*)\\x00\\x00/U", $buffer, $match);
+      $teamname = explode("\x00", $match[1][0]."\x00".$match[1][1]);
+      
+      for($i=0; $i<count($name); $i++)
+      {
+        if (!$name[$i]) { continue; } // IGNORE ANY EMPTY NAMES
+      
+        $player[$i+1]['name']   = $name[$i];
+        $player[$i+1]['score']  = $score[$i];
+        $player[$i+1][ping]   = $ping[$i];
+        $player[$i+1][deaths] = $deaths[$i];
+        $player[$i+1][pid]    = $pid[$i];
+        $player[$i+1][skill]  = $skill[$i];
+        $player[$i+1][team]   = $teamname[$team[$i]-1]; // TEAM (1/2) TEAMNAME (0/1)
+      }
+      
+      return $player; // RETURN PLAYER
+    }
+
+//---------------------------------------------------------+
+  }
+
+//------------------------------------------------------------------------------------------------------------+
+//------------------------------------------------------------------------------------------------------------+
+
+  function lgsl_query_seven($ip, $port, $game, $request)
+  {
+//---------------------------------------------------------+
+
+    $challenge = "\xFF\xFF\xFF\xFFstatus\x00";
+
+    $fp = @fsockopen("udp://$ip", $port, $errno, $errstr, 1);
+
+    if (!$fp) { return FALSE; } // IF BUFFER EMPTY RETURN BLANK
+
+    stream_set_timeout($fp, 1, 0); stream_set_blocking($fp, true);  // SET TIMEOUT FOR OFFLINE SERVERS
+     
+    fwrite($fp, $challenge);
+      
+    $buffer = fread($fp, 4096);
+      
+    fclose($fp);
+ 
+    if (!$buffer) { return FALSE; } // IF BUFFER EMPTY RETURN BLANK
+     
+//---------------------------------------------------------+
+
+    $buffer = substr($buffer, 6); // REMOVE PACKET HEADER
+      
+    $buffer = explode("\n", $buffer); // EXPLODE BY ALL BY NEWLINE
+     
+//---------------------------------------------------------+
+
+    $tmp = explode("\\", $buffer[0]); // EXPLODE BY SETTINGS BY BACKSLASH
+
+    for($i=0; $i<count($tmp); $i=$i+2)
+    {
+      if (!trim($tmp[$i])) { continue; }
+
+      $tmp[$i] = strtolower("$tmp[$i]"); // MAKE ARRAY KEY LOWERCASE
+      $setting[$tmp[$i]] = $tmp[$i+1];   // LOAD DATA IN AN ARRAY
+    }
+      
+    if ($request == "settings") { return $setting; }  // RETURN SETTINGS
+
+//---------------------------------------------------------+
+
+    for($i=1; $i<=count($buffer); $i++)
+    {
+      if (!trim($buffer[$i])) { continue; }
+
+      preg_match("/(.*) (.*) (.*) (.*) \"(.*)\" \"(.*)\" (.*) (.*)/U", $buffer[$i], $match);
+      
+      $player[$i]['pid']         = $match[1];
+      $player[$i]['score']       = $match[2];
+      $player[$i]['time']        = $match[3];	
+      $player[$i]['ping']        = $match[4];
+      $player[$i]['name']        = $match[5];
+      $player[$i]['skin']        = $match[6];
+      $player[$i]['skin_top']    = $match[7];
+      $player[$i]['skin_bottom'] = $match[8];
+
+//---------------------------------------------------------+
+
+      // TRY TO REMOVE COLORCODES AND SYMBOLS FROM NAMES
+
+      $name_length = strlen($player[$i]['name']);
+      
+      for($char_pos=0; $char_pos<$name_length; $char_pos++)
+      {
+        $char = ord($player[$i]['name'][$char_pos]);
+        
+        if ($char > 141)
+        {
+          $player[$i]['name'][$char_pos] = chr($char-128);
+        }
+
+        $char = ord($player[$i]['name'][$char_pos]);
+
+        if ($char < 32)
+        {
+          $player[$i]['name'][$char_pos] = chr($char+30);
+        }
+      }
+
+//---------------------------------------------------------+
+
+    }
+
+    if ($request == "players") { return $player; }  // RETURN PLAYER
+
+//---------------------------------------------------------+
+
+    $data['gamemod']    = $setting['*gamedir'];
+    $data['hostname']   = $setting['hostname'];
+    $data['mapname']    = $setting[map];
+    $data[players]    = count($player);
+    $data[maxplayers] = $setting[maxclients];
+    $data['password']   = ($setting[needpass] > 0 && $setting[needpass] < 4 ? TRUE:FALSE);
+     
+    return $data; // DATA IS LAST TO COLLECT NUMBER OF CURRENT PLAYERS
+
+//---------------------------------------------------------+
+  }
+
+//------------------------------------------------------------------------------------------------------------+
+//------------------------------------------------------------------------------------------------------------+
+
+  function lgsl_query_eight($ip, $port, $queryport, $game, $request)
+  {
+//---------------------------------------------------------+
+
+    $challenge = "s";
+
+    $fp = @fsockopen("udp://$ip", $queryport, $errno, $errstr, 1);
+
+    if (!$fp) { return FALSE; } // IF BUFFER EMPTY RETURN BLANK
+
+    stream_set_timeout($fp, 1, 0); stream_set_blocking($fp, true);  // SET TIMEOUT FOR OFFLINE SERVERS
+     
+    fwrite($fp, $challenge);
+      
+    $buffer = fread($fp, 4096);
+      
+    fclose($fp);
+ 
+    if (!$buffer) { return FALSE; } // IF BUFFER EMPTY RETURN BLANK
+
+//---------------------------------------------------------+
+     
+    $buffer = substr($buffer, 4); // REMOVE PACKET HEADER
+    
+    $buffer = str_replace("\x01\x01", "\x01", $buffer); // FIXES LAST VALUE INTERFERING WITH SPLIT
+
+    $buffer_part = explode("\x01", $buffer, 2); // SEPERATE SETTINGS AND PLAYERS
+
+//---------------------------------------------------------+
+
+    $buffer = $buffer_part[0]; // SET BUFFER TO FIRST PART
+     
+    $position = 0;
+
+    do
+    {
+      $rawsetting[] = substr($buffer, $position+1, ord($buffer[$position])-1);
+
+      $position = $position + ord($buffer[$position]);
+    }
+    while ($position < strlen($buffer));
+
+//---------------------------------------------------------+
+      
+    $setting['game']       = $rawsetting[0];
+    $setting['port']       = $rawsetting[1];
+    $setting['hostname']   = $rawsetting[2];
+    $setting['mode']       = $rawsetting[3];
+    $setting['mapname']    = $rawsetting[4];
+    $setting['version']    = $rawsetting[5];
+    $setting['password']   = $rawsetting[6];
+    $setting['players']    = $rawsetting[7];
+    $setting['maxplayers'] = $rawsetting[8];
+
+//---------------------------------------------------------+
+  
+    for($i=9; $i<=count($rawsetting); $i=$i+2)
+    {
+      if (!trim($rawsetting[$i])) { continue; }
+      
+      $rawsetting[$i] = strtolower("$rawsetting[$i]"); // MAKE ARRAY KEY LOWERCASE
+      $setting[$rawsetting[$i]] = $rawsetting[$i+1];   // LOAD DATA IN AN ARRAY
+    }
+
+    if ($request == "settings") { return $setting; }  // RETURN SETTINGS
+
+//---------------------------------------------------------+
+
+    if ($game == "farcry")     { $setting['hostname'] = preg_replace("/\\$\d/", "", $setting['hostname']); } // REMOVE COLORCODES FROM HOSTNAME
+    if ($game == "painkiller") { $setting['hostname'] = preg_replace("/#./", "", $setting['hostname']);    } // REMOVE COLORCODES FROM HOSTNAME
+
+    $data['gamemod']    = $setting[gr_ssmod];
+    $data['hostname']   = $setting['hostname'];
+    $data['mapname']    = $setting['mapname'];
+    $data['players']    = $setting['players'];
+    $data['maxplayers'] = $setting['maxplayers'];
+    $data['password']   = $setting['password'];
+
+    if ($request == "info") { return $data; }  // RETURN INFO
+
+//---------------------------------------------------------+
+
+    $buffer = $buffer_part[1]; // SET BUFFER TO SECOND PART
+
+    if (!$buffer[0]) { return FALSE; exit; } // CHECK IF BITWISE CHARACTER EXISTS
+
+//---------------------------------------------------------+
+
+    $player_number = 0;
+    $position      = 0;
+
+    do
+    {
+      unset($field_list); // BUILD LIST OF RETURNED VALUES FOR EACH PLAYER USING BITWISE CHARACTER
+      
+      if (ord($buffer[$position]) & 1)  { $field_list[] = "name";  }
+      if (ord($buffer[$position]) & 2)  { $field_list[] = "team";  }
+      if (ord($buffer[$position]) & 4)  { $field_list[] = "skin";  }
+      if (ord($buffer[$position]) & 8)  { $field_list[] = "score"; }
+      if (ord($buffer[$position]) & 16) { $field_list[] = "ping";  }
+      if (ord($buffer[$position]) & 32) { $field_list[] = "time";  }
+
+      $player_number++; // NEXT PLAYER ID
+      $position++;      // SKIP BITWISE CHARACTER
+
+      foreach ($field_list as $field)
+      {
+        $increment = ord($buffer[$position]);                       // READ SIZE CHARACTER
+
+        $field_value = substr($buffer, $position+1, $increment-1);  // READ DATA SKIPPING WITHOUT THE SIZE CHARACTER
+
+        if ($game == "farcry" && $field == "name")     { $field_value = preg_replace("/\\$\d/", "", $field_value); } // REMOVE COLORCODES FROM NAME
+        if ($game == "painkiller" && $field == "name") { $field_value = preg_replace("/#./", "", $field_value);    } // REMOVE COLORCODES FROM NAME
+
+        if ($game == "farcry" && $field == "skin")     { $field = "skin_NOTUSED"; } // WORKAROUND TO HIDE FIELDS
+        if ($game == "painkiller" && $field == "time") { $field = "time_NOTUSED"; } // THAT ARE ALWAYS BLANK
+        if ($game == "painkiller" && $field == "team") { $field = "team_NOTUSED"; } // OR ALWAYS THE SAME
+
+        $player[$player_number][$field] = $field_value;             // SET PLAYER FIELD AND VALUE
+
+        $position += $increment;                                    // MOVE TO THE NEXT FIELD
+      }
+    }
+    while ($position < strlen($buffer));                            // KEEP GOING UNTIL END OF THE PLAYER STRING
+
+    return $player;                                                 // RETURN PLAYER
+
+//---------------------------------------------------------+
+  }
+
+//------------------------------------------------------------------------------------------------------------+
+//------------------------------------------------------------------------------------------------------------+
+
+  function lgsl_query_nine($ip, $port, $queryport, $game, $request)
+  {
+//---------------------------------------------------------+
+
+    if ($request == "info" || $request == "settings") { $challenge = "\xFE\xFD\x00\xAA\xAA\xAA\xAA\xFF\x00\x00"; }
+    if ($request == "players")                        { $challenge = "\xFE\xFD\x00\xAA\xAA\xAA\xAA\x00\xFF\x00"; }
+
+//---------------------------------------------------------+
+
+    $fp = @fsockopen("udp://$ip", $queryport, $errno, $errstr, 1);
+
+    if (!$fp) { return FALSE; } // IF BUFFER EMPTY RETURN BLANK
+
+    stream_set_timeout($fp, 1, 0); stream_set_blocking($fp, true);  // SET TIMEOUT FOR OFFLINE SERVERS
+     
+    fwrite($fp, $challenge);
+      
+    $buffer = fread($fp, 4096);
+    
+    fclose($fp);
+ 
+    if (!$buffer) { return FALSE; } // IF BUFFER EMPTY RETURN BLANK
+    
+    $buffer = trim(substr($buffer, 5));  // REMOVE PACKET HEADER
+
+//---------------------------------------------------------+
+
+    if ($request == "info" || $request == "settings")
+    {
+      $rawsetting = explode("\x00",$buffer); // EXPLODE INTO BITS
+
+      for($i=0; $i<count($rawsetting); $i=$i+2)
+      {
+        if (!trim($rawsetting[$i])) { continue; }
+      
+        $rawsetting[$i] = strtolower("$rawsetting[$i]"); // MAKE ARRAY KEY LOWERCASE
+        $setting[$rawsetting[$i]] = $rawsetting[$i+1];   // LOAD DATA IN AN ARRAY
+      }
+
+      if ($game == "vietcong2")
+      {
+        // [ 13 = Vietnam and RPG Mode 19 1b 99 9b ] [ 55 = Chat and Blind Spectator 5a 5c da dc ]
+        // [ 27 = Idle Limit ] [ 18 = Auto Balance ] [ 22 23 = Mounted MG Limit ]
+      
+        $setting[extinfo_autobalance] = ( ord($setting[extinfo][18]) == 2 ? "off" : "on" );
+      }
+
+      if ($request == "settings") { return $setting; }  // RETURN SETTINGS
+    }
+
+//---------------------------------------------------------+
+
+    if ($request == "info")
+    {
+      $data['hostname']   = $setting['hostname'];
+      $data['mapname']    = $setting['mapname'];
+      $data['players']    = $setting['numplayers'];
+      $data['maxplayers'] = $setting['maxplayers'];
+      $data['password']   = $setting['password'];
+
+      return $data;  // RETURN INFO
+    }
+
+//---------------------------------------------------------+
+
+    if ($request == "players")
+    {
+      if ($game == "neverwinter" || $game == "vietcong2")
+      {
+        $player[1]['name'] = "This Game Does Not Provide Player Information"; return $player;
+      }
+
+      $tmp = explode("\x00\x00",$buffer); // SEPERATE PLAYER FIELDS FROM PLAYER INFORMATION
+
+      $rawsetting = explode("\x00",$tmp[1]); // EXPLODE INTO BITS
+      
+      $player_number = 0;
+
+      for($i=0; $i<count($rawsetting); $i=$i+3)
+      {
+        $player_number++;
+
+        // BACKUP PAINKILLER QUERY AS ASE STYLE QUERY RETURNS MORE INFORMATION
+        // if ($game == "painkiller") { $rawsetting[$i] = preg_replace("/#./", "", $rawsetting[$i]); } // REMOVE COLORCODES FROM NAME
+        // name = $i / score = $i+1 / deaths = $i+2 / ping = $i+3
+        
+        $player[$player_number]['name']  = $rawsetting[$i]; 
+        $player[$player_number]['score'] = $rawsetting[$i+1];
+        $player[$player_number]['ping']  = $rawsetting[$i+2];
+      }
+
+      return $player;
+    }
+
+//---------------------------------------------------------+
+  }
+
+//------------------------------------------------------------------------------------------------------------+
+//------------------------------------------------------------------------------------------------------------+
+
+  function lgsl_query_ten($ip, $port, $game, $request)
+  {
+//---------------------------------------------------------+
+
+    $challenge = "\xFF\xFFgetInfo";
+
+    $fp = @fsockopen("udp://$ip", $port, $errno, $errstr, 1);
+
+    if (!$fp) { return FALSE; } // IF BUFFER EMPTY RETURN BLANK
+
+    stream_set_timeout($fp, 1, 0); stream_set_blocking($fp, true);  // SET TIMEOUT FOR OFFLINE SERVERS
+     
+    fwrite($fp, $challenge);
+      
+    $buffer = fread($fp, 4096);
+      
+    fclose($fp);
+ 
+    if (!$buffer) { return FALSE; } // IF BUFFER EMPTY RETURN BLANK
+
+//---------------------------------------------------------+
+
+    $buffer = substr($buffer, 23);
+
+    $buffer = explode("\x00\x00\x00", $buffer);
+
+    $rawsetting = explode("\x00", $buffer[0]);
+
+    for($i=0; $i<count($rawsetting); $i=$i+2)
+    {
+      $rawsetting[$i] = strtolower($rawsetting[$i]);                     // MAKE ARRAY KEY LOWERCASE
+      $rawsetting[$i] = preg_replace("/\^./", "", $rawsetting[$i]);      // REMOVE COLORCODES FROM KEY
+      $rawsetting[$i+1] = preg_replace("/\^./", "", $rawsetting[$i+1]);  // REMOVE COLORCODES FROM VALUE
+      $setting[$rawsetting[$i]] = $rawsetting[$i+1];                     // LOAD DATA IN AN ARRAY
+    }
+
+    if ($request == "settings") { return $setting;  }  // RETURN SETTINGS
+
+    if ($game == "doom3")
+    {
+      preg_match_all("/(.)(..)(..)(..)(.*)\\x00/U", $buffer[1], $matches); // DOOM3
+    }
+    else
+    {
+      preg_match_all("/(.)(..)(..)(..)(.*)\\x00(.*)\\x00/U", $buffer[1], $matches); // QUAKE4
+    }
+
+    for($i=0; $i<count($matches[5]); $i++)
+    {
+      $player[$i+1]['id']          = ord($matches[1][$i]);
+      list(,$player[$i+1][ping]) = unpack("s", $matches[2][$i]);
+      list(,$player[$i+1][rate]) = unpack("s", $matches[3][$i]);
+      $player[$i+1]['name']        = preg_replace("/\^./", "", $matches[5][$i]);
+      $player[$i+1]['tag']         = preg_replace("/\^./", "", $matches[6][$i]); // QUAKE4
+
+      if ($player[$i+1]['tag']) { $player[$i+1]['name'] = $player[$i+1]['tag']." ".$player[$i+1]['name']; } // APPEND TAG TO NAME
+    }
+
+    if ($request == "players") { return $player;  }  // RETURN PLAYERS
+
+//---------------------------------------------------------+
+
+    $data['gamemod']    = $setting['gamename'];
+    $data['hostname']   = $setting['si_name'];
+    $data['mapname']    = $setting['si_map'];
+    $data['players']    = count($player);
+    $data['maxplayers'] = $setting['si_maxplayers'];
+    $data['password']   = $setting['si_usepass'];
+
+    return $data;  // RETURN INFO
+
+//---------------------------------------------------------+
+  }
+
+//------------------------------------------------------------------------------------------------------------+
+//------------------------------------------------------------------------------------------------------------+
+
+
+  function lgsl_query_feed($ip, $port, $game, $request, $lgsl_feed_url)
+  {
+    $host = parse_url($lgsl_feed_url);
+    
+    if (!$host[path]) { echo "INCOMPLETE FEED URL SET"; exit; } // FOR PEOPLE WHO MAKE TYPOS IN THE URL
+    
+    $host[path] .= "?ip=$ip&port=$port&gametype=$game&request=$request"; // ADD SERVER DETAILS TO FEED PATH
+
+//---------------------------------------------------------+
+
+    $fp = @fsockopen($host[host], "80", $errno, $errstr, 1);
+
+    // FAKE ONLINE SERVER USED TO NOTIFY WHILE KEEPING CACHE TO STOP REPEATED REQUESTS TO AN OFFLINE FEED
+
+    if (!$fp)
+    {
+      $data['status']     = TRUE;
+      $data['hostname']   = $host[host].$host[path]."-".$errno."-".$errstr;
+      $data['mapname']    = "feed offline";
+      $data['players']    = 0;
+      $data['maxplayers'] = 0;
+      return $data;
+    }
+
+    stream_set_timeout($fp, 1, 0); stream_set_blocking($fp, true);  // SET TIMEOUT FOR OFFLINE SERVERS
+
+    $html_request  = "GET $host[path] HTTP/1.0\r\n";
+    $html_request .= "Host: $host[host]\r\n";
+    $html_request .= "User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.2.1) Gecko/20021204\r\n";
+    $html_request .= "Accept: text/xml,application/xml,application/xhtml+xml,";
+    $html_request .= "text/html;q=0.9,text/plain;q=0.8,video/x-mng,image/png,";
+    $html_request .= "image/jpeg,image/gif;q=0.2,text/css,*/*;q=0.1\r\n";
+    $html_request .= "Accept-Language: en-us, en;q=0.50\r\n";
+    $html_request .= "Accept-Encoding: \r\n";
+    $html_request .= "Accept-Charset: ISO-8859-1, utf-8;q=0.66, *;q=0.66\r\n";
+    $html_request .= "Referer: ".$_SERVER['SERVER_NAME'].$_SERVER['PHP_SELF']."\r\n";
+    $html_request .= "Cache-Control: max-age=0\r\n";
+    $html_request .= "Connection: Close\r\n\r\n";
+
+    fwrite($fp, $html_request);
+
+    unset($html_raw);
+    
+    while (!feof($fp))
+    {
+      $html_raw .= fread($fp, 1024);
+    }
+
+    fclose($fp);
+
+//---------------------------------------------------------+
+
+    $tmp = explode("_LGSL_FEED_", $html_raw);
+    
+    if (!$tmp[1]) { echo "Feed Missing From: $host[host]$host[path] Returned: $html_raw"; exit; }
+    
+    $data = unserialize($tmp[1]);
+    
+    return $data;
+
+//---------------------------------------------------------+
+  }
+
+//------------------------------------------------------------------------------------------------------------+
+//------------------------------------------------------------------------------------------------------------+
+
+?>
