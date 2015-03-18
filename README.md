@@ -1,5 +1,4 @@
 # What is this?
- 
  Tools and CMS for your eSports community. Mostly writen with CakePHP framework.
 
 # Copyright (Licenses)
