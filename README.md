@@ -1,5 +1,7 @@
 # What is this?
  Tools and CMS for your eSports community. Mostly writen with CakePHP framework.
+ 
+ **Note:** this projects is inactive and so support is very very minimal. Sorry.
 
 # Copyright (Licenses)
  This CMS is based on *[CakePHP](https://github.com/cakephp/cakephp)* which use *MIT* license. So files marked with this license must follows license rules. Other files froms CMS is distributed by *GPLv2.0* license .  Theme and logo - *CC 3.0 BY-SA*.
