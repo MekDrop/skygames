@@ -2,7 +2,7 @@
  Tools and CMS for your eSports community. Mostly writen with CakePHP framework.
 
 # Copyright (Licenses)
- This CMS is based on *CakePHP* which are using *CakePHP* based on *MIT* license. So files marked with this license must follows license rules. Other files froms CMS is distributed by *GPLv2* license .  Theme and logo - *CC 3.0 BY-SA*.
+ This CMS is based on *[CakePHP](https://github.com/cakephp/cakephp)* which use *MIT* license. So files marked with this license must follows license rules. Other files froms CMS is distributed by *GPLv2.0* license .  Theme and logo - *CC 3.0 BY-SA*.
 
  See "[GPLv2.0 license.txt](https://raw.githubusercontent.com/MekDrop/skygames/master/GPLv2.0%20license.txt)", "[CC 3.0 BY-SA license.txt](https://raw.githubusercontent.com/MekDrop/skygames/master/CC%203.0%20BY-SA%20license.txt)" and "[MIT License.txt](https://raw.githubusercontent.com/MekDrop/skygames/master/MIT%20License.txt)" files for more info about these licenses.
 
