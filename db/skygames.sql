@@ -3567,8 +3567,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`id`, `points`, `username`, `passwd`, `name`, `email`, `last_visit`, `group_id`, `active`, `created`, `modified`, `skype`, `avatar_url`) VALUES
-(1, 1000, 'root', '47bce5c74f589f4867dbd57e9ca9f808', 'root', 'zzz@example.com', '2009-06-02 15:14:04', 1, 1, '0000-00-00 00:00:00', '2009-04-10 15:21:19', 'asdasd', '/img/uploads/avatars/01737_elemental_1280x10240.jpg'),
-(1794, 1000, 'MekDrop', '57f417b438b12da673e661e998e5bb92', 'MekDrop', 'skygames@googlecode.com', '2009-11-15 16:16:15', 1, 1, '2008-02-24 22:02:27', '2009-11-15 16:15:56', '', NULL);
+(1, 1000, 'root', '47bce5c74f589f4867dbd57e9ca9f808', 'root', 'zzz@example.com', '2009-06-02 15:14:04', 1, 1, '0000-00-00 00:00:00', '2009-04-10 15:21:19', 'asdasd', '/img/uploads/avatars/01737_elemental_1280x10240.jpg');
 
 --
 -- Apribojimai eksportuotom lentelėm
