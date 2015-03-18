@@ -15,7 +15,7 @@ To install SkyGames on your server you must perform these steps:
  2. import *./db/skygames.sql* in to empty MySQL database
  3. edit *./config/database.php* file
  4. change *define('DEFAULT_LANGUAGE', 'lit');* line in *./config/bootstrap.php* if you need other default language than lithuanian
- 5. *chmod +R 777 ./v2 ./tmp *
+ 5. *chmod +R 777 ./v2 ./tmp*
  6. configure other stuff by your self
  7. have a nice web site! :)
 
