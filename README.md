@@ -21,3 +21,6 @@ To install SkyGames on your server you must perform these steps:
 
  Screenshots
 ----------------------------------------------
+![] (http://skygames.googlecode.com/svn/screenshots/440x01.jpg)
+![] (http://skygames.googlecode.com/svn/screenshots/440x02.jpg)
+![] (http://skygames.googlecode.com/svn/screenshots/440x03.jpg)
